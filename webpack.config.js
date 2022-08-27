@@ -15,11 +15,21 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader'
-          }
-        ]
-      }
-    ]
+            loader: 'css-loader',
+          },
+        ],
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+  output: {
+    filename: 'main.js',
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -29,16 +39,16 @@ module.exports = {
         removeComments: true,
         minifyJS: true,
       },
-      inlineSource: isProduction && '\.(js|css)$'
+      inlineSource: isProduction && '.(js|css)$',
     }),
     new HtmlWebpackInlineSourcePlugin(),
     new OptimizeCssAssetsPlugin({}),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
-    })
+      filename: '[name].css',
+    }),
   ],
   devServer: {
     stats: 'minimal',
-    overlay: true
-  }
+    overlay: true,
+  },
 };
