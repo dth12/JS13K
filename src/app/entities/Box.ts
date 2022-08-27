@@ -4,15 +4,11 @@ export class Box {
   scene: Scene;
   el: Entity;
 
-  constructor(x: number, y: number, z: number, settings: any) {
+  constructor(x = 0, y = 0, z = 0, settings: any = {}) {
     this.scene = document.querySelector('a-scene');
     this.el = document.createElement('a-entity');
 
-    this.el.setAttribute('position', {
-      x: x || 0,
-      y: y || 0,
-      z: z || 0,
-    });
+    this.el.setAttribute('position', { x, y, z });
     this.el.setAttribute('geometry', {
       primitive: 'box',
       width: settings.width || 1,
@@ -20,7 +16,8 @@ export class Box {
       depth: settings.depth || 1,
     });
     this.el.setAttribute('material', {
-      opacity: 1,
+      color: '#efefef',
+      opacity: 0.5,
       shader: 'standard',
     });
 
@@ -33,6 +30,6 @@ export class Box {
 
   update(time: number, timeDelta: number) {
     let rotation = this.el.getAttribute('rotation');
-    this.el.setAttribute('rotation', { y: rotation.y + 0.01 * timeDelta });
+    this.el.setAttribute('rotation', { x: rotation.x + 0.03 * timeDelta, y: rotation.y + 0.02 * timeDelta });
   }
 }
