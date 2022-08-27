@@ -28,7 +28,7 @@ export class Box {
     this.scene.appendChild(this.el);
   }
 
-  update(time: number, timeDelta: number) {
+  update(timeDelta: number) {
     let rotation = this.el.getAttribute('rotation');
     this.el.setAttribute('rotation', { x: rotation.x + 0.03 * timeDelta, y: rotation.y + 0.02 * timeDelta });
   }
