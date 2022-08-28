@@ -1,15 +1,8 @@
 {
-  "author": "Marc Guinea Casas <develop.marcguinea@gmail.com>",
-  "name": "js13k-aframe-boilerplate",
+  "name": "js13k",
   "version": "1.0.0",
-  "description": "An A-Frame boilerplate for the js13k competition.",
+  "description": "js13k competition.",
   "license": "MIT",
-  "homepage": "https://github.com/mguinea/js13k-aframe-boilerplate#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mguinea/js13k-aframe-boilerplate.git"
-  },
-  "main": "src/main.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
