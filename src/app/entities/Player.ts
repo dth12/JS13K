@@ -41,7 +41,7 @@ export class Player {
         return;
       }
 
-      this.$flash.setAttribute('intensity', this.isFlashOn ? '0' : '1 ');
+      this.$flash.setAttribute('intensity', this.isFlashOn ? '0' : '1');
     });
   }
 }
