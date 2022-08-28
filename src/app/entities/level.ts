@@ -1,4 +1,4 @@
-import { Box } from '../entities/Box';
+import { Box } from './Box';
 
 export class Level {
   private static $boxes: Box[] = [];

@@ -1,5 +1,5 @@
 import { Player } from '../entities/Player';
-import { Level } from './level';
+import { Level } from '../entities/Level';
 import playerSetting from '../settings/player.json';
 import lightSetting from '../settings/light.json';
 
