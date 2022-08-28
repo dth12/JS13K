@@ -8,6 +8,7 @@
   <body>
     <a-scene id="gameScene">
       <!-- environment -->
+      <a-light id="light" type="ambient" color="#fff" intensity="0.3" position="0 20 -10"></a-light>
       <a-sky color="#222" segments-width="5" segments-height="5"></a-sky>
       <a-plane
         position="0 0 0"
@@ -16,22 +17,6 @@
         rotation="-90 0 0"
         material="color: #2e0811; roughness: 0.9"
       ></a-plane>
-
-      <a-light id="light" type="ambient" color="#fff" intensity="0.3" position="0 20 -10"></a-light>
-
-      <!-- player -->
-      <a-entity id="player" camera wasd-controls look-controls="pointerLockEnabled:true" position="0 2.5 0">
-        <a-light
-          id="flash"
-          type="spot"
-          angle="30"
-          decay="1"
-          distance="30"
-          color="#fff"
-          intensity="0"
-          position="0 0 0"
-        ></a-light>
-      </a-entity>
     </a-scene>
   </body>
 </html>
