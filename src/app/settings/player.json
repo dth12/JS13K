@@ -1,0 +1,6 @@
+{
+  "camera": {},
+  "wasd-controls": {},
+  "look-controls": { "pointerLockEnabled": true },
+  "position": { "a": 0, "y": 2.5, "z": 0 }
+}

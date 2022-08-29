@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene id="gameScene">
+      <!-- environment -->
+      <a-light id="light" type="ambient" color="#fff" intensity="0.3" position="0 20 -10"></a-light>
+      <a-sky color="#222" segments-width="5" segments-height="5"></a-sky>
+      <a-plane
+        position="0 0 0"
+        height="1000"
+        width="1000"
+        rotation="-90 0 0"
+        material="color: #2e0811; roughness: 0.9"
+      ></a-plane>
+    </a-scene>
+  </body>
+</html>
