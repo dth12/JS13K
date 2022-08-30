@@ -1,6 +1,6 @@
 import { Entity, Scene } from 'aframe';
 
-export class Box {
+export class Key {
   scene: Scene;
   el: Entity;
 
@@ -16,8 +16,8 @@ export class Box {
       depth: settings.depth || 1,
     });
     this.el.setAttribute('material', {
-      color: '#efefef',
-      opacity: 0.5,
+      color: '#ffe45e',
+      opacity: 0.9,
       shader: 'standard',
     });
 
@@ -30,6 +30,9 @@ export class Box {
 
   update(timeDelta: number) {
     let rotation = this.el.getAttribute('rotation');
-    this.el.setAttribute('rotation', { x: rotation.x + 0.03 * timeDelta, y: rotation.y + 0.02 * timeDelta });
+    this.el.setAttribute('rotation', {
+      x: rotation.x + Math.random() * 0.1 * timeDelta,
+      y: rotation.y + Math.random() * 0.1 * timeDelta,
+    });
   }
 }

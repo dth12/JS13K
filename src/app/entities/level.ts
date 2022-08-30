@@ -1,13 +1,22 @@
-import { Box } from './Box';
+import { getRandomRange } from '../../utils/util';
+import { Key } from './Key';
+
+const MAX_MAP_SIZE = 500;
 
 export class Level {
-  private static $boxes: Box[] = [];
+  private static $keys: Key[] = [];
   private static createWall(option: any) {
     const $wall = document.createElement('a-box');
     Object.keys(option).forEach((key) => {
       $wall.setAttribute(key, option[key]);
     });
     return $wall;
+  }
+
+  private static addKeys(count: number) {
+    for (let i = 0; i < count; i++) {
+      this.$keys.push(new Key(getRandomRange(MAX_MAP_SIZE / 2), 1.5, getRandomRange(MAX_MAP_SIZE / 2)));
+    }
   }
 
   static createStage(stage = 1) {
@@ -41,18 +50,15 @@ export class Level {
             color: 'black',
           })
         );
+        this.addKeys(10);
         $gameScene.appendChild($frag);
-
-        // add boxes
-        this.$boxes.push(new Box(0, 2, -40));
-        this.$boxes.push(new Box(0, 2, 20));
         break;
       default:
     }
   }
 
   static update(deltaTime: number) {
-    this.$boxes.forEach(($box) => {
+    this.$keys.forEach(($box) => {
       $box.update(deltaTime);
     });
   }
