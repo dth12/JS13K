@@ -21,14 +21,14 @@ export class Level {
           this.createWall({
             material: 'roughness: 0.9',
             position: '-5 0 0',
-            height: '10',
+            height: '30',
             width: '100',
             rotation: '0 90 0',
             color: '#570c1e',
           }),
           this.createWall({
             position: '5 0 0',
-            height: '10',
+            height: '30',
             width: '100',
             rotation: '0 90 0',
             color: '#570c1e',
@@ -36,7 +36,7 @@ export class Level {
           }),
           this.createWall({
             position: '0 0 -50',
-            height: '10',
+            height: '30',
             width: '10',
             color: 'black',
           })
