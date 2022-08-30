@@ -49,7 +49,11 @@ export class Player {
           const config = this.$el.getAttribute('wasd-controls');
           this.$el.setAttribute('wasd-controls', { ...config, acceleration: this.isRunning ? Speed.Walk : Speed.Run });
           break;
+        case 'Alt':
+          // for test
+          this.$el.setAttribute('wasd-controls', { ...config, acceleration: '1000' });
         default:
+          console.log(event.key);
       }
     });
   }
