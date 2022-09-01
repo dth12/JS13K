@@ -45,13 +45,17 @@ export class Level {
     for (let idx = 1; idx < row; idx++) {
       $frag.append(
         this.createWall({
-          position: `${-this.mapWitdh / 2 + 125 / 2} 15 ${this.mapHeight / 2 - (this.mapHeight / row) * idx}`,
-          width: this.roomDepth,
+          width: this.roomDepth + (idx % 2) * this.roomDepth * 1.25,
+          position: `${-(this.mapWitdh / 2 - this.roomDepth / 2 - (idx % 2) * ((this.roomDepth * 1.25) / 2))} 15 ${
+            this.mapHeight / 2 - (this.mapHeight / row) * idx
+          }`,
           rotation: '0 0 0',
         }),
         this.createWall({
-          position: `${this.mapWitdh / 2 - 125 / 2} 15 ${this.mapHeight / 2 - (this.mapHeight / row) * idx}`,
-          width: this.roomDepth,
+          width: this.roomDepth + ((idx + 1) % 2) * this.roomDepth * 1.25,
+          position: `${this.mapWitdh / 2 - this.roomDepth / 2 - ((idx + 1) % 2) * ((this.roomDepth * 1.25) / 2)} 15 ${
+            this.mapHeight / 2 - (this.mapHeight / row) * idx
+          }`,
           rotation: '0 0 0',
         })
       );
@@ -67,7 +71,6 @@ export class Level {
           width: this.getDoorWitdh(row),
           rotation: '0 90 0',
         }),
-
         this.createWall({
           position: `${this.roomDepth} 15 ${
             this.mapHeight / 2 - this.getDoorWitdh(row) / 2 - this.getDoorWitdh(row) * idx
