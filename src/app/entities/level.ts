@@ -1,4 +1,4 @@
-import { getRandomRange } from '../../utils/util';
+import { getRandomIndex, getRandomRange } from '../../utils/util';
 import { Key } from './Key';
 
 export class Level {
@@ -13,7 +13,7 @@ export class Level {
   }
 
   private static getDoorWitdh(row: number) {
-    return this.mapHeight / (row * 2);
+    return this.mapHeight / row;
   }
 
   private static createWall(customOption: any) {
@@ -40,42 +40,43 @@ export class Level {
 
   private static generateRooms($frag: DocumentFragment) {
     const row = Math.max(this.roomRowCount, 3);
+    const doorZPositions = [
+      this.mapHeight / 2 - this.getDoorWitdh(row) * 0.5,
+      this.mapHeight / 2 - this.getDoorWitdh(row) * 0.25,
+      this.mapHeight / 2 - this.getDoorWitdh(row) * 0.75,
+    ];
 
     // horizontal wall
     for (let idx = 1; idx < row; idx++) {
       $frag.append(
         this.createWall({
           width: this.roomDepth + (idx % 2) * this.roomDepth * 1.25,
-          position: `${-(this.mapWitdh / 2 - this.roomDepth / 2 - (idx % 2) * ((this.roomDepth * 1.25) / 2))} 15 ${
+          position: `${-(this.mapWitdh / 2 - this.roomDepth * 0.5 - (idx % 2) * (this.roomDepth * 1.25 * 0.75))} 15 ${
             this.mapHeight / 2 - (this.mapHeight / row) * idx
           }`,
           rotation: '0 0 0',
         }),
         this.createWall({
           width: this.roomDepth + ((idx + 1) % 2) * this.roomDepth * 1.25,
-          position: `${this.mapWitdh / 2 - this.roomDepth / 2 - ((idx + 1) % 2) * ((this.roomDepth * 1.25) / 2)} 15 ${
-            this.mapHeight / 2 - (this.mapHeight / row) * idx
-          }`,
+          position: `${
+            this.mapWitdh / 2 - this.roomDepth * 0.5 - ((idx + 1) % 2) * (this.roomDepth * 1.25 * 0.75)
+          } 15 ${this.mapHeight / 2 - (this.mapHeight / row) * idx}`,
           rotation: '0 0 0',
         })
       );
     }
 
     // vertical wall
-    for (let idx = 0; idx < row * 2; idx++) {
+    for (let idx = 0; idx < row; idx++) {
       $frag.append(
         this.createWall({
-          position: `-${this.roomDepth} 15 ${
-            this.mapHeight / 2 - this.getDoorWitdh(row) / 2 - this.getDoorWitdh(row) * idx
-          }`,
-          width: this.getDoorWitdh(row),
+          width: this.getDoorWitdh(row) * 0.5,
+          position: `-${this.roomDepth} 15 ${doorZPositions[getRandomIndex(3)] - this.getDoorWitdh(row) * idx}`,
           rotation: '0 90 0',
         }),
         this.createWall({
-          position: `${this.roomDepth} 15 ${
-            this.mapHeight / 2 - this.getDoorWitdh(row) / 2 - this.getDoorWitdh(row) * idx
-          }`,
-          width: this.getDoorWitdh(row),
+          width: this.getDoorWitdh(row) * 0.5,
+          position: `${this.roomDepth} 15 ${doorZPositions[getRandomIndex(3)] - this.getDoorWitdh(row) * idx}`,
           rotation: '0 90 0',
         })
       );
@@ -126,7 +127,7 @@ export class Level {
   static createStage(stage = 1) {
     switch (stage) {
       case 1:
-        this.roomRowCount = 5;
+        this.roomRowCount = 7;
         this.mapHeight = this.roomRowCount * 100;
         this.generateWorld();
         this.addKeys(10);
