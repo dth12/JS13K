@@ -1,13 +1,19 @@
-// This music has been exported by SoundBox. You can use it with
-// http://sb.bitsnbites.eu/player-small.js in your own product.
+//최댓값은 제외, 최솟값은 포함
+const getRandomNote = () => {
+  const MIN_NOTE = 99;
+  const MAX_NOTE = 110;
+  return Math.floor(Math.random() * (MAX_NOTE - MIN_NOTE)) + MIN_NOTE; 
+}
 
-// See http://sb.bitsnbites.eu/demo.html for an example of how to
-// use it in a demo.
+const getRandomMelody = () => {
+  const MAX_MELODY_LENGTH = 8;
+  const randomMelody = [];
 
-const getRandomN = () => {
-  const MIN_N = 99;
-  const MAX_N = 110;
-  return Math.floor(Math.random() * (MAX_N - MIN_N)) + MIN_N; //최댓값은 제외, 최솟값은 포함
+  for (let i = 0; i < MAX_MELODY_LENGTH; ++i) {
+    randomMelody.push(...[getRandomNote(),,,,,,,,]);
+  }
+
+  return randomMelody;
 }
 
 // Song data
@@ -50,7 +56,7 @@ export const song = {
       // Columns
       c: [
         {
-          n: [getRandomN(),,,,,,,,getRandomN(),,,,,,,,getRandomN(),,,,,,,,getRandomN(),,,,,,,,getRandomN(),,,,,,,,getRandomN(),,,,,,,,getRandomN(),,,,,,,,getRandomN()],
+          n: getRandomMelody(),
           f: []
         }
       ]
