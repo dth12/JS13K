@@ -7,12 +7,12 @@
     <script type="text/javascript" src="src/utils/player-small.js"></script>
     <script type="text/javascript" src="src/utils/Blob.js"></script>
     <script type="module">
-      import {startDemo} from '../src/utils/music-generator.js';
-      document.getElementById('playButton').addEventListener('click', startDemo);
+      import {generateMusic} from '../src/utils/music-generator.js';
+      document.getElementById('musicButton').addEventListener('click', generateMusic);
     </script>
   </head>
     <a-scene id="gameScene">
-      <button class="a-enter-vr-button" id="playButton"></button>
+      <button class="a-enter-vr-button" id="musicButton"></button>
       <!-- environment -->
       <a-light id="light" type="ambient" color="#fff" intensity="0.3" position="0 20 -10"></a-light>
       <a-sky color="#171101" segments-width="5" segments-height="5"></a-sky>
