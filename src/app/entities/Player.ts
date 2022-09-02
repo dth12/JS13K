@@ -1,16 +1,10 @@
 import { Entity } from 'aframe';
+import { state } from '../systems/state';
 import { Light, Speed } from '../types';
 
 export class Player {
   private $el: Entity;
   private $flash: Entity;
-  private get isRunning() {
-    return this.$el.getAttribute('wasd-controls').acceleration === Speed.Run;
-  }
-
-  private get isFlashOn() {
-    return this.$flash.getAttribute('intensity') !== Light.Off;
-  }
 
   constructor(playerOption: { [key: string]: any }, lightOption: { [key: string]: any }) {
     const $gameScene = document.querySelector('#gameScene');
@@ -40,14 +34,24 @@ export class Player {
   }
 
   private initEventHandler() {
+    const { flash, player } = state;
     document.addEventListener('keydown', (event) => {
       switch (event.key) {
         case ' ':
-          this.$flash.setAttribute('intensity', this.isFlashOn ? Light.Off : Light.On);
+          flash.isOn = !flash.isOn;
+          if (flash.isOn) {
+            this.$flash.setAttribute('intensity', Light.On);
+            break;
+          }
+          this.$flash.setAttribute('intensity', Light.Off);
           break;
         case 'Control':
           const config = this.$el.getAttribute('wasd-controls');
-          this.$el.setAttribute('wasd-controls', { ...config, acceleration: this.isRunning ? Speed.Walk : Speed.Run });
+          player.isRunning = !player.isRunning;
+          this.$el.setAttribute('wasd-controls', {
+            ...config,
+            acceleration: player.isRunning ? Speed.Run : Speed.Walk,
+          });
           break;
         case 'Alt':
           // for test
