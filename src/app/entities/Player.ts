@@ -3,6 +3,8 @@ import { state } from '../systems/state';
 import { Light, Speed } from '../types';
 
 export class Player {
+  private readonly FLASH_CONSUME_SPEED = 0.1;
+  private readonly FLASH_CHARGE_SPEED = 0.01;
   private $el: Entity;
   private $flash: Entity;
 
@@ -33,17 +35,54 @@ export class Player {
     });
   }
 
+  private chargeFlashBattery() {
+    const $battery = document.querySelector('.battery');
+    const { flash } = state;
+    requestAnimationFrame(
+      function comsumeBattery() {
+        console.log(`charging flash!`);
+        flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
+        $battery.style.width = `${flash.battery}%`;
+        !flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
+      }.bind(this)
+    );
+  }
+
+  private consumeFlashBattery() {
+    const $battery = document.querySelector('.battery');
+    const { flash } = state;
+    requestAnimationFrame(
+      function comsumeBattery() {
+        console.log(`consuming flash!`);
+        flash.battery = Math.max(flash.battery - this.FLASH_CONSUME_SPEED, 0);
+        $battery.style.width = `${flash.battery}%`;
+        flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
+        if (flash.battery === 0) {
+          flash.isOn = false;
+          this.$flash.setAttribute('intensity', Light.Off);
+          this.chargeFlashBattery();
+        }
+      }.bind(this)
+    );
+  }
+
   private initEventHandler() {
     const { flash, player } = state;
     document.addEventListener('keydown', (event) => {
       switch (event.key) {
         case ' ':
           flash.isOn = !flash.isOn;
-          if (flash.isOn) {
-            this.$flash.setAttribute('intensity', Light.On);
+          if (!flash.isOn) {
+            this.$flash.setAttribute('intensity', Light.Off);
+            this.chargeFlashBattery();
             break;
           }
-          this.$flash.setAttribute('intensity', Light.Off);
+          if (flash.battery < 1) {
+            flash.isOn = !flash.isOn;
+            break;
+          }
+          this.$flash.setAttribute('intensity', Light.On);
+          this.consumeFlashBattery();
           break;
         case 'Control':
           const config = this.$el.getAttribute('wasd-controls');
@@ -56,8 +95,6 @@ export class Player {
         case 'Alt':
           // for test
           this.$el.setAttribute('wasd-controls', { ...config, acceleration: '1000' });
-        default:
-          console.log(event.key);
       }
     });
   }
