@@ -1,11 +1,39 @@
 html,
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-    background-color: cornflowerblue;
+.ui {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 5rem;
+  font-size: 3rem;
+  font-weight: bold;
+  z-index: 9999;
+  width: 70%;
+  height: 10%;
+
+  background: linear-gradient(to right, #f4eeb790, #f0aaa990);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.ui_item {
+  text-align: center;
+}
+
+.ui_title {
+  font-weight: 400;
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
