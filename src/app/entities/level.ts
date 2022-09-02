@@ -1,264 +1,136 @@
-import { getRandomRange } from '../../utils/util';
+import { getRandomIndex, getRandomRange } from '../../utils/util';
 import { Key } from './Key';
 
-const MAX_MAP_SIZE = 500;
-
 export class Level {
+  private static mapWitdh = 500;
+  private static mapHeight = 500;
+  private static roomRowCount = 5;
+  private static $gameScene = document.querySelector('#gameScene');
   private static $keys: Key[] = [];
-  private static createWall(option: any) {
+
+  private static get roomDepth() {
+    return this.mapWitdh / 4;
+  }
+
+  private static getDoorWitdh(row: number) {
+    return this.mapHeight / row;
+  }
+
+  private static createWall(customOption: any) {
     const $wall = document.createElement('a-box');
+    const option = {
+      material: { roughness: 0.9 },
+      height: 30,
+      color: '#570c1e',
+      ...customOption,
+    };
+
     Object.keys(option).forEach((key) => {
       $wall.setAttribute(key, option[key]);
     });
+
     return $wall;
   }
 
   private static addKeys(count: number) {
     for (let i = 0; i < count; i++) {
-      this.$keys.push(new Key(getRandomRange(MAX_MAP_SIZE / 2), 1.5, getRandomRange(MAX_MAP_SIZE / 2)));
+      this.$keys.push(new Key(getRandomRange(this.mapWitdh / 2), 1.5, getRandomRange(this.mapWitdh / 2)));
     }
   }
 
-  static createStage(stage = 1) {
-    const $gameScene = document.querySelector('#gameScene');
-    const $frag = document.createDocumentFragment();
+  private static generateRooms($frag: DocumentFragment) {
+    const row = Math.max(this.roomRowCount, 3);
+    const doorZPositions = [
+      this.mapHeight / 2 - this.getDoorWitdh(row) * 0.5,
+      this.mapHeight / 2 - this.getDoorWitdh(row) * 0.25,
+      this.mapHeight / 2 - this.getDoorWitdh(row) * 0.75,
+    ];
 
+    // horizontal wall
+    for (let idx = 1; idx < row; idx++) {
+      $frag.append(
+        this.createWall({
+          width: this.roomDepth + (idx % 2) * this.roomDepth * 1.25,
+          position: `${-(this.mapWitdh / 2 - this.roomDepth * 0.5 - (idx % 2) * (this.roomDepth * 1.25 * 0.75))} 15 ${
+            this.mapHeight / 2 - (this.mapHeight / row) * idx
+          }`,
+          rotation: '0 0 0',
+        }),
+        this.createWall({
+          width: this.roomDepth + ((idx + 1) % 2) * this.roomDepth * 1.25,
+          position: `${
+            this.mapWitdh / 2 - this.roomDepth * 0.5 - ((idx + 1) % 2) * (this.roomDepth * 1.25 * 0.75)
+          } 15 ${this.mapHeight / 2 - (this.mapHeight / row) * idx}`,
+          rotation: '0 0 0',
+        })
+      );
+    }
+
+    // vertical wall
+    for (let idx = 0; idx < row; idx++) {
+      $frag.append(
+        this.createWall({
+          width: this.getDoorWitdh(row) * 0.5,
+          position: `-${this.roomDepth} 15 ${doorZPositions[getRandomIndex(3)] - this.getDoorWitdh(row) * idx}`,
+          rotation: '0 90 0',
+        }),
+        this.createWall({
+          width: this.getDoorWitdh(row) * 0.5,
+          position: `${this.roomDepth} 15 ${doorZPositions[getRandomIndex(3)] - this.getDoorWitdh(row) * idx}`,
+          rotation: '0 90 0',
+        })
+      );
+    }
+  }
+
+  private static generateWorld() {
+    const $frag = document.createDocumentFragment();
+    const $sky = document.createElement('a-sky');
+    $sky.setAttribute('color', '#171101');
+    $sky.setAttribute('radius', (Math.max(this.mapHeight, this.mapWitdh) / 2) * 1.5);
+
+    const $ground = document.createElement('a-plane');
+    $ground.setAttribute('position', '0 0 0');
+    $ground.setAttribute('rotation', '-90 0 0');
+    $ground.setAttribute('width', this.mapWitdh);
+    $ground.setAttribute('height', this.mapHeight);
+    $ground.setAttribute('material', { color: '#010645', roughness: 0.9 });
+
+    const $edgeWalls = [
+      this.createWall({
+        position: `-${this.mapWitdh / 2} 15 0`,
+        width: this.mapHeight,
+        rotation: '0 90 0',
+      }),
+      this.createWall({
+        position: `${this.mapWitdh / 2} 15 0`,
+        width: this.mapHeight,
+        rotation: '0 90 0',
+      }),
+      this.createWall({
+        position: `0 15 -${this.mapHeight / 2}`,
+        width: this.mapWitdh,
+        rotation: '0 0 0',
+      }),
+      this.createWall({
+        position: `0 15 ${this.mapHeight / 2}`,
+        width: this.mapWitdh,
+        rotation: '0 0 0',
+      }),
+    ];
+
+    $frag.append($sky, $ground, ...$edgeWalls);
+    this.generateRooms($frag);
+    this.$gameScene.appendChild($frag);
+  }
+
+  static createStage(stage = 1) {
     switch (stage) {
       case 1:
-        // add walls
-        $frag.append(
-          // left horizontal wall
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-189 15 -50',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-189 15 -150',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-189 15 50',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-189 15 150',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          // left vertical wall
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 225',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 175',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 125',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 75',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 25',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 -25',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 -75',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 -125',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 -175',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '-126 15 -225',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          // right horizontal wall
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '189 15 -50',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '189 15 -150',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '189 15 50',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '189 15 150',
-            height: '30',
-            width: '125',
-            rotation: '0 0 0',
-            color: '#570c1e',
-          }),
-          // right vertical wall
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 225',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 175',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 125',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 75',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 25',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 -25',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 -75',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 -125',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 -175',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          }),
-          this.createWall({
-            material: 'roughness: 0.9',
-            position: '126 15 -225',
-            height: '30',
-            width: '50',
-            rotation: '0 90 0',
-            color: '#fff',
-          })
-          //asfdasdf
-        );
+        this.roomRowCount = 7;
+        this.mapHeight = this.roomRowCount * 100;
+        this.generateWorld();
         this.addKeys(10);
-        $gameScene.appendChild($frag);
         break;
       default:
     }
