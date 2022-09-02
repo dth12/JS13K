@@ -15,19 +15,24 @@
       <button class="a-enter-vr-button" id="musicButton"></button>
       <!-- environment -->
       <a-light id="light" type="ambient" color="#fff" intensity="0.3" position="0 20 -10"></a-light>
-      <a-sky color="#171101" segments-width="5" segments-height="5"></a-sky>
-      <a-plane
-        position="0 0 0"
-        height="500"
-        width="500"
-        rotation="-90 0 0"
-        material="color: #010645; roughness: 0.9"
-      ></a-plane>
-
-      <a-box position="-250 15 0" height="30" width="500" color="#570c1e" material="roughness: 0.9" rotation="0 90 0"></a-box>
-      <a-box position="250 15 0" height="30" width="500" color="#570c1e" material="roughness: 0.9" rotation="0 90 0"></a-box>
-      <a-box position="0 15 -250" height="30" width="500" color="#570c1e" material="roughness: 0.9" rotation="0 0 0"></a-box>
-      <a-box position="0 15 250" height="30" width="500" color="#570c1e" material="roughness: 0.9" rotation="0 0 0"></a-box>
+      <div class="ui">
+        <div class="ui_items ui_text">
+          <div class="ui_item keys">
+            <span class="ui_title">Keys</span>
+            <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
+          </div>
+          <div class="ui_item monsters">
+            <span class="ui_title">Monsters</span>
+            <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
+          </div>
+        </div>
+        <div class="ui_flash ui_text">
+          <span class="ui_flash_title">Flash Battery</span>
+          <div class="battery_wrap">
+            <div class="battery" />
+          </div>
+        </div>
+      </div>
     </a-scene>
   </body>
 </html>

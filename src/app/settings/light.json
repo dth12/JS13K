@@ -2,7 +2,7 @@
   "type": "spot",
   "angle": "30",
   "decay": "1",
-  "distance": "100",
+  "distance": "300",
   "color": "#fff",
   "intensity": "0",
   "position": "0 0 0"
