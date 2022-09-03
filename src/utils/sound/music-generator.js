@@ -1,4 +1,4 @@
-import { song } from "../sounds/song.js";
+import { song } from "../../sounds/song.js";
 
 export const generateMusic = () => {
   // Initialize music generation (player).
@@ -24,4 +24,4 @@ export const generateMusic = () => {
       audio.play();
     }
   }, 0);
-}
+};
