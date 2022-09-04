@@ -22,10 +22,11 @@ export class Flash {
     const $battery = document.querySelector('.battery');
     const { flash } = state;
     requestAnimationFrame(
-      function comsumeBattery() {
+      function chargeBattery() {
+        console.log('charging!');
         flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
         $battery.style.width = `${flash.battery}%`;
-        !flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
+        !flash.isOn && flash.battery < 100 && requestAnimationFrame(chargeBattery.bind(this));
       }.bind(this)
     );
   }
@@ -61,5 +62,11 @@ export class Flash {
     }
     this.$el.setAttribute('intensity', Light.On);
     this.consumeBattery();
+  }
+  // for test
+  chargeFull() {
+    const $battery = document.querySelector('.battery');
+    state.flash.battery = 100;
+    $battery.style.width = `${state.flash.battery}%`;
   }
 }
