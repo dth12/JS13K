@@ -1,8 +1,6 @@
 import { Player } from '../entities/Player';
 import { Level } from '../entities/Level';
 import { Ui } from '../entities/Ui';
-import playerSetting from '../settings/player.json';
-import lightSetting from '../settings/light.json';
 import { Speed } from '../types';
 import { state } from './state';
 
@@ -23,7 +21,7 @@ AFRAME.registerSystem('game', {
     document.addEventListener('pointerlockchange', onChangePointerLock.bind(this), false);
 
     // init player
-    this.$player = new Player(playerSetting, lightSetting);
+    this.$player = new Player();
     // init UI
     this.$ui = new Ui();
   },
