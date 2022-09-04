@@ -40,7 +40,6 @@ export class Player {
     const { flash } = state;
     requestAnimationFrame(
       function comsumeBattery() {
-        console.log(`charging flash!`);
         flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
         $battery.style.width = `${flash.battery}%`;
         !flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
@@ -53,7 +52,6 @@ export class Player {
     const { flash } = state;
     requestAnimationFrame(
       function comsumeBattery() {
-        console.log(`consuming flash!`);
         flash.battery = Math.max(flash.battery - this.FLASH_CONSUME_SPEED, 0);
         $battery.style.width = `${flash.battery}%`;
         flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
