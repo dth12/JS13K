@@ -127,7 +127,7 @@ export class Level {
     const { level } = state;
     switch (stage) {
       case 1:
-        level.roomRowCount = 30;
+        level.roomRowCount = 9;
         level.mapHeight = level.roomRowCount * 100;
         this.generateWorld();
         this.addKeys(10);
