@@ -1,12 +1,12 @@
 const NOTE_TYPE = {
-  'h': 0.3, //hammered
-  's': 0.5, //sustained
+  'h': 0.3, // hammered
+  's': 0.5, // sustained
 };
 
 const FIGURES = {
   'w' : 1, 'h' : 0.5, 'q' : 0.25 , 
   'e': 0.125, 's' : 0.0625, 'es' : 0.03125,
-  'dbl' : 0.01563
+  'dbl' : 0.01563,
 };
 
 const FREQUENCIES = {
@@ -29,18 +29,22 @@ AFRAME.registerSystem('gameaudio', {
   },
   playSequence(sequence, tempo, instrument, volume) {
     let time = 0;
+
     sequence.forEach(element => {
-      let [note, figure, decTime = 's']  = element.split(' '); 
+      let [note, figure, decTime = 's'] = element.split(' '); 
       let notes = note.split(',');
+
       notes.forEach(n => {
         if (note !== '-'){
           let dec = NOTE_TYPE[decTime] * 120 / tempo;
           instrument.playNote(FREQUENCIES[n], time, dec, volume);
         }
       });
+      
       const beatsPerSecond = 60.0 / tempo * FIGURES[figure];
       time += beatsPerSecond;
     });
+
     return time;
-  }
+  },
 });
