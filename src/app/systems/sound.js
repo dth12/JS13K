@@ -22,12 +22,12 @@ const FREQUENCIES = {
   'B3'  : 1975.53,
 };
 
-export default AFRAME.registerSystem('gameaudio', {
-  init: function() {
+AFRAME.registerSystem('gameaudio', {
+  init() {
     let AudioContext = window.AudioContext || window.webkitAudioContext;
     this.audioContext = new AudioContext();
   },
-  playSequence: function(sequence, tempo, instrument, volume){
+  playSequence(sequence, tempo, instrument, volume) {
     let time = 0;
     sequence.forEach(element => {
       let [note, figure, decTime = 's']  = element.split(' '); 
