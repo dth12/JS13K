@@ -1,10 +1,10 @@
-import { Entity, Scene } from 'aframe';
+import {Entity, Scene} from 'aframe';
 
 export class Key {
   $scene: Scene;
   $el: Entity;
 
-  constructor(x = 0, y = 0, z = 0, settings: any = {}) {
+  constructor(id: number, x = 0, y = 0, z = 0, settings: any = {}) {
     this.$scene = document.querySelector('a-scene');
     this.$el = document.createElement('a-entity');
 
@@ -20,10 +20,11 @@ export class Key {
       opacity: 0.9,
       shader: 'standard',
     });
-
+    this.$el.setAttribute('collision', {keyId: id});
     this.$el.setAttribute('visible', true);
 
     this.$el.className = 'box';
+    this.$el.id = 'key';
 
     this.$scene.appendChild(this.$el);
   }

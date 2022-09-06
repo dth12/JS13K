@@ -1,6 +1,6 @@
-import { Entity } from 'aframe';
-import { state } from '../systems/state';
-import { Light, Speed } from '../types';
+import {Entity} from 'aframe';
+import {state} from '../systems/state';
+import {Light, Speed} from '../types';
 
 export class Player {
   private readonly FLASH_CONSUME_SPEED = 0.1;
@@ -30,6 +30,8 @@ export class Player {
   private initPlayer(option: { [key: string]: any }) {
     this.$el = document.createElement('a-entity');
     this.$el.id = 'player';
+    this.$el.setAttribute('collision', '');
+    this.$el.setAttribute('player', '');
     Object.keys(option).forEach((key) => {
       this.$el.setAttribute(key, option[key]);
     });
