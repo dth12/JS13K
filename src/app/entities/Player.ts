@@ -31,6 +31,7 @@ export class Player {
     this.$el = document.createElement('a-entity');
     this.$el.id = 'player';
     this.$el.setAttribute('collision', '');
+    this.$el.setAttribute('player', '');
     Object.keys(option).forEach((key) => {
       this.$el.setAttribute(key, option[key]);
     });

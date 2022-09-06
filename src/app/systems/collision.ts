@@ -6,10 +6,10 @@ export default AFRAME.registerSystem('collision', {
     this.walls = [];
     this.wallsWithCollision = [];
     this.player;
+    this.playerOldPosition = undefined;
   },
   registerPlayer(player: Entity) {
     this.player = player;
-
   },
   registerKey(key: Entity) {
     this.keys.push(key);
@@ -21,11 +21,11 @@ export default AFRAME.registerSystem('collision', {
     this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall))
 
     if (this.wallsWithCollision.length > 0) {
-      console.log('collision with wall');
+      // console.log('collision with wall');
     }
   },
   detectCollisionWithKey() {
-    this.keysWithCollision = this.keys.filter((key: Entity) => this.isCollide(key))
+    this.keysWithCollision = this.keys.filter((key: Entity) => this.isCollide(key));
 
     if (this.keysWithCollision.length > 0) {
       console.log('collision with key');
@@ -41,16 +41,26 @@ export default AFRAME.registerSystem('collision', {
     const elMin = boundingBox.min;
     const elMax = boundingBox.max;
 
-    return (x <= elMax.x && x >= elMin.x) &&
-           (y <= elMax.y && y >= elMin.y) &&
-           (z <= elMax.z && z >= elMin.z);
+    return (x <= elMax.x + 1 && x >= elMin.x - 1) &&
+           (y <= elMax.y + 1 && y >= elMin.y - 1) &&
+           (z <= elMax.z + 1 && z >= elMin.z - 1);
   },
-  solveCollision() {
-
+  solveCollisionWithWall() {
+    if (this.playerOldPosition === undefined || this.wallsWithCollision.length === 0) return;
+    const [x, y, z] = this.playerOldPosition;
+    this.player.object3D.position.x = x;
+    this.player.object3D.position.y = y;
+    this.player.object3D.position.z = z;
   },
-  tick(time, timeDelta) {
-    if (!this.player) return;
+  updatePlayerOldPosition() {
+    const {x, y, z} = this.player.object3D.position;
+    this.playerOldPosition = [x, y, z];
+  },
+  tick() {
+    if (!this.player || !this.player.is('started')) return;
     this.detectCollisionWithWall();
-    this.solveCollision(timeDelta);
+    this.detectCollisionWithKey();
+    this.solveCollisionWithWall();
+    this.updatePlayerOldPosition();
   }
 })

@@ -13,7 +13,9 @@ AFRAME.registerComponent('collision', {
     }
   },
   update() {
-
+    if (this.el.id === 'player') {
+      this.system.registerPlayer(this.el);
+    }
   },
   tick() {
     // if (this.el.id === 'player') {
