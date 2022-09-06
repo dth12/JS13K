@@ -22,7 +22,7 @@ const FREQUENCIES = {
   'B3'  : 1975.53,
 };
 
-AFRAME.registerSystem('gameaudio', {
+export default AFRAME.registerSystem('gameaudio', {
   init() {
     let AudioContext = window.AudioContext || window.webkitAudioContext;
     this.audioContext = new AudioContext();

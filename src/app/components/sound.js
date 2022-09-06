@@ -1,7 +1,7 @@
 import Piano from '../../utils/sound/piano';
 import Sequences from '../../utils/sound/sequences';
 
-AFRAME.registerComponent('gameaudio', {
+export default AFRAME.registerComponent('gameaudio', {
   schema: {
     sequence: {default: 's4'},
     tempo: {default: 30},
