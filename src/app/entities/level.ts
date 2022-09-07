@@ -19,6 +19,7 @@ export class Level {
     const option = {
       material: { roughness: 0.9 },
       height: 30,
+      depth: 10,
       color: '#570c1e',
       collision: '',
       ...customOption,
@@ -44,8 +45,8 @@ export class Level {
     const row = Math.max(level.roomRowCount, 3);
     const doorZPositions = [
       level.mapHeight / 2 - this.getDoorWitdh(row) * 0.5,
-      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.25,
-      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.75,
+      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.25 + 5,
+      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.75 - 5,
     ];
 
     // horizontal wall
