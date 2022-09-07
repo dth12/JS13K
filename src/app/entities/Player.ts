@@ -14,6 +14,7 @@ export class Player {
     Object.keys(playerOption).forEach((key) => {
       this.$el.setAttribute(key, playerOption[key]);
     });
+    this.$el.id = 'player';
     this.flash = new Flash(this.$el);
     this.$gameScene.appendChild(this.$el);
     this.initEventHandler();

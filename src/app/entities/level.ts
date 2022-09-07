@@ -1,6 +1,6 @@
-import { getRandomIndex, getRandomRange } from '../../utils/util';
-import { state } from '../systems/state';
-import { Key } from './Key';
+import {getRandomIndex, getRandomRange} from '../../utils/util';
+import {state} from '../systems/state';
+import {Key} from './Key';
 
 export class Level {
   private static $gameScene = document.querySelector('#gameScene');
@@ -20,6 +20,7 @@ export class Level {
       material: { roughness: 0.9 },
       height: 30,
       color: '#570c1e',
+      collision: '',
       ...customOption,
     };
 
