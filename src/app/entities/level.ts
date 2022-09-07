@@ -1,6 +1,6 @@
-import {getRandomIndex, getRandomRange} from '../../utils/util';
-import {state} from '../systems/state';
-import {Key} from './Key';
+import { getRandomIndex, getRandomRange } from '../../utils/util';
+import { state } from '../systems/state';
+import { Key } from './Key';
 
 export class Level {
   private static $gameScene = document.querySelector('#gameScene');
@@ -19,6 +19,7 @@ export class Level {
     const option = {
       material: { roughness: 0.9 },
       height: 30,
+      depth: 10,
       color: '#570c1e',
       collision: '',
       ...customOption,
@@ -33,7 +34,9 @@ export class Level {
 
   private static addKeys(count: number) {
     for (let i = 0; i < count; i++) {
-      this.$keys.push(new Key(getRandomRange(state.level.mapWitdh / 2), 1.5, getRandomRange(state.level.mapWitdh / 2)));
+      this.$keys.push(
+        new Key(i, getRandomRange(state.level.mapWitdh / 2), 1.5, getRandomRange(state.level.mapWitdh / 2))
+      );
     }
   }
 
@@ -42,8 +45,8 @@ export class Level {
     const row = Math.max(level.roomRowCount, 3);
     const doorZPositions = [
       level.mapHeight / 2 - this.getDoorWitdh(row) * 0.5,
-      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.25,
-      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.75,
+      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.25 + 5,
+      level.mapHeight / 2 - this.getDoorWitdh(row) * 0.75 - 5,
     ];
 
     // horizontal wall
@@ -128,7 +131,7 @@ export class Level {
     const { level } = state;
     switch (stage) {
       case 1:
-        level.roomRowCount = 30;
+        level.roomRowCount = 9;
         level.mapHeight = level.roomRowCount * 100;
         this.generateWorld();
         this.addKeys(10);

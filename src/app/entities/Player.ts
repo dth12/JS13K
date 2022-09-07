@@ -1,90 +1,41 @@
-import {Entity} from 'aframe';
-import {state} from '../systems/state';
-import {Light, Speed} from '../types';
+import { state } from '../systems/state';
+import { Speed } from '../types';
+import { Flash } from './Flash';
+import option from '../settings/player.json';
 
 export class Player {
-  private readonly FLASH_CONSUME_SPEED = 0.1;
-  private readonly FLASH_CHARGE_SPEED = 0.01;
-  private $el: Entity;
-  private $flash: Entity;
+  private $gameScene = document.querySelector('#gameScene');
+  private $el = document.createElement('a-entity');
+  private flash: Flash;
 
-  constructor(playerOption: { [key: string]: any }, lightOption: { [key: string]: any }) {
-    const $gameScene = document.querySelector('#gameScene');
+  constructor() {
+    const playerOption = option as { [key: string]: any };
 
-    this.initFlash(lightOption);
-    this.initPlayer(playerOption);
-
-    this.$el.appendChild(this.$flash);
-    $gameScene.appendChild(this.$el);
-
-    this.initEventHandler();
-  }
-
-  private initFlash(option: { [key: string]: any }) {
-    this.$flash = document.createElement('a-light');
-    Object.keys(option).forEach((key) => {
-      this.$flash.setAttribute(key, option[key]);
+    Object.keys(playerOption).forEach((key) => {
+      this.$el.setAttribute(key, playerOption[key]);
     });
-  }
-
-  private initPlayer(option: { [key: string]: any }) {
-    this.$el = document.createElement('a-entity');
     this.$el.id = 'player';
-    this.$el.setAttribute('collision', '');
-    this.$el.setAttribute('player', '');
-    Object.keys(option).forEach((key) => {
-      this.$el.setAttribute(key, option[key]);
-    });
-  }
-
-  private chargeFlashBattery() {
-    const $battery = document.querySelector('.battery');
-    const { flash } = state;
-    requestAnimationFrame(
-      function comsumeBattery() {
-        console.log(`charging flash!`);
-        flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
-        $battery.style.width = `${flash.battery}%`;
-        !flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
-      }.bind(this)
-    );
-  }
-
-  private consumeFlashBattery() {
-    const $battery = document.querySelector('.battery');
-    const { flash } = state;
-    requestAnimationFrame(
-      function comsumeBattery() {
-        console.log(`consuming flash!`);
-        flash.battery = Math.max(flash.battery - this.FLASH_CONSUME_SPEED, 0);
-        $battery.style.width = `${flash.battery}%`;
-        flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
-        if (flash.battery === 0) {
-          flash.isOn = false;
-          this.$flash.setAttribute('intensity', Light.Off);
-          this.chargeFlashBattery();
-        }
-      }.bind(this)
-    );
+    this.flash = new Flash(this.$el);
+    this.$gameScene.appendChild(this.$el);
+    this.initEventHandler();
   }
 
   private initEventHandler() {
     const { flash, player } = state;
+
     document.addEventListener('keydown', (event) => {
+      if (!document.pointerLockElement) {
+        return;
+      }
+
       switch (event.key) {
         case ' ':
           flash.isOn = !flash.isOn;
           if (!flash.isOn) {
-            this.$flash.setAttribute('intensity', Light.Off);
-            this.chargeFlashBattery();
+            this.flash.turnOff();
             break;
           }
-          if (flash.battery < 1) {
-            flash.isOn = !flash.isOn;
-            break;
-          }
-          this.$flash.setAttribute('intensity', Light.On);
-          this.consumeFlashBattery();
+          this.flash.turnOn();
           break;
         case 'Control':
           const config = this.$el.getAttribute('wasd-controls');
@@ -94,8 +45,12 @@ export class Player {
             acceleration: player.isRunning ? Speed.Run : Speed.Walk,
           });
           break;
+        // for test
+        case 'r':
+          this.flash.chargeFull();
+          break;
+        // for test
         case 'Alt':
-          // for test
           this.$el.setAttribute('wasd-controls', { ...config, acceleration: '1000' });
       }
     });
