@@ -1,6 +1,6 @@
-import {getRandomIndex, getRandomRange} from '../../utils/util';
-import {state} from '../systems/state';
-import {Key} from './Key';
+import { getRandomIndex, getRandomRange } from '../../utils/util';
+import { state } from '../systems/state';
+import { Key } from './Key';
 
 export class Level {
   private static $gameScene = document.querySelector('#gameScene');
@@ -33,7 +33,9 @@ export class Level {
 
   private static addKeys(count: number) {
     for (let i = 0; i < count; i++) {
-      this.$keys.push(new Key(getRandomRange(state.level.mapWitdh / 2), 1.5, getRandomRange(state.level.mapWitdh / 2)));
+      this.$keys.push(
+        new Key(i, getRandomRange(state.level.mapWitdh / 2), 1.5, getRandomRange(state.level.mapWitdh / 2))
+      );
     }
   }
 
