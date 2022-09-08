@@ -6,6 +6,6 @@ AFRAME.registerComponent('bgm', {
     loop: {default: false},
   },
   init() {
-    document.getElementById('musicButton').addEventListener('click', this.system.generateMusic());
+    document.querySelector('#musicButton').addEventListener('click', this.system.generateMusic());
   },
 });
