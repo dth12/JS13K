@@ -2,9 +2,6 @@
 import {sequences} from '../../utils/sound/sequences';
 
 AFRAME.registerSystem('bgm', {
-  init() {
-
-  },
   generateMusic() {
     // Initialize music generation (player).
     const player = new CPlayer();
