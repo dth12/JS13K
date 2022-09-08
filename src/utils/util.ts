@@ -11,7 +11,7 @@ export const getRandomIndex = (num: number): number => {
 };
 
 // getRandomNote() => MIN_NOTE <= x < MAX_NOTE
-export const getRandomNote = (): number => {
+const getRandomNote = (): number => {
   return Math.floor(Math.random() * (MAX_NOTE - MIN_NOTE)) + MIN_NOTE; 
 }
 

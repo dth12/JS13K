@@ -1,5 +1,7 @@
 // Song data
-export const song = {
+import { getRandomMelody } from "../../../utils/util";
+
+export const SONG = {
   songData: [
     { // Instrument 0
       i: [
@@ -39,9 +41,9 @@ export const song = {
       c: [
         {
           n: getRandomMelody(),
-          f: []
+          f: [],
         }
-      ]
+      ],
     },
   ],
   rowLen: 11025,   // In sample lengths
