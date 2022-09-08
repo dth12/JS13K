@@ -1,6 +1,24 @@
-// Song data
-import { getRandomMelody } from "../../../utils/util";
+const MIN_NOTE = 99;
+const MAX_NOTE = 122;
+const MAX_MELODY_LENGTH = 8;
 
+// getRandomNote() => MIN_NOTE <= x < MAX_NOTE
+const getRandomNote = () => {
+  return Math.floor(Math.random() * (MAX_NOTE - MIN_NOTE)) + MIN_NOTE; 
+}
+
+// getRandomMelody() => songData.c.n
+const getRandomMelody = () => {
+  const randomMelody = [];
+
+  for (let i = 0; i < MAX_MELODY_LENGTH; ++i) {
+    randomMelody.push(...[getRandomNote(),,,,,,,,]);
+  }
+
+  return randomMelody;
+}
+
+// Song data
 export const SONG = {
   songData: [
     { // Instrument 0
