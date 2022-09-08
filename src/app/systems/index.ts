@@ -1,3 +1,3 @@
+import './bgm.ts';
 import './collision.ts';
 import './game.ts';
-import './sound.ts';

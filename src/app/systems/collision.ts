@@ -1,6 +1,6 @@
 import {Entity} from 'aframe';
 
-export default AFRAME.registerSystem('collision', {
+AFRAME.registerSystem('collision', {
   init() {
     this.keys = [];
     this.walls = [];
