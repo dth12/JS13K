@@ -1,9 +1,9 @@
 // getRandomRange(10) => -10 < x < 10
-export const getRandomRange = (num: number) => {
+export const getRandomRange = (num: number): number => {
   return Math.random() * num * 2 - num;
 };
 
 // getRandomIndex(3) => 0 <= x < 3
-export const getRandomIndex = (num: number) => {
+export const getRandomIndex = (num: number): number => {
   return Math.floor(Math.random() * num);
 };
