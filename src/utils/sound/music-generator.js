@@ -1,4 +1,4 @@
-import { sequences } from "./sequences.js";
+import {sequences} from "./sequences.js";
 
 export const generateMusic = () => {
   // Initialize music generation (player).
@@ -17,8 +17,8 @@ export const generateMusic = () => {
 
     if (done) {
       // Put the generated song in an Audio element.
-      var wave = player.createWave();
-      var audio = document.createElement("audio");
+      const wave = player.createWave();
+      const audio = document.createElement("audio");
       audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
       audio.loop = true;
       audio.play();
