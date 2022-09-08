@@ -1,3 +1,3 @@
 import './collision.ts';
-import './player.ts';
+import './game.ts';
 import './sound.ts';
