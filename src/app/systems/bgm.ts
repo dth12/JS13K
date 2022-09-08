@@ -2,7 +2,7 @@
 import {sequences} from '../../utils/sound/sequences';
 
 AFRAME.registerSystem('bgm', {
-  generateMusic() {
+  generateMusic(data) {
     // Initialize music generation (player).
     const player = new CPlayer();
     player.init(sequences.soundbox);
@@ -22,7 +22,9 @@ AFRAME.registerSystem('bgm', {
         const wave = player.createWave();
         const audio = document.createElement("audio");
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
-        audio.loop = true;
+        audio.volume = data.volume;
+        audio.autoplay = data.autoplay;
+        audio.loop = data.loop;
         audio.play();
       }
     }, 0);

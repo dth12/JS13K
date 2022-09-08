@@ -6,6 +6,6 @@ AFRAME.registerComponent('bgm', {
     loop: {default: false},
   },
   init() {
-    this.system.generateMusic();
+    this.system.generateMusic(this.data);
   },
 });
