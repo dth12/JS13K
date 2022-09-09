@@ -5,7 +5,7 @@ AFRAME.registerSystem('bgm', {
   generateMusic(data) {
     // Initialize music generation (player).
     const player = new CPlayer();
-    player.init(sequences.soundbox);
+    player.init(sequences.soundBox);
 
     // Generate music...
     let done = false;

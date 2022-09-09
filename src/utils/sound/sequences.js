@@ -21,7 +21,7 @@ const getRandomMelody = (noteCount, noteLength) => {
 
 export const sequences = {
   // Song data
-  soundbox: {
+  soundBox: {
     songData: [
       { // Instrument 0
         i: [
