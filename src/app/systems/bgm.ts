@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {sequences} from '../../utils/sound/sequences';
+import {sequences} from '../../utils/sequences';
 
 AFRAME.registerSystem('bgm', {
   generateMusic(data) {

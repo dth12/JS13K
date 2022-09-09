@@ -1,23 +1,11 @@
-const MIN_NOTE = 99;
-const MAX_NOTE = 122;
+// @ts-nocheck
+import { getRandomMelody } from "./util";
 
-// getRandomScale() => MIN_NOTE <= x < MAX_NOTE
-const getRandomScale = () => {
-  return Math.floor(Math.random() * (MAX_NOTE - MIN_NOTE)) + MIN_NOTE; 
-}
-
-// getRandomMelody(noteCount, noteLength) => songData.c.n
-const getRandomMelody = (noteCount, noteLength) => {
-  const randomMelody = [];
-
-  for (let i = 0; i < noteCount; ++i) {
-    const randomNote = Array(noteLength);
-    randomNote[0] = getRandomScale();
-    randomMelody.push(...randomNote);
-  }
-
-  return randomMelody;
-}
+const MIN_SCALE = 99;
+const MAX_SCALE = 122;
+const DEFAULT_PATTERN_LEN = 32;
+const MAX_PATTERN_LEN = 256;
+const NOTE_LENGTH = 4;
 
 export const sequences = {
   // Song data
@@ -59,13 +47,13 @@ export const sequences = {
         p: [1],
         // Columns
         c: [{
-          n: getRandomMelody(8, 4),
-          f: [],
-        }],
-      },
+          n: getRandomMelody(MIN_SCALE, MAX_SCALE, DEFAULT_PATTERN_LEN, NOTE_LENGTH),
+          f: []
+        }]
+      }
     ],
     rowLen: 5513,   // In sample lengths
-    patternLen: 32,  // Rows per pattern
+    patternLen: DEFAULT_PATTERN_LEN,  // Rows per pattern
     endPattern: 0,  // End pattern
     numChannels: 1  // Number of channels
   },
@@ -107,13 +95,13 @@ export const sequences = {
         p: [1],
         // Columns
         c: [
-          {n: getRandomMelody(64, 4),
-           f: []}
+          {n: getRandomMelody(MIN_SCALE, MAX_SCALE, MAX_PATTERN_LEN, NOTE_LENGTH),
+           f: []},
         ]
-      },
+      }
     ],
     rowLen: 55125,   // In sample lengths
-    patternLen: 256,  // Rows per pattern
+    patternLen: MAX_PATTERN_LEN,  // Rows per pattern
     endPattern: 0,  // End pattern
     numChannels: 1  // Number of channels
   },
