@@ -107,13 +107,13 @@ export const sequences = {
         p: [1],
         // Columns
         c: [
-          {n: getRandomMelody(8, 4),
+          {n: getRandomMelody(64, 4),
            f: []}
         ]
       },
     ],
     rowLen: 55125,   // In sample lengths
-    patternLen: 32,  // Rows per pattern
+    patternLen: 256,  // Rows per pattern
     endPattern: 0,  // End pattern
     numChannels: 1  // Number of channels
   },
