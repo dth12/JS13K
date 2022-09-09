@@ -10,7 +10,7 @@ function onChangePointerLock() {
     return;
   }
   this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-  this.$player.$el.setAttribute('bgm', { sequence: 'soundBox', volume: 0.5, autoplay: true, loop: true });
+  this.$player.$el.setAttribute('bgm', { sequence: 'baseString', volume: 0.5, autoplay: true, loop: true });
 }
 
 AFRAME.registerSystem('game', {
