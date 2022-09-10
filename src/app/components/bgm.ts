@@ -1,7 +1,7 @@
 AFRAME.registerComponent('bgm', {
   schema: {
     sequence: {default: 'soundBox'},
-    volume: {default: 0.5},
+    volume: {default: 1.0},
     autoplay: {default: false},
     loop: {default: false},
   },
