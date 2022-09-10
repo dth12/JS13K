@@ -1,10 +1,13 @@
 export class Monster {
-  private readonly HEIGHT = 4;
-  private readonly BOUNCING_SPEED = 0.02;
+  private readonly HEIGHT = 5;
+  private readonly BOUNCING_SPEED = 0.01;
+
   private $scene = document.querySelector('#gameScene');
   private $el = document.createElement('a-box');
 
-  private isBouncing = false;
+  private didFindPlayer = false;
+  private speed = 0.015;
+  private deg = 0;
 
   constructor(option: { [key: string]: any } = {}) {
     Object.keys(option).forEach((key) => {
@@ -12,28 +15,37 @@ export class Monster {
     });
     this.$el.classList.add('monster');
     this.$scene.appendChild(this.$el);
-    this.startBounce();
   }
 
-  private startBounce() {
-    this.isBouncing = true;
-    (function bounce(deg = 0) {
-      requestAnimationFrame(() => {
-        const { x, z } = this.$el.getAttribute('position');
-        this.$el.setAttribute('position', {
-          x,
-          z,
-          y: this.HEIGHT + Math.sin(Math.PI * deg) * 0.8,
-        });
+  update(deltaTime: number) {
+    const $player = document.querySelector('#player');
+    // playerX, playerZ
+    const { x: px, z: pz } = $player.getAttribute('position');
+    // monsterX, monsterZ
+    const { x: mx, y: my, z: mz } = this.$el.getAttribute('position');
 
-        if (this.isBouncing) {
-          bounce.call(this, deg + this.BOUNCING_SPEED);
-        }
-      });
-    }.bind(this)());
-  }
+    const distX = px - mx;
+    const distZ = pz - mz;
+    const ratio = Math.abs(distZ / distX);
 
-  private stopBounce() {
-    this.isBouncing = false;
+    const dirX = distX >= 0 ? 1 : -1;
+    const dirZ = distZ >= 0 ? 1 : -1;
+
+    const distance = Math.sqrt(distX ** 2 + distZ ** 2);
+
+    if (!this.didFindPlayer && distance < 16) {
+      this.didFindPlayer = true;
+    }
+
+    const offsetX = this.didFindPlayer ? 0 : Math.sqrt(this.speed ** 2 / (1 + ratio ** 2));
+    const offsetZ = this.didFindPlayer ? 0 : offsetX * ratio;
+
+    this.$el.setAttribute('position', {
+      x: mx + offsetX * dirX * deltaTime,
+      y: this.HEIGHT + Math.sin(Math.PI * this.deg) * 0.5,
+      z: mz + offsetZ * dirZ * deltaTime,
+    });
+
+    this.deg += this.BOUNCING_SPEED;
   }
 }

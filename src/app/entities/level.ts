@@ -133,7 +133,7 @@ export class Level {
     Array.from({ length: count }).forEach((_, idx) => {
       const position = {
         x: getRandomRange(state.level.mapWitdh / 2),
-        y: 7,
+        y: 5,
         z: getRandomRange(state.level.mapHeight / 2),
       };
 
@@ -166,6 +166,10 @@ export class Level {
   static update(deltaTime: number) {
     this.$keys.forEach(($box) => {
       $box.update(deltaTime);
+    });
+
+    this.$monsters.forEach(($monster) => {
+      $monster.update(deltaTime);
     });
   }
 }
