@@ -1,3 +1,5 @@
+import { state } from './../systems/state';
+
 export class Monster {
   private readonly HEIGHT = 5;
   private readonly BOUNCING_SPEED = 0.01;
@@ -18,6 +20,7 @@ export class Monster {
   }
 
   update(deltaTime: number) {
+    const { flash } = state;
     const $player = document.querySelector('#player');
     // playerX, playerZ
     const { x: px, z: pz } = $player.getAttribute('position');
@@ -37,8 +40,8 @@ export class Monster {
       this.didFindPlayer = true;
     }
 
-    const offsetX = this.didFindPlayer ? 0 : Math.sqrt(this.speed ** 2 / (1 + ratio ** 2));
-    const offsetZ = this.didFindPlayer ? 0 : offsetX * ratio;
+    const offsetX = this.didFindPlayer || !flash.isOn ? 0 : Math.sqrt(this.speed ** 2 / (1 + ratio ** 2));
+    const offsetZ = this.didFindPlayer || !flash.isOn ? 0 : offsetX * ratio;
 
     this.$el.setAttribute('position', {
       x: mx + offsetX * dirX * deltaTime,
