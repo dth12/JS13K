@@ -16,12 +16,6 @@ AFRAME.registerSystem('bgm', {
   init() {
     this.audio = undefined;
   },
-  playMusic() {
-    this.audio.play();
-  },
-  pauseMusic() {
-    this.audio.pause();
-  },
   initMusic(data) {
     // Initialize music generation (player).
     const player = new CPlayer();
@@ -42,5 +36,17 @@ AFRAME.registerSystem('bgm', {
         generateMusic(data, player);
       }
     }, 0);
+  },
+  playMusic() {
+    this.audio.play();
+  },
+  pauseMusic() {
+    this.audio.pause();
+  },
+  muteMusic() {
+    this.audio.muted = true;
+  },
+  unmuteMusic() {
+    this.audio.unmuted = true;
   },
 });
