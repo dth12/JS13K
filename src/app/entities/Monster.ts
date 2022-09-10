@@ -3,12 +3,12 @@ import { state } from './../systems/state';
 export class Monster {
   private readonly HEIGHT = 5;
   private readonly BOUNCING_SPEED = 0.01;
+  private readonly SPEED = 0.015;
 
   private $scene = document.querySelector('#gameScene');
   private $el = document.createElement('a-box');
 
   private didFindPlayer = false;
-  private speed = 0.015;
   private deg = 0;
 
   constructor(option: { [key: string]: any } = {}) {
@@ -40,8 +40,10 @@ export class Monster {
       this.didFindPlayer = true;
     }
 
-    const offsetX = this.didFindPlayer || flash.isOn ? 0 : Math.sqrt(this.speed ** 2 / (1 + ratio ** 2));
-    const offsetZ = this.didFindPlayer || flash.isOn ? 0 : offsetX * ratio;
+    const speed = this.didFindPlayer || !flash.isOn ? this.SPEED * 0.1 : this.SPEED;
+
+    const offsetX = Math.sqrt(speed ** 2 / (1 + ratio ** 2));
+    const offsetZ = offsetX * ratio;
 
     this.$el.setAttribute('position', {
       x: mx + offsetX * dirX * deltaTime,
