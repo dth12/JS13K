@@ -173,6 +173,12 @@ export class Level {
     }
   }
 
+  static stopMonsters() {
+    this.$monsters.forEach((monster) => {
+      monster.setDidFindPlayer(true);
+    });
+  }
+
   static removeStage() {
     this.removeEntity(this.$sky);
     this.removeEntity(this.$ground);

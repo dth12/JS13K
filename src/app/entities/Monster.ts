@@ -55,4 +55,7 @@ export class Monster {
 
     this.deg += this.BOUNCING_SPEED;
   }
+  setDidFindPlayer(didFindPlayer: boolean) {
+    this.didFindPlayer = didFindPlayer;
+  }
 }
