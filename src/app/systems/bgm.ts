@@ -2,6 +2,15 @@
 import {sequences} from '../../utils/sound/sequences';
 
 AFRAME.registerSystem('bgm', {
+  init() {
+    this.audio = undefined;
+  },
+  playMusic() {
+    this.audio.play();
+  },
+  pauseMusic() {
+    this.audio.pause();
+  },
   generateMusic(data) {
     // Initialize music generation (player).
     const player = new CPlayer();
@@ -20,13 +29,14 @@ AFRAME.registerSystem('bgm', {
       if (done) {
         // Put the generated song in an Audio element.
         const wave = player.createWave();
-        const audio = document.createElement("audio");
-        audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
-        audio.volume = data.volume;
-        audio.autoplay = data.autoplay;
-        audio.loop = data.loop;
-        audio.play();
+        this.audio = document.createElement("audio");
+        this.audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
+        this.audio.volume = data.volume;
+        this.audio.muted = data.muted;
+        this.audio.autoplay = data.autoplay;
+        this.audio.loop = data.loop;
+        this.playMusic();
       }
     }, 0);
-  }
+  },
 });
