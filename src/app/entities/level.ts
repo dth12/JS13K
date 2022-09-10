@@ -149,6 +149,10 @@ export class Level {
     });
   }
 
+  static removeStage() {
+    
+  }
+
   static createStage(stage = 1) {
     const { level } = state;
     switch (stage) {
