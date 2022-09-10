@@ -30,6 +30,11 @@ AFRAME.registerSystem('game', {
     Level.update(timeDelta);
   },
   restartGame() {
-    alert('GAME OVER');
+    console.log('GAME OVER');
+    Level.createStage(1);
+    // init player
+    this.$player = new Player();
+    // init UI
+    this.$ui = new Ui();
   },
 });
