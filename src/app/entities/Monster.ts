@@ -42,7 +42,7 @@ export class Monster {
 
     const speed = this.didFindPlayer || !flash.isOn ? this.SPEED * 0.1 : this.SPEED;
 
-    const offsetX = Math.sqrt(speed ** 2 / (1 + ratio ** 2));
+    const offsetX = !this.didFindPlayer ? Math.sqrt(speed ** 2 / (1 + ratio ** 2)) : 0;
     const offsetZ = offsetX * ratio;
 
     this.$el.setAttribute('position', {
