@@ -7,6 +7,7 @@ function generateSong(data, player) {
   this.audio = document.createElement("audio");
   this.audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
   this.audio.volume = data.volume;
+  this.audio.muted = data.muted;
   this.audio.autoplay = data.autoplay;
   this.audio.loop = data.loop;
   this.playMusic();
