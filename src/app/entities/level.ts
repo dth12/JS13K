@@ -149,8 +149,26 @@ export class Level {
     });
   }
 
+  private static removeEntity(entityEl: any) {
+    /*
+    entityEl.object3D.position.y = 1000;
+    entityEl.object3D.visible = false;
+    entityEl.pause();
+    */
+    entityEl.parentNode.removeChild(entityEl);
+  }
+
+  private static removeEntities(entities: any[]) {
+    while (entities.length > 0) {
+      this.removeEntity(entities[entities.length - 1].$el);
+      entities.pop();
+    }
+  }
+
   static removeStage() {
-    
+    this.removeEntities(this.$keys);
+    this.removeEntities(this.$monsters);
+    console.log(this.$keys, this.$monsters);
   }
 
   static createStage(stage = 1) {

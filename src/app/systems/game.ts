@@ -31,6 +31,7 @@ AFRAME.registerSystem('game', {
   },
   restartGame() {
     console.log('GAME OVER');
+    Level.removeStage();
     Level.createStage(1);
     // init player
     this.$player = new Player();
