@@ -29,4 +29,7 @@ AFRAME.registerSystem('game', {
   tick(_time, timeDelta) {
     Level.update(timeDelta);
   },
+  restartGame() {
+    alert('GAME OVER');
+  },
 });

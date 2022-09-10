@@ -38,6 +38,8 @@ export class Monster {
 
     if (!this.didFindPlayer && distance < 16) {
       this.didFindPlayer = true;
+      // @ts-ignore
+      this.$scene.systems['game'].restartGame();
     }
 
     const speed = this.didFindPlayer || !flash.isOn ? this.SPEED * 0.1 : this.SPEED;
