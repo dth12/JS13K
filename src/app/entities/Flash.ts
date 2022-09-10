@@ -23,7 +23,6 @@ export class Flash {
     const { flash } = state;
     requestAnimationFrame(
       function chargeBattery() {
-        console.log('charging!');
         flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
         $battery.style.width = `${flash.battery}%`;
         !flash.isOn && flash.battery < 100 && requestAnimationFrame(chargeBattery.bind(this));

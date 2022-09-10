@@ -1,10 +1,12 @@
 import { getRandomIndex, getRandomRange } from '../../utils/util';
 import { state } from '../systems/state';
 import { Key } from './Key';
+import { Monster } from './Monster';
 
 export class Level {
   private static $gameScene = document.querySelector('#gameScene');
   private static $keys: Key[] = [];
+  private static $monsters: Monster[] = [];
 
   private static get roomDepth() {
     return state.level.mapWitdh / 4;
@@ -20,7 +22,7 @@ export class Level {
       material: { roughness: 0.9 },
       height: 30,
       depth: 10,
-      color: '#570c1e',
+      color: '#390904',
       collision: '',
       ...customOption,
     };
@@ -35,7 +37,7 @@ export class Level {
   private static addKeys(count: number) {
     for (let i = 0; i < count; i++) {
       this.$keys.push(
-        new Key(i, getRandomRange(state.level.mapWitdh / 2), 1.5, getRandomRange(state.level.mapWitdh / 2))
+        new Key(i, getRandomRange(state.level.mapWitdh / 2), 1.5, getRandomRange(state.level.mapHeight / 2))
       );
     }
   }
@@ -97,7 +99,7 @@ export class Level {
     $ground.setAttribute('rotation', '-90 0 0');
     $ground.setAttribute('width', state.level.mapWitdh);
     $ground.setAttribute('height', state.level.mapHeight);
-    $ground.setAttribute('material', { color: '#010645', roughness: 0.9 });
+    $ground.setAttribute('material', { color: '#071e38', roughness: 0.9 });
 
     const $edgeWalls = [
       this.createWall({
@@ -127,6 +129,26 @@ export class Level {
     this.$gameScene.appendChild($frag);
   }
 
+  private static spawnMonster(count: number) {
+    Array.from({ length: count }).forEach((_, idx) => {
+      const position = {
+        x: getRandomRange(state.level.mapWitdh / 2),
+        y: 7,
+        z: getRandomRange(state.level.mapHeight / 2),
+      };
+
+      this.$monsters.push(
+        new Monster({
+          position,
+          width: 5,
+          height: 5,
+          depth: 5,
+          material: { color: '#162c50', roughness: 0.9 },
+        })
+      );
+    });
+  }
+
   static createStage(stage = 1) {
     const { level } = state;
     switch (stage) {
@@ -135,6 +157,7 @@ export class Level {
         level.mapHeight = level.roomRowCount * 100;
         this.generateWorld();
         this.addKeys(10);
+        this.spawnMonster(10);
         break;
       default:
     }
