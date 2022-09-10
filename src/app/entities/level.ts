@@ -167,7 +167,6 @@ export class Level {
   static removeStage() {
     this.removeEntities(this.$keys);
     this.removeEntities(this.$monsters);
-    console.log(this.$keys, this.$monsters);
   }
 
   static createStage(stage = 1) {

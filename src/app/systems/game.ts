@@ -33,9 +33,11 @@ AFRAME.registerSystem('game', {
     console.log('GAME OVER');
     Level.removeStage();
     Level.createStage(1);
+    /*
     // init player
     this.$player = new Player();
     // init UI
     this.$ui = new Ui();
+    */
   },
 });
