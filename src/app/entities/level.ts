@@ -1,7 +1,7 @@
-import { getRandomIndex, getRandomRange } from '../../utils/util';
-import { state } from '../systems/state';
-import { Key } from './Key';
-import { Monster } from './Monster';
+import {getRandomIndex, getRandomRange} from '../../utils/util';
+import {state} from '../systems/state';
+import {Key} from './Key';
+import {Monster} from './Monster';
 
 export class Level {
   private static $gameScene = document.querySelector('#gameScene');

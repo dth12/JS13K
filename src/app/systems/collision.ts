@@ -5,8 +5,9 @@ AFRAME.registerSystem('collision', {
     this.keys = [];
     this.walls = [];
     this.wallsWithCollision = [];
+    this.keyWithCollision;
     this.player;
-    this.playerOldPosition = undefined;
+    this.playerOldPosition;
   },
   registerPlayer(player: Entity) {
     this.player = player;
@@ -18,20 +19,12 @@ AFRAME.registerSystem('collision', {
     this.walls.push(wall);
   },
   detectCollisionWithWall() {
-    this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall))
-
-    if (this.wallsWithCollision.length > 0) {
-      // console.log('collision with wall');
-    }
+    this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall, 0.2));
   },
   detectCollisionWithKey() {
-    this.keysWithCollision = this.keys.filter((key: Entity) => this.isCollide(key));
-
-    if (this.keysWithCollision.length > 0) {
-      console.log('collision with key');
-    }
+    this.keyWithCollision = this.keys.find((key: Entity) => this.isCollide(key, 1.5));
   },
-  isCollide(el: Entity) {
+  isCollide(el: Entity, dist: number) {
     const {x, y, z} = this.player.object3D.position;
 
     // @ts-ignore
@@ -41,26 +34,36 @@ AFRAME.registerSystem('collision', {
     const elMin = boundingBox.min;
     const elMax = boundingBox.max;
 
-    return (x <= elMax.x + 1 && x >= elMin.x - 1) &&
-           (y <= elMax.y + 1 && y >= elMin.y - 1) &&
-           (z <= elMax.z + 1 && z >= elMin.z - 1);
+    return (x <= elMax.x + dist && x >= elMin.x - dist) &&
+           (y <= elMax.y + dist && y >= elMin.y - dist) &&
+           (z <= elMax.z + dist && z >= elMin.z - dist);
   },
   solveCollisionWithWall() {
     if (this.playerOldPosition === undefined || this.wallsWithCollision.length === 0) return;
-    const [x, y, z] = this.playerOldPosition;
-    this.player.object3D.position.x = x;
-    this.player.object3D.position.y = y;
-    this.player.object3D.position.z = z;
+
+    const [ox, oy, oz] = this.playerOldPosition;
+    const {x, y, z} = this.player.object3D.position;
+    this.player.object3D.position.x += (ox - x) * 3.3;
+    this.player.object3D.position.y += (oy - y) * 3.3;
+    this.player.object3D.position.z += (oz - z) * 3.3;
+  },
+  solveCollisionWithKey() {
+    if (this.keyWithCollision === undefined) return;
+
+    this.keyWithCollision.emit('find-key');
+    this.keyWithCollision.parentNode.removeChild(this.keyWithCollision);
   },
   updatePlayerOldPosition() {
     const {x, y, z} = this.player.object3D.position;
     this.playerOldPosition = [x, y, z];
   },
   tick() {
-    if (!this.player || !this.player.is('started')) return;
+    if (this.player === undefined) return;
+
     this.detectCollisionWithWall();
     this.detectCollisionWithKey();
     this.solveCollisionWithWall();
+    this.solveCollisionWithKey();
     this.updatePlayerOldPosition();
   }
 })

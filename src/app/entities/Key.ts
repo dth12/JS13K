@@ -20,7 +20,7 @@ export class Key {
       opacity: 0.9,
       shader: 'standard',
     });
-    this.$el.setAttribute('collision', {keyId: id});
+    this.$el.setAttribute('collision', '');
     this.$el.setAttribute('visible', true);
 
     this.$el.className = 'box';

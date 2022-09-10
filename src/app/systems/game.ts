@@ -1,8 +1,8 @@
-import { Player } from '../entities/Player';
-import { Level } from '../entities/Level';
-import { Ui } from '../entities/Ui';
-import { Speed } from '../types';
-import { state } from './state';
+import {Level} from '../entities/Level';
+import {Player} from '../entities/Player';
+import {Ui} from '../entities/Ui';
+import {Speed} from '../types';
+import {state} from './state';
 
 function onChangePointerLock() {
   if (!document.pointerLockElement) {
@@ -20,11 +20,20 @@ AFRAME.registerSystem('game', {
 
     // init event
     document.addEventListener('pointerlockchange', onChangePointerLock.bind(this), false);
+    document.addEventListener('find-key', () => {
+      const $keyUi = document.querySelector('.keys');
+      const $keyCountUi = $keyUi.querySelector('.ui_item_count');
+      const increasedKeyCount = this.keyCount + 1;
+      $keyCountUi.textContent = increasedKeyCount.toString();
+      this.keyCount += 1;
+    })
 
     // init player
     this.$player = new Player();
     // init UI
     this.$ui = new Ui();
+    // init key count
+    this.keyCount = 0;
   },
   tick(_time, timeDelta) {
     Level.update(timeDelta);
