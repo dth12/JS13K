@@ -40,12 +40,12 @@ export class Monster {
       this.didFindPlayer = true;
     }
 
-    const offsetX = this.didFindPlayer || !flash.isOn ? 0 : Math.sqrt(this.speed ** 2 / (1 + ratio ** 2));
-    const offsetZ = this.didFindPlayer || !flash.isOn ? 0 : offsetX * ratio;
+    const offsetX = this.didFindPlayer || flash.isOn ? 0 : Math.sqrt(this.speed ** 2 / (1 + ratio ** 2));
+    const offsetZ = this.didFindPlayer || flash.isOn ? 0 : offsetX * ratio;
 
     this.$el.setAttribute('position', {
       x: mx + offsetX * dirX * deltaTime,
-      y: this.HEIGHT + Math.sin(Math.PI * this.deg) * 0.5,
+      y: this.HEIGHT + Math.sin(Math.PI * this.deg) * 0.15,
       z: mz + offsetZ * dirZ * deltaTime,
     });
 
