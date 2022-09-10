@@ -1,5 +1,6 @@
 interface PlayerStatus {
   isRunning: boolean;
+  isMuted: boolean;
 }
 
 interface UiItem {
@@ -54,6 +55,7 @@ class LevelState {
 class State {
   player: PlayerStatus = {
     isRunning: false,
+    isMuted: false,
   };
   level = new LevelState();
   flash: FlashStatus = {

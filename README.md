@@ -19,3 +19,4 @@ npm run build # create zip file at ~/dist/build.zip
 - **WASD** to move
 - use **MOUSE** to look around
 - **SPACE KEY** to toggle flash light
+- **ZERO KEY** to toggle sound

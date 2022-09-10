@@ -38,11 +38,19 @@ export class Player {
           this.flash.turnOn();
           break;
         case 'Control':
-          const config = this.$el.getAttribute('wasd-controls');
+          const controlConfig = this.$el.getAttribute('wasd-controls');
           player.isRunning = !player.isRunning;
           this.$el.setAttribute('wasd-controls', {
-            ...config,
+            ...controlConfig,
             acceleration: player.isRunning ? Speed.Run : Speed.Walk,
+          });
+          break;
+        case '0':
+          const bgmConfig = this.$el.getAttribute('bgm');
+          player.isMuted = !player.isMuted;
+          this.$el.setAttribute('bgm', {
+            ...bgmConfig,
+            muted: player.isMuted,
           });
           break;
         // for test
@@ -51,7 +59,7 @@ export class Player {
           break;
         // for test
         case 'Alt':
-          this.$el.setAttribute('wasd-controls', { ...config, acceleration: '1000' });
+          this.$el.setAttribute('wasd-controls', { ...controlConfig, acceleration: '1000' });
       }
     });
   }
