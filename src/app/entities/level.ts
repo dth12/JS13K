@@ -1,3 +1,4 @@
+import { Entity } from 'aframe';
 import {getRandomIndex, getRandomRange} from '../../utils/util';
 import {state} from '../systems/state';
 import {Key} from './Key';
@@ -5,6 +6,9 @@ import {Monster} from './Monster';
 
 export class Level {
   private static $gameScene = document.querySelector('#gameScene');
+  private static $sky: Entity = undefined;
+  private static $ground: Entity = undefined;
+  private static $walls: Entity[] = [];
   private static $keys: Key[] = [];
   private static $monsters: Monster[] = [];
 
@@ -30,6 +34,9 @@ export class Level {
     Object.keys(option).forEach((key) => {
       $wall.setAttribute(key, option[key]);
     });
+
+    $wall.className = 'wall';
+    this.$walls.push($wall);
 
     return $wall;
   }
@@ -90,16 +97,17 @@ export class Level {
 
   private static generateWorld() {
     const $frag = document.createDocumentFragment();
-    const $sky = document.createElement('a-sky');
-    $sky.setAttribute('color', '#171101');
-    $sky.setAttribute('radius', (Math.max(state.level.mapHeight, state.level.mapWidth) / 2) * 1.5);
 
-    const $ground = document.createElement('a-plane');
-    $ground.setAttribute('position', '0 0 0');
-    $ground.setAttribute('rotation', '-90 0 0');
-    $ground.setAttribute('width', state.level.mapWidth);
-    $ground.setAttribute('height', state.level.mapHeight);
-    $ground.setAttribute('material', { color: '#071e38', roughness: 0.9 });
+    this.$sky = document.createElement('a-sky');
+    this.$sky.setAttribute('color', '#171101');
+    this.$sky.setAttribute('radius', (Math.max(state.level.mapHeight, state.level.mapWidth) / 2) * 1.5);
+
+    this.$ground = document.createElement('a-plane');
+    this.$ground.setAttribute('position', '0 0 0');
+    this.$ground.setAttribute('rotation', '-90 0 0');
+    this.$ground.setAttribute('width', state.level.mapWidth);
+    this.$ground.setAttribute('height', state.level.mapHeight);
+    this.$ground.setAttribute('material', { color: '#071e38', roughness: 0.9 });
 
     const $edgeWalls = [
       this.createWall({
@@ -124,7 +132,7 @@ export class Level {
       }),
     ];
 
-    $frag.append($sky, $ground, ...$edgeWalls);
+    $frag.append(this.$sky, this.$ground, ...$edgeWalls);
     this.generateRooms($frag);
     this.$gameScene.appendChild($frag);
   }
@@ -149,22 +157,26 @@ export class Level {
     });
   }
 
-  private static removeEntity(entityEl: any) {
+  private static removeEntity(entity: any) {
     /*
     entityEl.object3D.position.y = 1000;
     entityEl.object3D.visible = false;
     entityEl.pause();
     */
+    const entityEl = entity.$el ? entity.$el : entity;
     entityEl.parentNode.removeChild(entityEl);
   }
 
   private static removeEntities(entities: any[]) {
     while (entities.length > 0) {
-      this.removeEntity((entities.pop()).$el);
+      this.removeEntity((entities.pop()));
     }
   }
 
   static removeStage() {
+    this.removeEntity(this.$sky);
+    this.removeEntity(this.$ground);
+    this.removeEntities(this.$walls);
     this.removeEntities(this.$keys);
     this.removeEntities(this.$monsters);
   }
