@@ -38,22 +38,4 @@ AFRAME.registerSystem('game', {
   tick(_time, timeDelta) {
     Level.update(timeDelta);
   },
-  restartGame() {
-    console.log('GAME OVER');
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
-    Level.stopMonsters();
-
-    setTimeout(()=>{
-      Level.removeStage();
-      Level.createStage(1);
-      this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-    },5000)
-
-    /*
-    // init player
-    this.$player = new Player();
-    // init UI
-    this.$ui = new Ui();
-    */
-  },
 });

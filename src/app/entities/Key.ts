@@ -23,8 +23,8 @@ export class Key {
     this.$el.setAttribute('collision', '');
     this.$el.setAttribute('visible', true);
 
-    this.$el.className = 'key';
-    this.$el.id = `key${id}`;
+    this.$el.className = 'box';
+    this.$el.id = 'key';
 
     this.$scene.appendChild(this.$el);
   }
