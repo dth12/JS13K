@@ -39,15 +39,15 @@ AFRAME.registerSystem('bgm', {
     }, 0);
   },
   playMusic() {
-    this.audio.play();
+    this.audio?.play();
   },
   pauseMusic() {
-    this.audio.pause();
+    this.audio?.pause();
   },
   muteMusic() {
-    this.audio.muted = true;
+    this.audio?.muted = true;
   },
   unmuteMusic() {
-    this.audio.unmuted = true;
+    this.audio?.muted = false;
   },
 });

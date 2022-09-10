@@ -9,4 +9,12 @@ AFRAME.registerComponent('bgm', {
   init() {
     this.system.initMusic(this.data);
   },
+  update() {
+    if (this.data.muted) {
+      this.system.muteMusic();
+    }
+    else {
+      this.system.unmuteMusic();
+    }
+  }
 });
