@@ -1,4 +1,4 @@
-import { state } from '../systems/state';
+import {state} from '../systems/state';
 
 export class Ui {
   private $keys: HTMLDivElement;

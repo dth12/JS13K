@@ -3,6 +3,5 @@
   "wasd-controls": {},
   "look-controls": { "pointerLockEnabled": true },
   "position": { "x": 0, "y": 3, "z": 0 },
-  "collision": "",
-  "player": ""
+  "collision": ""
 }
