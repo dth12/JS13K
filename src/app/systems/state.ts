@@ -27,17 +27,17 @@ interface RoomSection {
 
 class LevelState {
   mapHeight = 500;
-  mapWitdh = 500;
+  mapWidth = 500;
   roomRowCount = 5;
   get roomCount() {
     return this.roomRowCount * 2;
   }
   get roomSection() {
     const OFFSET_MARGIN = 10;
-    const xLeft = (-this.mapWitdh * 3) / 8;
-    const xOffset = this.mapWitdh / 8 - OFFSET_MARGIN;
+    const xLeft = (-this.mapWidth * 3) / 8;
+    const xOffset = this.mapWidth / 8 - OFFSET_MARGIN;
     const zOffset = this.mapHeight / this.roomRowCount / 2 - OFFSET_MARGIN;
-    const xRight = (this.mapWitdh * 3) / 8;
+    const xRight = (this.mapWidth * 3) / 8;
     return Array.from({ length: this.roomRowCount }).reduce<RoomSection>(
       (p, _, i) => {
         const z =
