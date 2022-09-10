@@ -160,8 +160,7 @@ export class Level {
 
   private static removeEntities(entities: any[]) {
     while (entities.length > 0) {
-      this.removeEntity(entities[entities.length - 1].$el);
-      entities.pop();
+      this.removeEntity((entities.pop()).$el);
     }
   }
 
