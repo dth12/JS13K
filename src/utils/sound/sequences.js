@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { getRandomMelody } from "./util";
+import { getRandomMelody } from "../util";
 
 const MIN_SCALE = 99;
 const MAX_SCALE = 122;
