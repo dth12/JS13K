@@ -70,7 +70,7 @@ export class Player {
       }
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
-      const audioConfig = this.$el.getAttribute('audio');
+      const musicConfig = this.$el.getAttribute('music');
 
       switch (event.key) {
         case ' ':
@@ -90,8 +90,8 @@ export class Player {
           break;
         case '0':
           player.isMuted = !player.isMuted;
-          this.$el.setAttribute('audio', {
-            ...audioConfig,
+          this.$el.setAttribute('music', {
+            ...musicConfig,
             muted: player.isMuted,
           });
           break;

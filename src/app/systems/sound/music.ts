@@ -1,15 +1,14 @@
 // @ts-nocheck
-import {music} from '../../utils/audio/sequences';
+import {music} from '../../../utils/sound/sequences';
 
-AFRAME.registerSystem('audio', {
+AFRAME.registerSystem('music', {
   init() {
     this.audio = undefined;
   },
-  initAudio(data) {
+  initMusic(data) {
     const player = new CPlayer();
-    const sequence = data.type === 'music' ? music[data.sequence] : sound[data.sequence];
     const audio = document.createElement("audio");
-    player.init(sequence);
+    player.init(music[data.sequence]);
 
     let done = false;
     
@@ -23,10 +22,7 @@ AFRAME.registerSystem('audio', {
       if (done) {
         const wave = player.createWave();
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
-        audio.playbackRate = data.playbackRate;
-        audio.volume = data.volume;
         audio.muted = data.muted;
-        audio.autoplay = true;
         audio.loop = true;
       }
     }, 0);
@@ -34,9 +30,7 @@ AFRAME.registerSystem('audio', {
     this.audio = audio;
     this.audio.play();
   },
-  updateAudio(data) {
-    this.audio.playbackRate = data.playbackRate;
-    this.audio.volume = data.volume;
+  updateMusic(data) {
     this.audio.muted = data.muted;
   },
 });
