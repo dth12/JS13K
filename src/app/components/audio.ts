@@ -1,11 +1,10 @@
 AFRAME.registerComponent('audio', {
   multiple: true,
   schema: {
+    type: {default: 'music'},
     sequence: {default: 'default'},
     volume: {default: 1.0},
     muted: {default: false},
-    autoplay: {default: false},
-    loop: {default: false},
   },
   init() {
     this.system.initAudio(this.data);

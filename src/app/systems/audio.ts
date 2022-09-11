@@ -7,8 +7,9 @@ AFRAME.registerSystem('audio', {
   },
   initAudio(data) {
     const player = new CPlayer();
+    const sequence = data.type === 'music' ? music[data.sequence] : sound[data.sequence];
     const audio = document.createElement("audio");
-    player.init(music[data.sequence]);
+    player.init(sequence);
 
     let done = false;
     
@@ -24,8 +25,8 @@ AFRAME.registerSystem('audio', {
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
         audio.volume = data.volume;
         audio.muted = data.muted;
-        audio.autoplay = data.autoplay;
-        audio.loop = data.loop;
+        audio.autoplay = true;
+        audio.loop = true;
       }
     }, 0);
 

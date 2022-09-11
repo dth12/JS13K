@@ -63,6 +63,7 @@ const getFootstepSound = (rowLen, patternLen) => {
 };
 
 export const sound = {
+  default: {},
   walk: getFootstepSound(MIN_PATTERN_LEN, WALK_ROWLEN),
   run: getFootstepSound(MIN_PATTERN_LEN, RUN_ROWLEN),
 };
@@ -105,11 +106,11 @@ export const music = {
         // Patterns
         p: [1],
         // Columns
-        c: [{
-          n: getRandomMelody(MIN_SCALE, MAX_SCALE, DEFAULT_PATTERN_LEN, NOTE_LEN),
-          f: []
-        }]
-      }
+        c: [
+          {n: getRandomMelody(MIN_SCALE, MAX_SCALE, DEFAULT_PATTERN_LEN, NOTE_LEN),
+           f: []}
+        ]
+      },
     ],
     rowLen: DEFAULT_ROWLEN,   // In sample lengths
     patternLen: DEFAULT_PATTERN_LEN,  // Rows per pattern
@@ -157,7 +158,7 @@ export const music = {
           {n: getRandomMelody(MIN_SCALE, MAX_SCALE, MAX_PATTERN_LEN, NOTE_LEN),
            f: []},
         ]
-      }
+      },
     ],
     rowLen: BASE_STRING_ROWLEN,   // In sample lengths
     patternLen: MAX_PATTERN_LEN,  // Rows per pattern
