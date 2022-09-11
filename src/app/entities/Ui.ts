@@ -1,9 +1,11 @@
-import {state} from '../systems/state';
+import { Entity } from 'aframe';
+import { state } from '../systems/state';
 
 export class Ui {
   private $keys: HTMLDivElement;
   private $monsters: HTMLDivElement;
   private $mainPage: HTMLDivElement;
+  private $gameScene: Entity = document.querySelector('#gameScene')
 
   private initUiItems() {
     const {
@@ -23,6 +25,8 @@ export class Ui {
     this.$mainPage.querySelector('.ui_main_start').addEventListener('click', () => {
       game.isStarted = true;
       this.$mainPage.classList.add('off');
+      // @ts-ignore
+      this.$gameScene.systems['music'].playMusic();
     });
   }
 

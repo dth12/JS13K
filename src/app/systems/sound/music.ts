@@ -28,9 +28,11 @@ AFRAME.registerSystem('music', {
     }, 0);
 
     this.audio = audio;
-    this.audio.play();
   },
   updateMusic(data) {
     this.audio.muted = data.muted;
   },
+  playMusic() {
+    this.audio.play();
+  }
 });
