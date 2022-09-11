@@ -1,46 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script type="text/javascript" src="src/utils/sound/blob.js"></script>
-    <script type="text/javascript" src="src/utils/sound/player-small.js"></script>
-  </head>
-  <body>
-    <a-scene id="gameScene">
-      <!-- environment -->
-      <a-light id="light" type="ambient" color="#fff" intensity="0.1" position="0 20 -10"></a-light>
-      <div class="ui">
-        <div class="ui_main">
-          <h1 class="ui_main_title">Death Javascript Game</h1>
-          <p class="ui_main_story">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex in fugiat doloribus, neque repudiandae beatae obcaecati unde veniam maxime ab praesentium deserunt facilis, atque corporis, facere illum. Dolore, exercitationem error.
-          </p>
-          <p class="ui_main_tips">
-            <span class="tip">Move: WASD</span>
-            <span class="tip">Flash: Space Bar</span>
-            <span class="tip">Walk/Run: Ctrl</span>
-          </p>
-          <button class="ui_main_start" >GO!</button>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script type="text/javascript" src="src/utils/sound/blob.js"></script>
+  <script type="text/javascript" src="src/utils/sound/player-small.js"></script>
+</head>
+
+<body>
+  <a-scene id="gameScene">
+    <!-- environment -->
+    <a-light id="light" type="ambient" color="#fff" intensity="0.1" position="0 20 -10"></a-light>
+    <div class="ui">
+      <div class="ui_main">
+        <h1 class="ui_main_title">Death Javascript Game</h1>
+        <p class="ui_main_story">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex in fugiat doloribus, neque repudiandae beatae
+          obcaecati unde veniam maxime ab praesentium deserunt facilis, atque corporis, facere illum. Dolore,
+          exercitationem error.
+        </p>
+        <p class="ui_main_tips">
+          <span class="tip">Move: WASD</span>
+          <span class="tip">Flash: Space Bar</span>
+          <span class="tip">Walk/Run: Ctrl</span>
+        </p>
+        <button class="ui_main_start">GO!</button>
+      </div>
+      <div class="ui_items ui_text">
+        <div class="ui_item keys">
+          <span class="ui_title">Keys</span>
+          <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
         </div>
-        <div class="ui_items ui_text">
-          <div class="ui_item keys">
-            <span class="ui_title">Keys</span>
-            <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
-          </div>
-          <div class="ui_item monsters">
-            <span class="ui_title">Monsters</span>
-            <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
-          </div>
-        </div>
-        <div class="ui_flash ui_text">
-          <span class="ui_flash_title">Flash Battery</span>
-          <div class="battery_wrap">
-            <div class="battery" />
-          </div>
+        <div class="ui_item monsters">
+          <span class="ui_title">Monsters</span>
+          <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
         </div>
       </div>
-    </a-scene>
-  </body>
+      <div class="ui_flash ui_text">
+        <span class="ui_flash_title">Flash Battery</span>
+        <div class="battery_wrap">
+          <div class="battery" />
+        </div>
+      </div>
+    </div>
+    <div class="ui_health ui_text">
+      <span class="ui_health_title">Health</span>
+      <div class="health_wrap">
+        <div class="health">
+      </div>
+    </div>
+  </div>
+  </a-scene>
+</body>
+
 </html>

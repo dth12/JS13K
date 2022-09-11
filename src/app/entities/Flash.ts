@@ -4,8 +4,8 @@ import { Light } from '../types';
 import option from '../settings/light.json';
 
 export class Flash {
-  private readonly FLASH_CONSUME_SPEED = 0.1;
-  private readonly FLASH_CHARGE_SPEED = 0.01;
+  private readonly FLASH_CONSUME_SPEED = 0.07;
+  private readonly FLASH_CHARGE_SPEED = 0.02;
   private $el = document.createElement('a-light');
 
   constructor($parentEl: Entity) {
