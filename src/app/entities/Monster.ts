@@ -5,7 +5,7 @@ export class Monster {
   private readonly BOUNCING_SPEED = 0.02;
   private readonly SPEED = 0.025;
 
-  private $scene = document.querySelector('#gameScene');
+  private $gameScene = document.querySelector('#gameScene');
   private $el = document.createElement('a-box');
 
   private didFindPlayer = false;
@@ -16,7 +16,7 @@ export class Monster {
       this.$el.setAttribute(key, option[key]);
     });
     this.$el.classList.add('monster');
-    this.$scene.appendChild(this.$el);
+    this.$gameScene.appendChild(this.$el);
   }
 
   update(deltaTime: number) {
@@ -47,7 +47,7 @@ export class Monster {
     if (!this.didFindPlayer && distance < 16) {
       this.didFindPlayer = true;
       // @ts-ignore
-      this.$scene.systems['game'].restartGame();
+      this.$gameScene.systems['game'].restartGame();
     }
 
     const speed = this.didFindPlayer || !flash.isOn ? this.SPEED * 0.05 : this.SPEED;

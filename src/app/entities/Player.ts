@@ -70,6 +70,9 @@ export class Player {
       }
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
+      const footstepConfig = this.$el.getAttribute('footstep');
+      const musicConfig = this.$el.getAttribute('music');
+
       switch (event.key) {
         case ' ':
           flash.isOn = !flash.isOn;
@@ -83,15 +86,21 @@ export class Player {
           if (player.isFound) {
             break;
           }
-
           player.isRunning = !player.isRunning;
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
+          this.$el.setAttribute('footstep', {
+            ...footstepConfig,
+            playbackRate: player.isRunning ? 2.0 : 1.0,
+          });
           break;
         case '0':
-          const bgmConfig = this.$el.getAttribute('bgm');
           player.isMuted = !player.isMuted;
-          this.$el.setAttribute('bgm', {
-            ...bgmConfig,
+          this.$el.setAttribute('footstep', {
+            ...footstepConfig,
+            muted: player.isMuted,
+          });
+          this.$el.setAttribute('music', {
+            ...musicConfig,
             muted: player.isMuted,
           });
           break;
