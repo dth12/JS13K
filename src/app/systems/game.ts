@@ -49,7 +49,6 @@ AFRAME.registerSystem('game', {
     Level.update(timeDelta);
   },
   restartGame() {
-    console.log('GAME OVER');
     state.player.isFound = true;
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     Level.stopMonsters();
@@ -59,7 +58,7 @@ AFRAME.registerSystem('game', {
       Level.createStage(1);
       state.player.isFound = false;
       this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-    },5000)
+    }, 5000)
 
     /*
     // init player
