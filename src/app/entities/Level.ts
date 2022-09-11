@@ -189,14 +189,16 @@ export class Level {
   }
 
   static createStage(stage = 1) {
-    const {level} = state;
+    const {level, uiItem} = state;
     switch (stage) {
       case 1:
-        level.roomRowCount = 9;
+        level.roomRowCount = 13;
         level.mapHeight = level.roomRowCount * 100;
+        uiItem.monsters.total = 5;
+        uiItem.keys.total = 10;
         this.generateWorld();
-        this.addKeys(10);
-        this.spawnMonster(10);
+        this.addKeys(uiItem.keys.total);
+        this.spawnMonster(uiItem.monsters.total);
         break;
       default:
     }
