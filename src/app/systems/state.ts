@@ -1,7 +1,10 @@
+import { Monster } from "../entities/Monster";
+
 interface PlayerStatus {
   isRunning: boolean;
   isMuted: boolean;
   isFound: boolean;
+  nearMonsters: Monster[];
 }
 
 interface UiItem {
@@ -58,6 +61,7 @@ class State {
     isRunning: false,
     isMuted: false,
     isFound: false,
+    nearMonsters: []
   };
   level = new LevelState();
   flash: FlashStatus = {

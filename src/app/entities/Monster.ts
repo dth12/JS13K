@@ -2,8 +2,8 @@ import { state } from './../systems/state';
 
 export class Monster {
   private readonly HEIGHT = 5;
-  private readonly BOUNCING_SPEED = 0.01;
-  private readonly SPEED = 0.015;
+  private readonly BOUNCING_SPEED = 0.02;
+  private readonly SPEED = 0.025;
 
   private $scene = document.querySelector('#gameScene');
   private $el = document.createElement('a-box');
@@ -20,7 +20,7 @@ export class Monster {
   }
 
   update(deltaTime: number) {
-    const { flash } = state;
+    const { flash, player } = state;
     const $player = document.querySelector('#player');
     // playerX, playerZ
     const { x: px, z: pz } = $player.getAttribute('position');
@@ -36,20 +36,28 @@ export class Monster {
 
     const distance = Math.sqrt(distX ** 2 + distZ ** 2);
 
+    if(distance < 150) {
+      if(!player.nearMonsters.includes(this)) {
+        player.nearMonsters.push(this);
+      }
+    } else {
+      player.nearMonsters = player.nearMonsters.filter((monster) => monster !== this);
+    }
+
     if (!this.didFindPlayer && distance < 16) {
       this.didFindPlayer = true;
       // @ts-ignore
       this.$scene.systems['game'].restartGame();
     }
 
-    const speed = this.didFindPlayer || !flash.isOn ? this.SPEED * 0.1 : this.SPEED;
+    const speed = this.didFindPlayer || !flash.isOn ? this.SPEED * 0.05 : this.SPEED;
 
     const offsetX = !this.didFindPlayer ? Math.sqrt(speed ** 2 / (1 + ratio ** 2)) : 0;
     const offsetZ = offsetX * ratio;
 
     this.$el.setAttribute('position', {
       x: mx + offsetX * dirX * deltaTime,
-      y: this.HEIGHT + Math.sin(Math.PI * this.deg) * 0.15,
+      y: this.HEIGHT + Math.sin(Math.PI * this.deg),
       z: mz + offsetZ * dirZ * deltaTime,
     });
 

@@ -32,4 +32,8 @@ export class Ui {
     this.$mainPage = document.querySelector('.ui_main') as unknown as HTMLDivElement;
     this.initUiItems();
   }
+
+  setMonsterCount(count: number) {
+    this.$monsters.querySelector('.ui_item_count').textContent = `${count}`;
+  }
 }
