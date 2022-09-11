@@ -1,7 +1,7 @@
-export const generateAudio = (data, sequences) => {
+export const generateAudio = (data, sequence) => {
   const player = new CPlayer();
   const audio = document.createElement("audio");
-  player.init(sequences[data.sequence]);
+  player.init(sequence);
 
   let done = false;
   
