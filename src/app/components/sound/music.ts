@@ -1,11 +1,12 @@
 AFRAME.registerComponent('music', {
   schema: {
+    volume: {default: 1.0},
     muted: {default: false},
   },
   init() {
-    this.system.initMusic(this.data);
+    this.system.initAudio(this.data);
   },
   update() {
-    this.system.updateMusic(this.data);
+    this.system.updateAudio(this.data);
   }
 });

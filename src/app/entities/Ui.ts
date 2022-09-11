@@ -26,7 +26,9 @@ export class Ui {
       game.isStarted = true;
       this.$mainPage.classList.add('off');
       // @ts-ignore
-      this.$gameScene.systems['music'].playMusic();
+      this.$gameScene.systems['footstep'].playAudio();
+      // @ts-ignore
+      this.$gameScene.systems['music'].playAudio();
     });
   }
 

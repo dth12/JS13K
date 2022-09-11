@@ -2,18 +2,19 @@
 import { footstep } from '../../../utils/sound/sequences';
 import { generateAudio } from '../../../utils/sound/sound-box';
 
-AFRAME.registerSystem('music', {
+AFRAME.registerSystem('footstep', {
   init() {
     this.audio = undefined;
   },
-  initFootstep(data) {
+  initAudio(data) {
     this.audio = generateAudio(data, footstep);
   },
-  updateFootstep(data) {
+  updateAudio(data) {
+    this.audio.volume = data.volume;
     this.audio.muted = data.muted;
     this.audio.playbackRate = data.playbackRate;
   },
-  playMusic() {
+  playAudio() {
     this.audio.play();
   }
 });

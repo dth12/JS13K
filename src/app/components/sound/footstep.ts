@@ -1,12 +1,13 @@
 AFRAME.registerComponent('footstep', {
   schema: {
+    volume: {default: 1.0},
     muted: {default: false},
     playbackRate: {default: 1.0},
   },
   init() {
-    this.system.initFootstep(this.data);
+    this.system.initAudio(this.data);
   },
   update() {
-    this.system.updateFootstep(this.data);
+    this.system.updateAudio(this.data);
   }
 });

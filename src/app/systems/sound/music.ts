@@ -6,13 +6,14 @@ AFRAME.registerSystem('music', {
   init() {
     this.audio = undefined;
   },
-  initMusic(data) {
+  initAudio(data) {
     this.audio = generateAudio(data, music);
   },
-  updateMusic(data) {
+  updateAudio(data) {
+    this.audio.volume = data.volume;
     this.audio.muted = data.muted;
   },
-  playMusic() {
+  playAudio() {
     this.audio.play();
   }
 });

@@ -70,6 +70,7 @@ export class Player {
       }
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
+      const footstepConfig = this.$el.getAttribute('footstep');
       const musicConfig = this.$el.getAttribute('music');
 
       switch (event.key) {
@@ -90,6 +91,10 @@ export class Player {
           break;
         case '0':
           player.isMuted = !player.isMuted;
+          this.$el.setAttribute('footstep', {
+            ...footstepConfig,
+            muted: player.isMuted,
+          });
           this.$el.setAttribute('music', {
             ...musicConfig,
             muted: player.isMuted,
