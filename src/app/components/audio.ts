@@ -3,7 +3,7 @@ AFRAME.registerComponent('audio', {
   schema: {
     type: {default: 'music'},
     sequence: {default: 'default'},
-    volume: {default: 1.0},
+    playbackRate: {default: 1.0},
     muted: {default: false},
   },
   init() {

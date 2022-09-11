@@ -23,7 +23,7 @@ AFRAME.registerSystem('audio', {
       if (done) {
         const wave = player.createWave();
         audio.src = URL.createObjectURL(new Blob([wave], {type: "audio/wav"}));
-        audio.volume = data.volume;
+        audio.playbackRate = data.playbackRate;
         audio.muted = data.muted;
         audio.autoplay = true;
         audio.loop = true;
