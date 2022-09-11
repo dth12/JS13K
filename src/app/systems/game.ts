@@ -6,7 +6,7 @@ import {state} from './state';
 
 function onChangePointerLock() {
   if (!document.pointerLockElement) {
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: Speed.Stand });
+    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     return;
   }
   this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
@@ -51,7 +51,7 @@ AFRAME.registerSystem('game', {
   restartGame() {
     console.log('GAME OVER');
     state.player.isFound = true;
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: Speed.Stand });
+    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     Level.stopMonsters();
 
     setTimeout(()=>{

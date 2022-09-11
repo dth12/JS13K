@@ -88,6 +88,10 @@ export class Player {
           }
           player.isRunning = !player.isRunning;
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
+          this.$el.setAttribute('footstep', {
+            ...footstepConfig,
+            playbackRate: player.isRunning ? 2.0 : 1.0,
+          });
           break;
         case '0':
           player.isMuted = !player.isMuted;
