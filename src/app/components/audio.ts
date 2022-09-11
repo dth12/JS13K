@@ -1,7 +1,7 @@
 AFRAME.registerComponent('audio', {
   multiple: true,
   schema: {
-    sequence: {default: 'soundBox'},
+    sequence: {default: 'default'},
     volume: {default: 1.0},
     muted: {default: false},
     autoplay: {default: false},
