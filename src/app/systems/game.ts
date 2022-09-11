@@ -36,6 +36,8 @@ AFRAME.registerSystem('game', {
     this.keyCount = 0;
   },
   tick(_time, timeDelta) {
+    const {player} = state;
+    this.$ui.setMonsterCount(player.nearMonsters.length);
     Level.update(timeDelta);
   },
   restartGame() {

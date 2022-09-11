@@ -5,5 +5,5 @@ export const enum Speed {
 
 export const enum Light {
   Off = '0',
-  On = '1',
+  On = '2',
 }

@@ -21,10 +21,11 @@ export class Player {
   }
 
   private initEventHandler() {
-    const { flash, player } = state;
+    const { flash, player, game } = state;
 
     document.addEventListener('keydown', (event) => {
-      if (!document.pointerLockElement) {
+      if (!document.pointerLockElement || !game.isStarted) {
+        this.$el.removeAttribute('wasd-controls');
         return;
       }
 
