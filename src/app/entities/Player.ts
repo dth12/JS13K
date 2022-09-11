@@ -7,6 +7,7 @@ export class Player {
   private HEALTH_CONSUME_SPEED = 0.05;
   private HEALTH_RECOVER_SPEED = 0.02;
   private $gameScene = document.querySelector('#gameScene');
+  private $mainPage = document.querySelector('.ui_main');
   private $el = document.createElement('a-entity');
   private flash: Flash;
 
@@ -65,7 +66,17 @@ export class Player {
 
     document.addEventListener('keydown', (event) => {
       if (!document.pointerLockElement || !game.isStarted) {
-        this.$el.removeAttribute('wasd-controls');
+        if (event.key === 'Enter') {
+          game.isStarted = true;
+          this.$mainPage.classList.add('off');
+          // @ts-ignore
+          this.$gameScene.systems['footstep'].playAudio();
+          // @ts-ignore
+          this.$gameScene.systems['music'].playAudio();
+        } else {
+          this.$el.removeAttribute('wasd-controls');
+        }
+
         return;
       }
 
