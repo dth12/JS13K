@@ -6,7 +6,7 @@ const DEFAULT_PATTERN_LEN = 32;
 const MAX_PATTERN_LEN = 256;
 const NOTE_LENGTH = 4;
 
-export const sequences = {
+export const music = {
   // Song data
   soundBox: {
     songData: [

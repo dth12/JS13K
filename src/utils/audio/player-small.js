@@ -306,7 +306,7 @@ var CPlayer = function() {
     };
 
     // Create a AudioBuffer from the generated audio data
-    this.createAudioBuffer = function(context) {
+    this.getAudioBuffer = function(context) {
         var buffer = context.createBuffer(2, mNumWords / 2, 44100);
         for (var i = 0; i < 2; i ++) {
             var data = buffer.getChannelData(i);

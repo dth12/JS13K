@@ -88,10 +88,10 @@ export class Player {
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
           break;
         case '0':
-          const bgmConfig = this.$el.getAttribute('bgm');
+          const audioConfig = this.$el.getAttribute('audio');
           player.isMuted = !player.isMuted;
-          this.$el.setAttribute('bgm', {
-            ...bgmConfig,
+          this.$el.setAttribute('audio', {
+            ...audioConfig,
             muted: player.isMuted,
           });
           break;

@@ -1,4 +1,5 @@
-AFRAME.registerComponent('bgm', {
+AFRAME.registerComponent('audio', {
+  multiple: true,
   schema: {
     sequence: {default: 'soundBox'},
     volume: {default: 1.0},
@@ -7,14 +8,14 @@ AFRAME.registerComponent('bgm', {
     loop: {default: false},
   },
   init() {
-    this.system.initMusic(this.data);
+    this.system.initAudio(this.data);
   },
   update() {
     if (this.data.muted) {
-      this.system.muteMusic();
+      this.system.muteAudio();
     }
     else {
-      this.system.unmuteMusic();
+      this.system.unmuteAudio();
     }
   }
 });

@@ -1,2 +1,2 @@
-import './bgm.ts';
+import './audio.ts';
 import './collision.ts';
