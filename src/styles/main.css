@@ -121,12 +121,8 @@ body {
   border: none;
   padding: 0.5rem 2rem;
   border-radius: 3px;
-  background: #679950;
+  background: #995050;
   color: #3c3c3c;
   font-weight: bold;
   font-size: 1.5rem;
-}
-
-.ui_main_start:hover {
-  transform: scale(1.1);
 }
