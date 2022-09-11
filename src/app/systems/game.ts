@@ -40,12 +40,14 @@ AFRAME.registerSystem('game', {
   },
   restartGame() {
     console.log('GAME OVER');
+    state.player.isFound = true;
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     Level.stopMonsters();
 
     setTimeout(()=>{
       Level.removeStage();
       Level.createStage(1);
+      state.player.isFound = false;
       this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
     },5000)
 

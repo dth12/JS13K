@@ -38,6 +38,10 @@ export class Player {
           this.flash.turnOn();
           break;
         case 'Control':
+          if (player.isFound) {
+            break;
+          }
+
           const controlConfig = this.$el.getAttribute('wasd-controls');
           player.isRunning = !player.isRunning;
           this.$el.setAttribute('wasd-controls', {
