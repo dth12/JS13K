@@ -68,6 +68,9 @@ class State {
     keys: { total: 10, count: 0 },
     monsters: { total: 10, count: 0 },
   };
+  game = {
+    isStarted: false,
+  };
 }
 
 export const state = new State();
