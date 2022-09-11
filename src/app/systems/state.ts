@@ -4,7 +4,6 @@ interface PlayerStatus {
   isRunning: boolean;
   health: number;
   isMuted: boolean;
-  isFound: boolean;
   nearMonsters: Monster[];
 }
 
@@ -62,7 +61,6 @@ class State {
     isRunning: false,
     health: 100,
     isMuted: false,
-    isFound: false,
     nearMonsters: []
   };
   level = new LevelState();

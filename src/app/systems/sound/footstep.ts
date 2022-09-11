@@ -16,5 +16,8 @@ AFRAME.registerSystem('footstep', {
   },
   playAudio() {
     this.audio.play();
-  }
+  },
+  pauseAudio() {
+    this.audio.pause();
+  },
 });

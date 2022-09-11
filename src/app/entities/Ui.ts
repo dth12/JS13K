@@ -1,9 +1,9 @@
-import { Entity } from 'aframe';
 import { state } from '../systems/state';
 
 export class Ui {
   private $keys: HTMLDivElement;
   private $monsters: HTMLDivElement;
+  private $gameOverPage: HTMLDivElement;
 
   private initUiItems() {
     const {
@@ -22,10 +22,15 @@ export class Ui {
   constructor() {
     this.$keys = document.querySelector('.keys') as unknown as HTMLDivElement;
     this.$monsters = document.querySelector('.monsters') as unknown as HTMLDivElement;
+    this.$gameOverPage = document.querySelector('.ui_game_over') as unknown as HTMLDivElement;
     this.initUiItems();
   }
 
   setMonsterCount(count: number) {
     this.$monsters.querySelector('.ui_item_count').textContent = `${count}`;
+  }
+
+  setGameOverUi() {
+    this.$gameOverPage.classList.remove('off');
   }
 }

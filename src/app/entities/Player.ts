@@ -9,6 +9,10 @@ export class Player {
   private $gameScene = document.querySelector('#gameScene');
   private $mainPage = document.querySelector('.ui_main');
   private $el = document.createElement('a-entity');
+  // @ts-ignore
+  private $footstep = this.$gameScene.systems['footstep'];
+  // @ts-ignore
+  private $music = this.$gameScene.systems['music']
   private flash: Flash;
 
   constructor() {
@@ -69,10 +73,10 @@ export class Player {
         if (event.key === 'Enter') {
           game.isStarted = true;
           this.$mainPage.classList.add('off');
-          // @ts-ignore
-          this.$gameScene.systems['footstep'].playAudio();
-          // @ts-ignore
-          this.$gameScene.systems['music'].playAudio();
+          // this.$footstep.pauseAudio();
+          this.$footstep.playAudio();
+          // this.$music.pauseAudio();
+          this.$music.playAudio();
         } else {
           this.$el.removeAttribute('wasd-controls');
         }
@@ -94,7 +98,7 @@ export class Player {
           this.flash.turnOn();
           break;
         case 'Control':
-          if (player.isFound) {
+          if (!game.isStarted) {
             break;
           }
           player.isRunning = !player.isRunning;
