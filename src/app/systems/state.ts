@@ -2,6 +2,7 @@ import { Monster } from "../entities/Monster";
 
 interface PlayerStatus {
   isRunning: boolean;
+  health: number;
   isMuted: boolean;
   isFound: boolean;
   nearMonsters: Monster[];
@@ -59,6 +60,7 @@ class LevelState {
 class State {
   player: PlayerStatus = {
     isRunning: false,
+    health: 100,
     isMuted: false,
     isFound: false,
     nearMonsters: []

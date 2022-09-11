@@ -4,6 +4,8 @@ import { Flash } from './Flash';
 import option from '../settings/player.json';
 
 export class Player {
+  private HEALTH_CONSUME_SPEED = 0.05;
+  private HEALTH_RECOVER_SPEED = 0.02;
   private $gameScene = document.querySelector('#gameScene');
   private $el = document.createElement('a-entity');
   private flash: Flash;
@@ -20,6 +22,44 @@ export class Player {
     this.initEventHandler();
   }
 
+  private run(config: any) {
+    const $health = document.querySelector('.health');
+    const {player} = state;
+    this.$el.setAttribute('wasd-controls', {
+      ...config,
+      acceleration: Speed.Run,
+    });
+
+    requestAnimationFrame(
+      function comsumeBattery() {
+        player.health = Math.max(player.health - this.HEALTH_CONSUME_SPEED, 0);
+        $health.style.width = `${player.health}%`;
+        player.isRunning && requestAnimationFrame(comsumeBattery.bind(this));
+        if (player.health === 0) {
+          player.isRunning = false;
+          this.walk()
+        }
+      }.bind(this)
+    );
+  }
+
+  private walk(config: any) {
+    const $health = document.querySelector('.health');
+    const {player} = state; 
+    this.$el.setAttribute('wasd-controls', {
+      ...config,
+      acceleration: Speed.Walk,
+    });
+
+    requestAnimationFrame(
+      function chargeBattery() {
+        player.health = Math.min(player.health + this.HEALTH_RECOVER_SPEED, 100);
+        $health.style.width = `${player.health}%`;
+        !player.isRunning && player.health < 100 && requestAnimationFrame(chargeBattery.bind(this));
+      }.bind(this)
+    );
+  }
+
   private initEventHandler() {
     const { flash, player, game } = state;
 
@@ -29,6 +69,7 @@ export class Player {
         return;
       }
 
+      const controlConfig = this.$el.getAttribute('wasd-controls');
       switch (event.key) {
         case ' ':
           flash.isOn = !flash.isOn;
@@ -43,12 +84,8 @@ export class Player {
             break;
           }
 
-          const controlConfig = this.$el.getAttribute('wasd-controls');
           player.isRunning = !player.isRunning;
-          this.$el.setAttribute('wasd-controls', {
-            ...controlConfig,
-            acceleration: player.isRunning ? Speed.Run : Speed.Walk,
-          });
+          player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
           break;
         case '0':
           const bgmConfig = this.$el.getAttribute('bgm');
