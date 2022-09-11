@@ -73,3 +73,52 @@ body {
   height: 100%;
   background: linear-gradient(to right, #ff8c8c95, #ffffff95);
 }
+
+.ui_main {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  background-color: #8181814f;
+  left: 50%;
+  top: 50%;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  color: #fdfdfdad;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.ui_main.off {
+  display: none;
+}
+
+.ui_main_title {
+  margin: 0;
+  font-size: 3rem;
+}
+
+.tip {
+  font-weight: bold;
+  display: block;
+}
+
+.ui_main_start {
+  pointer-events: all;
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+  background: #679950;
+  color: #3c3c3c;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.ui_main_start:hover {
+  transform: scale(1.1);
+}
