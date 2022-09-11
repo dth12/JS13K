@@ -10,11 +10,6 @@ AFRAME.registerComponent('audio', {
     this.system.initAudio(this.data);
   },
   update() {
-    if (this.data.muted) {
-      this.system.muteAudio();
-    }
-    else {
-      this.system.unmuteAudio();
-    }
+    this.system.updateAudio(this.data);
   }
 });

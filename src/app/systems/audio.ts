@@ -31,18 +31,10 @@ AFRAME.registerSystem('audio', {
     }, 0);
 
     this.audio = audio;
-    this.playAudio();
-  },
-  playAudio() {
     this.audio.play();
   },
-  pauseAudio() {
-    this.audio.pause();
-  },
-  muteAudio() {
-    this.audio.muted = true;
-  },
-  unmuteAudio() {
-    this.audio.muted = false;
+  updateAudio(data) {
+    this.audio.playbackRate = data.playbackRate;
+    this.audio.muted = data.muted;
   },
 });

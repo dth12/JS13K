@@ -70,6 +70,8 @@ export class Player {
       }
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
+      const audioConfig = this.$el.getAttribute('audio');
+
       switch (event.key) {
         case ' ':
           flash.isOn = !flash.isOn;
@@ -83,12 +85,14 @@ export class Player {
           if (player.isFound) {
             break;
           }
-
           player.isRunning = !player.isRunning;
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
+          this.$el.setAttribute('audio', {
+            ...audioConfig,
+            playbackRate: player.isRunning ? 2.0 : 1.0,
+          });
           break;
         case '0':
-          const audioConfig = this.$el.getAttribute('audio');
           player.isMuted = !player.isMuted;
           this.$el.setAttribute('audio', {
             ...audioConfig,
