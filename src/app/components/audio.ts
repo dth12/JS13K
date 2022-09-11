@@ -4,6 +4,7 @@ AFRAME.registerComponent('audio', {
     type: {default: 'music'},
     sequence: {default: 'default'},
     playbackRate: {default: 1.0},
+    volume: {default: 1.0},
     muted: {default: false},
   },
   init() {

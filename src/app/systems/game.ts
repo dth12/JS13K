@@ -6,11 +6,17 @@ import {state} from './state';
 
 function onChangePointerLock() {
   if (!document.pointerLockElement) {
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
+    this.$player.$el.setAttribute('wasd-controls', { acceleration: Speed.Stand });
     return;
   }
   this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-  this.$player.$el.setAttribute('audio', { type: 'music', sequence: 'baseString', playbackRate: 1.0, muted: state.player.isMuted });
+  this.$player.$el.setAttribute('audio', {
+    type: 'music',
+    sequence: 'baseString',
+    playbackRate: 1.0,
+    volume: 1.0,
+    muted: state.player.isMuted,
+  });
 }
 
 AFRAME.registerSystem('game', {
@@ -43,7 +49,7 @@ AFRAME.registerSystem('game', {
   restartGame() {
     console.log('GAME OVER');
     state.player.isFound = true;
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
+    this.$player.$el.setAttribute('wasd-controls', { acceleration: Speed.Stand });
     Level.stopMonsters();
 
     setTimeout(()=>{
