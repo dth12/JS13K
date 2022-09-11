@@ -1,4 +1,4 @@
-import { Entity } from 'aframe';
+import {Entity} from 'aframe';
 import {getRandomIndex, getRandomRange} from '../../utils/util';
 import {state} from '../systems/state';
 import {Key} from './Key';
@@ -23,7 +23,7 @@ export class Level {
   private static createWall(customOption: any) {
     const $wall = document.createElement('a-box');
     const option = {
-      material: { roughness: 0.9 },
+      material: {roughness: 0.9},
       height: 30,
       depth: 10,
       color: '#390904',
@@ -50,7 +50,7 @@ export class Level {
   }
 
   private static generateRooms($frag: DocumentFragment) {
-    const { level } = state;
+    const {level} = state;
     const row = Math.max(level.roomRowCount, 3);
     const doorZPositions = [
       level.mapHeight / 2 - this.getDoorWidth(row) * 0.5,
@@ -107,7 +107,7 @@ export class Level {
     this.$ground.setAttribute('rotation', '-90 0 0');
     this.$ground.setAttribute('width', state.level.mapWidth);
     this.$ground.setAttribute('height', state.level.mapHeight);
-    this.$ground.setAttribute('material', { color: '#071e38', roughness: 0.9 });
+    this.$ground.setAttribute('material', {color: '#071e38', roughness: 0.9});
 
     const $edgeWalls = [
       this.createWall({
@@ -138,11 +138,12 @@ export class Level {
   }
 
   private static spawnMonster(count: number) {
-    Array.from({ length: count }).forEach((_, idx) => {
+    const playerOffset = 200;
+    Array.from({length: count}).forEach((_, idx) => {
       const position = {
-        x: getRandomRange(state.level.mapWidth / 2),
+        x: (Math.random() * (state.level.mapWidth / 2 - playerOffset) + playerOffset) * (Math.random() < 0.5 ? 1 : -1),
         y: 5,
-        z: getRandomRange(state.level.mapHeight / 2),
+        z: (Math.random() * (state.level.mapHeight / 2 - playerOffset) + playerOffset) * (Math.random() < 0.5 ? 1 : -1),
       };
 
       this.$monsters.push(
@@ -151,7 +152,7 @@ export class Level {
           width: 5,
           height: 5,
           depth: 5,
-          material: { color: '#162c50', roughness: 0.9 },
+          material: {color: '#162c50', roughness: 0.9},
         })
       );
     });
@@ -169,7 +170,7 @@ export class Level {
 
   private static removeEntities(entities: any[]) {
     while (entities.length > 0) {
-      this.removeEntity((entities.pop()));
+      this.removeEntity(entities.pop());
     }
   }
 
@@ -188,7 +189,7 @@ export class Level {
   }
 
   static createStage(stage = 1) {
-    const { level } = state;
+    const {level} = state;
     switch (stage) {
       case 1:
         level.roomRowCount = 9;
