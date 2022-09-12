@@ -1,3 +1,5 @@
+import { CPlayer } from "./player-small";
+
 export const generateAudio = (data, sequence) => {
   const player = new CPlayer();
   const audio = document.createElement("audio");
