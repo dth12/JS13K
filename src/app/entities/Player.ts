@@ -103,6 +103,9 @@ export class Player {
         if (!game.isStarted) {
           game.isStarted = true;
           this.$mainPage.classList.add('off');
+          document.querySelector('.ui_items').classList.remove('off');
+          document.querySelector('.ui_flash').classList.remove('off');
+          document.querySelector('.ui_health').classList.remove('off');
         }
         else if (state.player.isFound) {
           state.player.isFound = false;
