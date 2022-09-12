@@ -39,6 +39,9 @@ export class Player {
 
     requestAnimationFrame(
       function comsumeBattery() {
+        if(player.isFound) {
+          return;
+        }
         player.health = Math.max(player.health - this.HEALTH_CONSUME_SPEED, 0);
         $health.style.width = `${player.health}%`;
         player.isRunning && requestAnimationFrame(comsumeBattery.bind(this));
@@ -60,6 +63,9 @@ export class Player {
 
     requestAnimationFrame(
       function chargeBattery() {
+        if(player.isFound) {
+          return;
+        }
         player.health = Math.min(player.health + this.HEALTH_RECOVER_SPEED, 100);
         $health.style.width = `${player.health}%`;
         !player.isRunning && player.health < 100 && requestAnimationFrame(chargeBattery.bind(this));

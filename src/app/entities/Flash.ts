@@ -22,9 +22,12 @@ export class Flash {
 
   private chargeBattery() {
     const $battery = document.querySelector('.battery');
-    const { flash } = state;
+    const { flash, player } = state;
     requestAnimationFrame(
       function chargeBattery() {
+        if(player.isFound) {
+          return;
+        }
         flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
         $battery.style.width = `${flash.battery}%`;
         !flash.isOn && flash.battery < 100 && requestAnimationFrame(chargeBattery.bind(this));
@@ -34,9 +37,12 @@ export class Flash {
 
   private consumeBattery() {
     const $battery = document.querySelector('.battery');
-    const { flash } = state;
+    const { flash , player} = state;
     requestAnimationFrame(
       function comsumeBattery() {
+        if(player.isFound) {
+          return;
+        }
         flash.battery = Math.max(flash.battery - this.FLASH_CONSUME_SPEED, 0);
         $battery.style.width = `${flash.battery}%`;
         flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
