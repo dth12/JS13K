@@ -1,3 +1,4 @@
+import { Level } from '../entities/Level';
 import { state } from '../systems/state';
 import { Speed } from '../types';
 import { Flash } from './Flash';
@@ -8,6 +9,7 @@ export class Player {
   private HEALTH_RECOVER_SPEED = 0.02;
   private $gameScene = document.querySelector('#gameScene');
   private $mainPage = document.querySelector('.ui_main');
+  private $gameOverPage = document.querySelector('.ui_game_over');
   private $el = document.createElement('a-entity');
   // @ts-ignore
   private $footstep = this.$gameScene.systems['footstep'];
@@ -69,24 +71,35 @@ export class Player {
     const { flash, player, game } = state;
 
     document.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        this.$footstep.playAudio();
+        this.$music.playAudio();
+
+        if (!game.isStarted) {
+          game.isStarted = true;
+          this.$mainPage.classList.add('off');
+        }
+        else if (state.player.isFound) {
+          state.player.isFound = false;
+          this.$gameOverPage.classList.add('off');
+          Level.removeStage();
+          Level.createStage(1);
+          this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
+        }
+
+        return;
+      }
+
       if (!document.pointerLockElement || !game.isStarted) {
+        console.log('out');
         this.$el.removeAttribute('wasd-controls');
         return;
       }
 
-      if (event.key === 'Enter') {
-        if (!game.isStarted) {
-          game.isStarted = true;
-          this.$mainPage.classList.add('off');
-          this.$footstep.playAudio();
-          this.$music.playAudio();
-        }
-        else {
-          
-        }
-
+      if (player.isFound || !game.isStarted) {
+        console.log('nono');
         return;
-      } 
+      }
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
       const footstepConfig = this.$el.getAttribute('footstep');
@@ -102,9 +115,6 @@ export class Player {
           this.flash.turnOn();
           break;
         case 'Control':
-          if (!game.isStarted) {
-            break;
-          }
           player.isRunning = !player.isRunning;
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
           this.$el.setAttribute('footstep', {

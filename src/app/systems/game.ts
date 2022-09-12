@@ -1,8 +1,8 @@
-import {Level} from '../entities/Level';
-import {Player} from '../entities/Player';
-import {Ui} from '../entities/Ui';
-import {Speed} from '../types';
-import {state} from './state';
+import { Level } from '../entities/Level';
+import { Player } from '../entities/Player';
+import { Ui } from '../entities/Ui';
+import { Speed } from '../types';
+import { state } from './state';
 
 function onChangePointerLock() {
   if (!document.pointerLockElement) {
@@ -50,13 +50,9 @@ AFRAME.registerSystem('game', {
     Level.update(timeDelta);
   },
   restartGame() {
+    state.player.isFound = true;
     Level.stopMonsters();
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
-
     this.$ui.setGameOverUi();
-
-    Level.removeStage();
-    Level.createStage(1);
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
   },
 });
