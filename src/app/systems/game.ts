@@ -10,15 +10,6 @@ function onChangePointerLock() {
     return;
   }
   this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-  this.$player.$el.setAttribute('footstep', {
-    volume: 1.0,
-    muted: state.player.isMuted,
-    playbackRate: 1.0,
-  });
-  this.$player.$el.setAttribute('music', {
-    volume: 0.1,
-    muted: state.player.isMuted,
-  });
 }
 
 AFRAME.registerSystem('game', {
@@ -42,6 +33,16 @@ AFRAME.registerSystem('game', {
     this.$ui = new Ui();
     // init key count
     this.keyCount = 0;
+
+    this.$player.$el.setAttribute('footstep', {
+      volume: 1.0,
+      muted: state.player.isMuted,
+      playbackRate: 1.0,
+    });
+    this.$player.$el.setAttribute('music', {
+      volume: 0.1,
+      muted: state.player.isMuted,
+    });
   },
   tick(_time, timeDelta) {
     const {player} = state;
