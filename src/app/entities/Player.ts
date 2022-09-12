@@ -6,7 +6,7 @@ import option from '../settings/player.json';
 
 export class Player {
   private HEALTH_CONSUME_SPEED = 0.05;
-  private HEALTH_RECOVER_SPEED = 0.02;
+  private HEALTH_RECOVER_SPEED = 0.01;
   private $gameScene = document.querySelector('#gameScene');
   private $mainPage = document.querySelector('.ui_main');
   private $gameOverPage = document.querySelector('.ui_game_over');
