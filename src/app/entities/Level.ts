@@ -1,7 +1,7 @@
 import {Entity} from 'aframe';
 import {getRandomIndex, getRandomRange} from '../../utils/util';
 // @ts-ignore
-import monsterImage from '../public/monster.webp';
+import '../public/monster.webp';
 import {state} from '../systems/state';
 import {Key} from './Key';
 import {Monster} from './Monster';
@@ -151,10 +151,10 @@ export class Level {
       this.$monsters.push(
         new Monster({
           position,
-          width: 5,
-          height: 5,
-          depth: 5,
-          material: {roughness: 0.9, src: monsterImage},
+          width: 10,
+          height: 10,
+          depth: 10,
+          material: {roughness: 0.9, src: '../public/monster.webp'},
         })
       );
     });

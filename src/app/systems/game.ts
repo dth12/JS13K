@@ -55,7 +55,7 @@ AFRAME.registerSystem('game', {
     });
   },
   tick(_time, timeDelta) {
-    if(state.game.isClear || state.player.isFound) {
+    if(state.game.isClear || state.player.isFound || !this.$player.$el.components['wasd-controls']) {
       return;
     }
     
