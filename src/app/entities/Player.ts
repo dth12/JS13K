@@ -1,6 +1,6 @@
 import { Level } from '../entities/Level';
 import { state } from '../systems/state';
-import { Speed } from '../types';
+import { PlaybackRate, Speed } from '../types';
 import { Flash } from './Flash';
 import option from '../settings/player.json';
 
@@ -117,7 +117,7 @@ export class Player {
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
           this.$el.setAttribute('footstep', {
             ...footstepConfig,
-            playbackRate: player.isRunning ? 2.0 : 1.0,
+            playbackRate: player.isRunning ? PlaybackRate.Run : PlaybackRate.Walk,
           });
           break;
         case '0':

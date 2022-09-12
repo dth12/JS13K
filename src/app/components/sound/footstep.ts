@@ -1,8 +1,10 @@
+import { PlaybackRate } from '../../types';
+
 AFRAME.registerComponent('footstep', {
   schema: {
     volume: {default: 1.0},
     muted: {default: false},
-    playbackRate: {default: 1.0},
+    playbackRate: {default: PlaybackRate.Walk},
   },
   init() {
     this.system.initAudio(this.data);

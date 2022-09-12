@@ -1,7 +1,7 @@
 import { Level } from '../entities/Level';
 import { Player } from '../entities/Player';
 import { Ui } from '../entities/Ui';
-import { Speed } from '../types';
+import { PlaybackRate, Speed } from '../types';
 import { state } from './state';
 
 function onChangePointerLock() {
@@ -37,7 +37,7 @@ AFRAME.registerSystem('game', {
     this.$player.$el.setAttribute('footstep', {
       volume: 1.0,
       muted: state.player.isMuted,
-      playbackRate: 1.0,
+      playbackRate: PlaybackRate.Walk,
     });
     this.$player.$el.setAttribute('music', {
       volume: 0.1,
