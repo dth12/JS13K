@@ -2,7 +2,6 @@ import { getRandomMelody } from "../util";
 
 const MIN_SCALE = 99;
 const MAX_SCALE = 122;
-const MIN_PATTERN_LEN = 4;
 const MAX_PATTERN_LEN = 256;
 const NOTE_LEN = 4;
 
@@ -50,7 +49,7 @@ export const footstep = {
     },
   ],
   rowLen: 7350,   // In sample lengths
-  patternLen: MIN_PATTERN_LEN,  // Rows per pattern
+  patternLen: 4,  // Rows per pattern
   endPattern: 0,  // End pattern
   numChannels: 1  // Number of channels
 };
@@ -142,7 +141,7 @@ export const toggle = {
       p: [1],
       // Columns
       c: [
-        {n: [MIN_SCALE],
+        {n: [99],
          f: []}
       ]
     },

@@ -118,7 +118,7 @@ export class Player {
           player.isRunning ? this.run(controlConfig) : this.walk(controlConfig);
           this.$el.setAttribute('footstep', {
             ...footstepConfig,
-            playbackRate: player.isRunning ? PlaybackRate.Run : PlaybackRate.Walk,
+            playbackRate: player.isRunning ? PlaybackRate.Run : PlaybackRate.Default,
           });
           break;
         case '0':

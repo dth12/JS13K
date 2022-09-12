@@ -10,10 +10,10 @@ AFRAME.registerSystem('footstep', {
     this.audio = generateAudio(data, footstep);
   },
   updateAudio(data) {
+    this.audio.playbackRate = data.playbackRate;
     this.audio.volume = data.volume;
     this.audio.loop = data.loop;
     this.audio.muted = data.muted;
-    this.audio.playbackRate = data.playbackRate;
   },
   playAudio() {
     this.audio.play();
