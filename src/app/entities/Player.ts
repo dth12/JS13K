@@ -12,6 +12,10 @@ export class Player {
   private $gameOverPage = document.querySelector('.ui_game_over');
   private $el = document.createElement('a-entity');
   // @ts-ignore
+  private $footstep = this.$gameScene.systems['footstep'];
+  // @ts-ignore
+  private $glitch = this.$gameScene.systems['glitch'];
+  // @ts-ignore
   private $music = this.$gameScene.systems['music'];
   private flash: Flash;
 
@@ -101,6 +105,8 @@ export class Player {
       }
       
       if (event.key === 'Enter') {
+        this.$footstep.playAudio();
+        this.$glitch.playAudio();
         this.$music.playAudio();
 
         if (!game.isStarted) {

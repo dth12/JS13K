@@ -67,6 +67,7 @@ AFRAME.registerSystem('game', {
     
     const {player} = state;
     const footstepConfig = this.$player.$el.getAttribute('footstep');
+    const glitchConfig = this.$player.$el.getAttribute('glitch');
     const playerVelocity = this.$player.$el.components['wasd-controls'].velocity;
     const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
     this.$player.$el.setAttribute('footstep', {
@@ -74,6 +75,17 @@ AFRAME.registerSystem('game', {
       muted: player.isMuted || !isMoving,
     });
     this.$ui.setMonsterCount(player.nearMonsters.length);
+    
+    if (!player.isMuted)
+    {
+      console.log(player.nearMonsters.length);
+
+      this.$player.$el.setAttribute('glitch', {
+        ...glitchConfig,
+        muted: player.nearMonsters.length === 0,
+      });
+    }
+
     Level.update(timeDelta);
   },
   restartGame() {
