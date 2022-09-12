@@ -26,7 +26,13 @@ export class Ui {
     this.initUiItems();
   }
 
+  setKeyCount(count: number) {
+    state.uiItem.keys.count = count;
+    this.$keys.querySelector('.ui_item_count').textContent = `${count}`;
+  }
+
   setMonsterCount(count: number) {
+    state.uiItem.monsters.count = count;
     this.$monsters.querySelector('.ui_item_count').textContent = `${count}`;
   }
 

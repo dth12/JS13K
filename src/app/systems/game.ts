@@ -20,19 +20,13 @@ AFRAME.registerSystem('game', {
     // init event
     document.addEventListener('pointerlockchange', onChangePointerLock.bind(this), false);
     document.addEventListener('find-key', () => {
-      const $keyUi = document.querySelector('.keys');
-      const $keyCountUi = $keyUi.querySelector('.ui_item_count');
-      const increasedKeyCount = this.keyCount + 1;
-      $keyCountUi.textContent = increasedKeyCount.toString();
-      this.keyCount += 1;
+      this.$ui.setKeyCount(state.uiItem.keys.count + 1);
     })
 
     // init player
     this.$player = new Player();
     // init UI
     this.$ui = new Ui();
-    // init key count
-    this.keyCount = 0;
 
     this.$player.$el.setAttribute('footstep', {
       playbackRate: PlaybackRate.Default,
@@ -63,5 +57,9 @@ AFRAME.registerSystem('game', {
     Level.stopMonsters();
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     this.$ui.setGameOverUi();
+  },
+  resetUi() {
+    this.$ui.setKeyCount(0);
+    this.$ui.setMonsterCount(0);
   },
 });
