@@ -1,3 +1,3 @@
-import './sound/index.ts';
-import './collision.ts';
-import './game.ts';
+import './sound/index';
+import './collision';
+import './game';
