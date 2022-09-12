@@ -93,32 +93,36 @@ body {
   background: linear-gradient(to right, #5aff5495, #ffffff95);
 }
 
-.ui_main, .ui_game_over {
+.ui_main, .ui_game_over, .ui_clear {
   position: absolute;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 70%;
   background-color: #8181814f;
   left: 50%;
   top: 50%;
   border-radius: 5px;
   transform: translate(-50%, -50%);
-  padding: 2rem;
+  padding: 2rem 4rem;
   color: #fdfdfdad;
   font-size: 1.5rem;
   text-align: center;
 }
 
-.ui_main.off, .ui_game_over.off {
+.off {
   display: none;
 }
 
 .ui_main_title, .ui_game_over_title {
   margin: 0;
   font-size: 3rem;
+}
+
+.ui_game_over_title, .ui_game_over_desc{
+  color: #a22929;
+  font-weight: bold;
 }
 
 .tip {
@@ -132,8 +136,19 @@ body {
   border: none;
   padding: 0.5rem 2rem;
   border-radius: 3px;
-  background: #995050;
-  color: #3c3c3c;
+  background: #fff;
+  color: #222;
   font-weight: bold;
   font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.ui_game_over_start {
+  margin-top: 1rem;
+}
+
+.ui_clear_title {
+  color: #fff;
+  font-weight: bold;
+  font-size: 3rem;
 }

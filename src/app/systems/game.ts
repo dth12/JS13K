@@ -21,6 +21,9 @@ AFRAME.registerSystem('game', {
     document.addEventListener('pointerlockchange', onChangePointerLock.bind(this), false);
     document.addEventListener('find-key', () => {
       this.$ui.setKeyCount(state.uiItem.keys.count + 1);
+      if(state.uiItem.keys.count === state.uiItem.keys.total) {
+        Level.clear();
+      }
     })
 
     // init player

@@ -39,11 +39,11 @@ export class Player {
     
     requestAnimationFrame(
       function comsumeHealth() {
-        if(player.isFound) {
+        if(player.isFound || state.game.isClear) {
           return;
         }
         const playerVelocity = this.$el.components['wasd-controls'].velocity;
-        const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
+        const isMoving = Math.abs(playerVelocity.x) > 5 || Math.abs(playerVelocity.y) > 5 || Math.abs(playerVelocity.z) > 5;
 
         player.health = Math.max(player.health - (isMoving ? this.HEALTH_CONSUME_SPEED : 0), 0);
         $health.style.width = `${player.health}%`;
@@ -96,6 +96,10 @@ export class Player {
     const { flash, player, game } = state;
 
     document.addEventListener('keydown', (event) => {
+      if(game.isClear) {
+        return;
+      }
+      
       if (event.key === 'Enter') {
         this.$footstep.playAudio();
         this.$music.playAudio();
@@ -103,6 +107,9 @@ export class Player {
         if (!game.isStarted) {
           game.isStarted = true;
           this.$mainPage.classList.add('off');
+          document.querySelector('.ui_items').classList.remove('off');
+          document.querySelector('.ui_flash').classList.remove('off');
+          document.querySelector('.ui_health').classList.remove('off');
         }
         else if (state.player.isFound) {
           state.player.isFound = false;

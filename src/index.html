@@ -18,7 +18,7 @@
         <h1 class="ui_main_title">THE MAZE OF DEATH</h1>
         <p class="ui_main_story">
           You're on the verge of death.<br>Collect enough collection of life and get out of the MAZE OF DEATH.<br><br><span class="warning">WARNING</span><br>
-          <span class="warning_message">Even now, the Grim Reaper is chasing you.<br>They move slowly in the dark, but they'll jump at you when they feel your light. They also move through walls, so you're not safe even with walls.</span>
+          <span class="warning_message">Even now, the Grim Reaper is chasing you.<br>They move slowly in the dark, but they'll jump at you when they feel your light.<br>They also move through walls, so you're not safe even with walls.</span>
         </p>
         <p class="ui_main_tips">
           <span class="tip">Move: WASD</span>
@@ -29,10 +29,17 @@
         <div class="ui_main_start">Press ENTER key to face DEATH...!</div>
       </div>
       <div class="ui_game_over off">
-        <h1 class="ui_game_over_title">GAME OVER</h1>
-        <div class="ui_game_over_start">Press ENTER key to continue</div>
+        <h1 class="ui_game_over_title">YOU ARE DEAD</h1>
+        <p class="ui_game_over_desc">Unfortunately, one of the Grim Reapers found you lacking life power.<br>And then Grim Reapers took all the life that was left and you finally died.</p>
+        <div class="ui_game_over_start">Press ENTER key to try again</div>
       </div>
-      <div class="ui_items ui_text">
+      <div class="ui_clear off">
+        <span class="ui_clear_title">YOU SURVIVED !</span>
+        <p>
+          Congratulations! You have successfully collected all the signs of life.<br>Grim Reapers can't take your life anymore because you have enough life power.
+        </p>
+      </div>
+      <div class="ui_items ui_text off">
         <div class="ui_item keys">
           <span class="ui_title">Collection of Life</span>
           <span class="ui_item_count">0</span> / <span class="ui_item_total">10</span>
@@ -42,14 +49,14 @@
           <span class="ui_item_count">0</span> / <span class="ui_item_total">5</span>
         </div>
       </div>
-      <div class="ui_flash ui_text">
+      <div class="ui_flash ui_text off">
         <span class="ui_flash_title">Flash Battery</span>
         <div class="battery_wrap">
           <div class="battery" />
         </div>
       </div>
     </div>
-    <div class="ui_health ui_text">
+    <div class="ui_health ui_text off">
       <span class="ui_health_title">Health</span>
       <div class="health_wrap">
         <div class="health">

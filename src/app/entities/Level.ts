@@ -197,7 +197,7 @@ export class Level {
     const {level, uiItem} = state;
     switch (stage) {
       case 1:
-        level.roomRowCount = 13;
+        level.roomRowCount = 15;
         level.mapHeight = level.roomRowCount * 100;
         uiItem.monsters.total = 5;
         uiItem.keys.total = 10;
@@ -217,5 +217,12 @@ export class Level {
     this.$monsters.forEach(($monster) => {
       $monster.update(deltaTime);
     });
+  }
+
+  static clear() {
+    state.game.isClear = true;
+    this.stopMonsters();
+    document.querySelector('#player').removeAttribute('wasd-controls');
+    document.querySelector('.ui_clear').classList.remove('off');
   }
 }
