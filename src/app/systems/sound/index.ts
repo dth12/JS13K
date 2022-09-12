@@ -1,3 +1,3 @@
 import './footstep.ts';
 import './music.ts';
-import './switch.ts';
+import './toggle.ts';
