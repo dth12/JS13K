@@ -1,6 +1,7 @@
 export const enum PlaybackRate {
-  Walk = 1.0,
+  Default = 1.0,
   Run = 2.0,
+  Toggle = 10.0,
 }
 
 export const enum Speed {

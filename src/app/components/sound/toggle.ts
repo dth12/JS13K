@@ -1,6 +1,6 @@
 import { PlaybackRate } from '../../types';
 
-AFRAME.registerComponent('footstep', {
+AFRAME.registerComponent('toggle', {
   schema: {
     playbackRate: {default: PlaybackRate.Default},
     volume: {default: 1.0},

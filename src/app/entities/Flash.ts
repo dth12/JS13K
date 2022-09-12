@@ -6,6 +6,8 @@ import option from '../settings/light.json';
 export class Flash {
   private readonly FLASH_CONSUME_SPEED = 0.05;
   private readonly FLASH_CHARGE_SPEED = 0.01;
+  // @ts-ignore
+  private $toggle = document.querySelector('#gameScene').systems['toggle'];
   private $el = document.createElement('a-light');
 
   constructor($parentEl: Entity) {
@@ -49,6 +51,7 @@ export class Flash {
 
   turnOff() {
     this.$el.setAttribute('intensity', Light.Off);
+    this.$toggle.playAudio();
     this.chargeBattery();
   }
 
@@ -60,6 +63,7 @@ export class Flash {
       return;
     }
     this.$el.setAttribute('intensity', Light.On);
+    this.$toggle.playAudio();
     this.consumeBattery();
   }
   // for test
