@@ -2,7 +2,7 @@
 import { glitch } from '../../../utils/sound/sequences';
 import { generateAudio } from '../../../utils/sound/sound-box';
 
-AFRAME.registerSystem('music', {
+AFRAME.registerSystem('glitch', {
   init() {
     this.audio = undefined;
   },
