@@ -24,6 +24,9 @@ AFRAME.registerSystem('game', {
     // init event
     document.addEventListener('pointerlockchange', onChangePointerLock.bind(this), false);
     document.addEventListener('find-key', () => {
+      // @ts-ignore
+      const coin = document.querySelector('#gameScene').systems['coin'];
+      coin.playAudio();
       this.$ui.setKeyCount(state.uiItem.keys.count + 1);
       if(state.uiItem.keys.count === state.uiItem.keys.total) {
         Level.clear();
@@ -36,8 +39,8 @@ AFRAME.registerSystem('game', {
     this.$ui = new Ui();
 
     this.$player.$el.setAttribute('coin', {
-      playbackRate: PlaybackRate.Coin,
-      volume: 0.2,
+      playbackRate: PlaybackRate.Default,
+      volume: 1.0,
       loop: false,
       muted: state.player.isMuted,
     });
@@ -61,7 +64,7 @@ AFRAME.registerSystem('game', {
     });
     this.$player.$el.setAttribute('toggle', {
       playbackRate: PlaybackRate.Toggle,
-      volume: 0.2,
+      volume: 1.0,
       loop: false,
       muted: state.player.isMuted,
     });
