@@ -43,7 +43,7 @@ export class Player {
           return;
         }
         const playerVelocity = this.$el.components['wasd-controls'].velocity;
-        const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
+        const isMoving = Math.abs(playerVelocity.x) > 5 || Math.abs(playerVelocity.y) > 5 || Math.abs(playerVelocity.z) > 5;
 
         player.health = Math.max(player.health - (isMoving ? this.HEALTH_CONSUME_SPEED : 0), 0);
         $health.style.width = `${player.health}%`;
