@@ -84,9 +84,9 @@ export class Player {
           this.$gameOverPage.classList.add('off');
           Level.removeStage();
           Level.createStage(1);
-          this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
         }
 
+        this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
         return;
       }
 
