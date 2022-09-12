@@ -36,12 +36,18 @@ export class Player {
       ...config,
       acceleration: Speed.Run,
     });
-
+    
     requestAnimationFrame(
-      function comsumeBattery() {
-        player.health = Math.max(player.health - this.HEALTH_CONSUME_SPEED, 0);
+      function comsumeHealth() {
+        if(player.isFound) {
+          return;
+        }
+        const playerVelocity = this.$el.components['wasd-controls'].velocity;
+        const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
+
+        player.health = Math.max(player.health - (isMoving ? this.HEALTH_CONSUME_SPEED : 0), 0);
         $health.style.width = `${player.health}%`;
-        player.isRunning && requestAnimationFrame(comsumeBattery.bind(this));
+        player.isRunning && requestAnimationFrame(comsumeHealth.bind(this));
         if (player.health === 0) {
           player.isRunning = false;
           this.walk()
@@ -59,10 +65,13 @@ export class Player {
     });
 
     requestAnimationFrame(
-      function chargeBattery() {
+      function chargeHealth() {
+        if(player.isFound) {
+          return;
+        }
         player.health = Math.min(player.health + this.HEALTH_RECOVER_SPEED, 100);
         $health.style.width = `${player.health}%`;
-        !player.isRunning && player.health < 100 && requestAnimationFrame(chargeBattery.bind(this));
+        !player.isRunning && player.health < 100 && requestAnimationFrame(chargeHealth.bind(this));
       }.bind(this)
     );
   }
