@@ -39,19 +39,26 @@ AFRAME.registerSystem('game', {
     });
     this.$player.$el.setAttribute('music', {
       playbackRate: PlaybackRate.Default,
-      volume: 0.1,
+      volume: 0.2,
       loop: true,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('toggle', {
       playbackRate: PlaybackRate.Toggle,
-      volume: 0.1,
+      volume: 0.2,
       loop: false,
       muted: state.player.isMuted,
     });
   },
   tick(_time, timeDelta) {
     const {player} = state;
+    const footstepConfig = this.$player.$el.getAttribute('footstep');
+    const playerVelocity = this.$player.$el.components['wasd-controls'].velocity;
+    const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
+    this.$player.$el.setAttribute('footstep', {
+      ...footstepConfig,
+      muted: player.isMuted || !isMoving,
+    });
     this.$ui.setMonsterCount(player.nearMonsters.length);
     Level.update(timeDelta);
   },
