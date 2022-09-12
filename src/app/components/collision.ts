@@ -1,9 +1,11 @@
 AFRAME.registerComponent('collision', {
   schema: {},
   init() {
+    const keyRegex = /key/;
+
     if (this.el.id === 'player') {
       this.system.registerPlayer(this.el);
-    } else if (this.el.id === 'key') {
+    } else if (keyRegex.test(this.el.id)) {
       this.system.registerKey(this.el);
     } else {
       this.system.registerWall(this.el);
