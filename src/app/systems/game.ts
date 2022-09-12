@@ -36,11 +36,13 @@ AFRAME.registerSystem('game', {
 
     this.$player.$el.setAttribute('footstep', {
       volume: 1.0,
+      loop: true,
       muted: state.player.isMuted,
       playbackRate: PlaybackRate.Walk,
     });
     this.$player.$el.setAttribute('music', {
       volume: 0.1,
+      loop: true,
       muted: state.player.isMuted,
     });
   },

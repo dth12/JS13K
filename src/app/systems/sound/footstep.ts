@@ -11,6 +11,7 @@ AFRAME.registerSystem('footstep', {
   },
   updateAudio(data) {
     this.audio.volume = data.volume;
+    this.audio.loop = data.loop;
     this.audio.muted = data.muted;
     this.audio.playbackRate = data.playbackRate;
   },

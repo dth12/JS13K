@@ -1,6 +1,7 @@
 AFRAME.registerComponent('music', {
   schema: {
     volume: {default: 1.0},
+    loop: {default: false},
     muted: {default: false},
   },
   init() {
