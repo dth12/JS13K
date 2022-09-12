@@ -14,6 +14,8 @@ export class Player {
   // @ts-ignore
   private $footstep = this.$gameScene.systems['footstep'];
   // @ts-ignore
+  private $glitch = this.$gameScene.systems['glitch'];
+  // @ts-ignore
   private $music = this.$gameScene.systems['music'];
   private flash: Flash;
 
@@ -104,6 +106,7 @@ export class Player {
       
       if (event.key === 'Enter') {
         this.$footstep.playAudio();
+        this.$glitch.playAudio();
         this.$music.playAudio();
 
         if (!game.isStarted) {
@@ -138,6 +141,7 @@ export class Player {
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
       const footstepConfig = this.$el.getAttribute('footstep');
+      const glitchConfig = this.$el.getAttribute('glitch');
       const musicConfig = this.$el.getAttribute('music');
       const toggleConfig = this.$el.getAttribute('toggle');
 
@@ -162,6 +166,10 @@ export class Player {
           player.isMuted = !player.isMuted;
           this.$el.setAttribute('footstep', {
             ...footstepConfig,
+            muted: player.isMuted,
+          });
+          this.$el.setAttribute('glitch', {
+            ...glitchConfig,
             muted: player.isMuted,
           });
           this.$el.setAttribute('music', {

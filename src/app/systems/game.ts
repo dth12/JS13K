@@ -41,6 +41,12 @@ AFRAME.registerSystem('game', {
       loop: true,
       muted: state.player.isMuted,
     });
+    this.$player.$el.setAttribute('glitch', {
+      playbackRate: PlaybackRate.Default,
+      volume: 0.2,
+      loop: true,
+      muted: state.player.isMuted,
+    });
     this.$player.$el.setAttribute('music', {
       playbackRate: PlaybackRate.Default,
       volume: 0.2,
@@ -61,6 +67,7 @@ AFRAME.registerSystem('game', {
     
     const {player} = state;
     const footstepConfig = this.$player.$el.getAttribute('footstep');
+    const glitchConfig = this.$player.$el.getAttribute('glitch');
     const playerVelocity = this.$player.$el.components['wasd-controls'].velocity;
     const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
     this.$player.$el.setAttribute('footstep', {
@@ -68,6 +75,15 @@ AFRAME.registerSystem('game', {
       muted: player.isMuted || !isMoving,
     });
     this.$ui.setMonsterCount(player.nearMonsters.length);
+    
+    if (!player.isMuted)
+    {
+      this.$player.$el.setAttribute('glitch', {
+        ...glitchConfig,
+        volume: player.nearMonsters.length * 0.04,
+      });
+    }
+
     Level.update(timeDelta);
   },
   restartGame() {
