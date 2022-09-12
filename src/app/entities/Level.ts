@@ -180,6 +180,11 @@ export class Level {
     });
   }
 
+  static removeKey(keyWithCollision: any) {
+    this.$keys = this.$keys.filter((key) => key.$el.id !== keyWithCollision.id);
+    this.removeEntity(keyWithCollision);
+  }
+
   static removeStage() {
     this.removeEntity(this.$sky);
     this.removeEntity(this.$ground);
