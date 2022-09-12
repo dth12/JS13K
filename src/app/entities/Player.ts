@@ -14,7 +14,7 @@ export class Player {
   // @ts-ignore
   private $footstep = this.$gameScene.systems['footstep'];
   // @ts-ignore
-  private $music = this.$gameScene.systems['music']
+  private $music = this.$gameScene.systems['music'];
   private flash: Flash;
 
   constructor() {
@@ -77,7 +77,7 @@ export class Player {
   }
 
   private resetStatus() {
-    const {flash, player} = state;
+    const { flash, player } = state;
 
     flash.isOn = false;
     this.flash.turnOff();
@@ -110,6 +110,8 @@ export class Player {
           Level.removeStage();
           Level.createStage(1);
           this.resetStatus();
+          // @ts-ignore
+          this.$gameScene.systems['game'].resetUi();
         }
 
         this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });

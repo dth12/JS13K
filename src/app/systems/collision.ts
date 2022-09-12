@@ -1,4 +1,5 @@
-import {Entity} from 'aframe';
+import { Entity } from 'aframe';
+import { Level } from '../entities/Level';
 
 AFRAME.registerSystem('collision', {
   init() {
@@ -51,7 +52,7 @@ AFRAME.registerSystem('collision', {
     if (this.keyWithCollision === undefined) return;
 
     this.keyWithCollision.emit('find-key');
-    this.keyWithCollision.parentNode.removeChild(this.keyWithCollision);
+    Level.removeKey(this.keyWithCollision);
   },
   updatePlayerOldPosition() {
     const {x, y, z} = this.player.object3D.position;
