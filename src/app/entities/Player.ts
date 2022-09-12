@@ -39,7 +39,7 @@ export class Player {
     
     requestAnimationFrame(
       function comsumeHealth() {
-        if(player.isFound) {
+        if(player.isFound || state.game.isClear) {
           return;
         }
         const playerVelocity = this.$el.components['wasd-controls'].velocity;
@@ -96,6 +96,10 @@ export class Player {
     const { flash, player, game } = state;
 
     document.addEventListener('keydown', (event) => {
+      if(game.isClear) {
+        return;
+      }
+      
       if (event.key === 'Enter') {
         this.$footstep.playAudio();
         this.$music.playAudio();

@@ -37,10 +37,10 @@ export class Flash {
 
   private consumeBattery() {
     const $battery = document.querySelector('.battery');
-    const { flash , player} = state;
+    const { flash , player, game} = state;
     requestAnimationFrame(
       function comsumeBattery() {
-        if(player.isFound) {
+        if(player.isFound || game.isClear) {
           return;
         }
         flash.battery = Math.max(flash.battery - this.FLASH_CONSUME_SPEED, 0);

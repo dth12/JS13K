@@ -76,6 +76,7 @@ class State {
   };
   game = {
     isStarted: false,
+    isClear: false
   };
 }
 
