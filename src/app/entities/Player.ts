@@ -140,6 +140,7 @@ export class Player {
       }
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
+      const coinConfig = this.$el.getAttribute('coin');
       const footstepConfig = this.$el.getAttribute('footstep');
       const glitchConfig = this.$el.getAttribute('glitch');
       const musicConfig = this.$el.getAttribute('music');
@@ -164,6 +165,10 @@ export class Player {
           break;
         case '0':
           player.isMuted = !player.isMuted;
+          this.$el.setAttribute('coin', {
+            ...coinConfig,
+            muted: player.isMuted,
+          });
           this.$el.setAttribute('footstep', {
             ...footstepConfig,
             muted: player.isMuted,

@@ -1,3 +1,4 @@
+import './coin.ts';
 import './footstep.ts';
 import './glitch.ts';
 import './music.ts';
