@@ -91,13 +91,11 @@ export class Player {
       }
 
       if (!document.pointerLockElement || !game.isStarted) {
-        console.log('out');
         this.$el.removeAttribute('wasd-controls');
         return;
       }
 
       if (player.isFound || !game.isStarted) {
-        console.log('nono');
         return;
       }
 
