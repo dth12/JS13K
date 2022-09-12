@@ -78,11 +78,9 @@ AFRAME.registerSystem('game', {
     
     if (!player.isMuted)
     {
-      console.log(player.nearMonsters.length);
-
       this.$player.$el.setAttribute('glitch', {
         ...glitchConfig,
-        muted: player.nearMonsters.length === 0,
+        volume: player.nearMonsters.length * 0.04,
       });
     }
 
