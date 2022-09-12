@@ -1,8 +1,8 @@
-import {Level} from '../entities/Level';
-import {Player} from '../entities/Player';
-import {Ui} from '../entities/Ui';
-import {Speed} from '../types';
-import {state} from './state';
+import { Level } from '../entities/Level';
+import { Player } from '../entities/Player';
+import { Ui } from '../entities/Ui';
+import { PlaybackRate, Speed } from '../types';
+import { state } from './state';
 
 function onChangePointerLock() {
   if (!document.pointerLockElement) {
@@ -10,7 +10,6 @@ function onChangePointerLock() {
     return;
   }
   this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-  this.$player.$el.setAttribute('bgm', { sequence: 'baseString', volume: 1.0, muted: state.player.isMuted, autoplay: true, loop: true, });
 }
 
 AFRAME.registerSystem('game', {
@@ -34,6 +33,16 @@ AFRAME.registerSystem('game', {
     this.$ui = new Ui();
     // init key count
     this.keyCount = 0;
+
+    this.$player.$el.setAttribute('footstep', {
+      volume: 1.0,
+      muted: state.player.isMuted,
+      playbackRate: PlaybackRate.Walk,
+    });
+    this.$player.$el.setAttribute('music', {
+      volume: 0.1,
+      muted: state.player.isMuted,
+    });
   },
   tick(_time, timeDelta) {
     const {player} = state;
@@ -41,23 +50,9 @@ AFRAME.registerSystem('game', {
     Level.update(timeDelta);
   },
   restartGame() {
-    console.log('GAME OVER');
     state.player.isFound = true;
-    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     Level.stopMonsters();
-
-    setTimeout(()=>{
-      Level.removeStage();
-      Level.createStage(1);
-      state.player.isFound = false;
-      this.$player.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
-    },5000)
-
-    /*
-    // init player
-    this.$player = new Player();
-    // init UI
-    this.$ui = new Ui();
-    */
+    this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
+    this.$ui.setGameOverUi();
   },
 });
