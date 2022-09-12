@@ -3,7 +3,7 @@ import { state } from './../systems/state';
 export class Monster {
   private readonly HEIGHT = 5;
   private readonly BOUNCING_SPEED = 0.02;
-  private readonly SPEED = 0.025;
+  private readonly SPEED = 0.035;
 
   private $gameScene = document.querySelector('#gameScene');
   private $el = document.createElement('a-box');
@@ -44,7 +44,7 @@ export class Monster {
       player.nearMonsters = player.nearMonsters.filter((monster) => monster !== this);
     }
 
-    if (!this.didFindPlayer && distance < 16) {
+    if (!this.didFindPlayer && distance < 10) {
       this.didFindPlayer = true;
       // @ts-ignore
       this.$gameScene.systems['game'].restartGame();

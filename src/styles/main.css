@@ -6,6 +6,16 @@ body {
   padding: 0;
 }
 
+.warning {
+  color:#a22929;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.warning_message {
+  color: #a22929;
+}
+
 .ui {
   position: absolute;
   z-index: 9999;
