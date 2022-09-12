@@ -15,5 +15,8 @@ AFRAME.registerSystem('music', {
   },
   playAudio() {
     this.audio.play();
-  }
+  },
+  pauseAudio() {
+    this.audio.pause();
+  },
 });

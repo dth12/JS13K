@@ -82,7 +82,7 @@ body {
   background: linear-gradient(to right, #5aff5495, #ffffff95);
 }
 
-.ui_main {
+.ui_main, .ui_game_over {
   position: absolute;
   box-sizing: border-box;
   display: flex;
@@ -101,11 +101,11 @@ body {
   text-align: center;
 }
 
-.ui_main.off {
+.ui_main.off, .ui_game_over.off {
   display: none;
 }
 
-.ui_main_title {
+.ui_main_title, .ui_game_over_title {
   margin: 0;
   font-size: 3rem;
 }
@@ -115,18 +115,14 @@ body {
   display: block;
 }
 
-.ui_main_start {
+.ui_main_start, .ui_game_over_start {
   pointer-events: all;
   cursor: pointer;
   border: none;
   padding: 0.5rem 2rem;
   border-radius: 3px;
-  background: #679950;
+  background: #995050;
   color: #3c3c3c;
   font-weight: bold;
   font-size: 1.5rem;
-}
-
-.ui_main_start:hover {
-  transform: scale(1.1);
 }
