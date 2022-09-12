@@ -1,5 +1,5 @@
-import './coin.ts';
-import './footstep.ts';
-import './glitch.ts';
-import './music.ts';
-import './toggle.ts';
+import './coin';
+import './footstep';
+import './glitch';
+import './music';
+import './toggle';

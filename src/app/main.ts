@@ -1,2 +1,2 @@
-import './components/index.ts';
-import './systems/index.ts';
+import './components/index';
+import './systems/index';
