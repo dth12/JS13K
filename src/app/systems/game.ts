@@ -5,6 +5,10 @@ import { PlaybackRate, Speed } from '../types';
 import { state } from './state';
 
 function onChangePointerLock() {
+  if(state.player.isFound || state.game.isClear) {
+    return
+  }
+
   if (!document.pointerLockElement) {
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     return;
@@ -51,6 +55,10 @@ AFRAME.registerSystem('game', {
     });
   },
   tick(_time, timeDelta) {
+    if(state.game.isClear || state.player.isFound) {
+      return;
+    }
+    
     const {player} = state;
     const footstepConfig = this.$player.$el.getAttribute('footstep');
     const playerVelocity = this.$player.$el.components['wasd-controls'].velocity;
