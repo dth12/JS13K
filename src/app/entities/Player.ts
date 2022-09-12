@@ -102,6 +102,7 @@ export class Player {
       const controlConfig = this.$el.getAttribute('wasd-controls');
       const footstepConfig = this.$el.getAttribute('footstep');
       const musicConfig = this.$el.getAttribute('music');
+      const toggleConfig = this.$el.getAttribute('toggle');
 
       switch (event.key) {
         case ' ':
@@ -128,6 +129,10 @@ export class Player {
           });
           this.$el.setAttribute('music', {
             ...musicConfig,
+            muted: player.isMuted,
+          });
+          this.$el.setAttribute('toggle', {
+            ...toggleConfig,
             muted: player.isMuted,
           });
           break;

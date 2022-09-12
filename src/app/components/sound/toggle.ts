@@ -1,4 +1,4 @@
-AFRAME.registerComponent('onoff', {
+AFRAME.registerComponent('toggle', {
   schema: {
     volume: {default: 1.0},
     loop: {default: false},

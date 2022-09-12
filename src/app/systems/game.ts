@@ -45,6 +45,11 @@ AFRAME.registerSystem('game', {
       loop: true,
       muted: state.player.isMuted,
     });
+    this.$player.$el.setAttribute('toggle', {
+      volume: 1.0,
+      loop: false,
+      muted: state.player.isMuted,
+    });
   },
   tick(_time, timeDelta) {
     const {player} = state;

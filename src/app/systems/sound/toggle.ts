@@ -2,12 +2,12 @@
 import { toggle } from '../../../utils/sound/sequences';
 import { generateAudio } from '../../../utils/sound/sound-box';
 
-AFRAME.registerSystem('music', {
+AFRAME.registerSystem('toggle', {
   init() {
     this.audio = undefined;
   },
   initAudio(data) {
-    this.audio = generateAudio(data, music);
+    this.audio = generateAudio(data, toggle);
   },
   updateAudio(data) {
     this.audio.volume = data.volume;
