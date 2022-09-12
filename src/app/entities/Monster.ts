@@ -1,4 +1,4 @@
-import { state } from './../systems/state';
+import {state} from './../systems/state';
 
 export class Monster {
   private readonly HEIGHT = 5;
