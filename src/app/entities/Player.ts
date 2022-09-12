@@ -76,6 +76,22 @@ export class Player {
     );
   }
 
+  private resetStatus() {
+    const {flash, player} = state;
+
+    flash.isOn = false;
+    this.flash.turnOff();
+    player.isRunning = false;
+
+    flash.battery = 100;
+    player.health = 100;
+
+    document.querySelector('.health').style.width = '100%';
+    document.querySelector('.battery').style.width = '100%';
+
+    player.nearMonsters = [];
+  }
+
   private initEventHandler() {
     const { flash, player, game } = state;
 
@@ -93,8 +109,7 @@ export class Player {
           this.$gameOverPage.classList.add('off');
           Level.removeStage();
           Level.createStage(1);
-          flash.battery = 100;
-          player.health = 100;
+          this.resetStatus();
         }
 
         this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
