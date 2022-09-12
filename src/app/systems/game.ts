@@ -35,6 +35,12 @@ AFRAME.registerSystem('game', {
     // init UI
     this.$ui = new Ui();
 
+    this.$player.$el.setAttribute('coin', {
+      playbackRate: PlaybackRate.Coin,
+      volume: 0.2,
+      loop: false,
+      muted: state.player.isMuted,
+    });
     this.$player.$el.setAttribute('footstep', {
       playbackRate: PlaybackRate.Default,
       volume: 1.0,
