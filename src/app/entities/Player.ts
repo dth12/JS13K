@@ -93,6 +93,8 @@ export class Player {
           this.$gameOverPage.classList.add('off');
           Level.removeStage();
           Level.createStage(1);
+          flash.battery = 100;
+          player.health = 100;
         }
 
         this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
