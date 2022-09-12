@@ -120,8 +120,9 @@ body {
   font-size: 3rem;
 }
 
-.ui_game_over_title {
-  color: #a22929
+.ui_game_over_title, .ui_game_over_desc{
+  color: #a22929;
+  font-weight: bold;
 }
 
 .tip {
@@ -140,6 +141,10 @@ body {
   font-weight: bold;
   font-size: 1.5rem;
   margin-top: 2rem;
+}
+
+.ui_game_over_start {
+  margin-top: 1rem;
 }
 
 .ui_clear_title {
