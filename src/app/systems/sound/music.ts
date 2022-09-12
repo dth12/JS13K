@@ -10,6 +10,7 @@ AFRAME.registerSystem('music', {
     this.audio = generateAudio(data, music);
   },
   updateAudio(data) {
+    this.audio.playbackRate = data.playbackRate;
     this.audio.volume = data.volume;
     this.audio.loop = data.loop;
     this.audio.muted = data.muted;

@@ -1,5 +1,8 @@
+import { PlaybackRate } from '../../types';
+
 AFRAME.registerComponent('music', {
   schema: {
+    playbackRate: {default: PlaybackRate.Default},
     volume: {default: 1.0},
     loop: {default: false},
     muted: {default: false},

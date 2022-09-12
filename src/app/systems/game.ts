@@ -41,6 +41,7 @@ AFRAME.registerSystem('game', {
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('music', {
+      playbackRate: PlaybackRate.Default,
       volume: 0.1,
       loop: true,
       muted: state.player.isMuted,
