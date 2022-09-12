@@ -49,6 +49,13 @@ AFRAME.registerSystem('game', {
   },
   tick(_time, timeDelta) {
     const {player} = state;
+    const footstepConfig = this.$player.$el.getAttribute('footstep');
+    const playerVelocity = this.$player.$el.components['wasd-controls'].velocity;
+    const isMoving = Math.abs(playerVelocity.x || playerVelocity.y || playerVelocity.z) > 5;
+    this.$player.$el.setAttribute('footstep', {
+      ...footstepConfig,
+      muted: player.isMuted || !isMoving,
+    });
     this.$ui.setMonsterCount(player.nearMonsters.length);
     Level.update(timeDelta);
   },
