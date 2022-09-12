@@ -152,7 +152,7 @@ export class Level {
           width: 5,
           height: 5,
           depth: 5,
-          material: {color: '#162c50', roughness: 0.9},
+          material: {color: '#080808', roughness: 0.9},
         })
       );
     });

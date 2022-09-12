@@ -44,7 +44,7 @@ export class Monster {
       player.nearMonsters = player.nearMonsters.filter((monster) => monster !== this);
     }
 
-    if (!this.didFindPlayer && distance < 16) {
+    if (!this.didFindPlayer && distance < 10) {
       this.didFindPlayer = true;
       // @ts-ignore
       this.$gameScene.systems['game'].restartGame();
