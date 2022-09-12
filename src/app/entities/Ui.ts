@@ -5,7 +5,7 @@ export class Ui {
   private $monsters: HTMLDivElement;
   private $gameOverPage: HTMLDivElement;
 
-  initUiItems() {
+  private initUiItems() {
     const {
       uiItem: { keys, monsters },
     } = state;
