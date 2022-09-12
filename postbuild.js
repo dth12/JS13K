@@ -39,5 +39,6 @@ archive.append(
         name: 'index.html'
     }
 );
+archive.directory('./dist/public/', 'public');
 
 archive.finalize();
