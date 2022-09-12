@@ -50,7 +50,6 @@ AFRAME.registerSystem('game', {
     Level.update(timeDelta);
   },
   restartGame() {
-    state.game.isStarted = false;
     Level.stopMonsters();
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
 

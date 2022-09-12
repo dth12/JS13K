@@ -70,19 +70,23 @@ export class Player {
 
     document.addEventListener('keydown', (event) => {
       if (!document.pointerLockElement || !game.isStarted) {
-        if (event.key === 'Enter') {
+        this.$el.removeAttribute('wasd-controls');
+        return;
+      }
+
+      if (event.key === 'Enter') {
+        if (!game.isStarted) {
           game.isStarted = true;
           this.$mainPage.classList.add('off');
-          // this.$footstep.pauseAudio();
           this.$footstep.playAudio();
-          // this.$music.pauseAudio();
           this.$music.playAudio();
-        } else {
-          this.$el.removeAttribute('wasd-controls');
+        }
+        else {
+          
         }
 
         return;
-      }
+      } 
 
       const controlConfig = this.$el.getAttribute('wasd-controls');
       const footstepConfig = this.$el.getAttribute('footstep');
