@@ -148,7 +148,7 @@ export const toggle = {
     },
   ],
   rowLen: 5513,   // In sample lengths
-  patternLen: MIN_PATTERN_LEN,  // Rows per pattern
+  patternLen: 1,  // Rows per pattern
   endPattern: 0,  // End pattern
   numChannels: 1  // Number of channels
 };
