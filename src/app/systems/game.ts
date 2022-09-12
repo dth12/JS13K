@@ -35,12 +35,21 @@ AFRAME.registerSystem('game', {
     this.keyCount = 0;
 
     this.$player.$el.setAttribute('footstep', {
+      playbackRate: PlaybackRate.Default,
       volume: 1.0,
+      loop: true,
       muted: state.player.isMuted,
-      playbackRate: PlaybackRate.Walk,
     });
     this.$player.$el.setAttribute('music', {
+      playbackRate: PlaybackRate.Default,
       volume: 0.1,
+      loop: true,
+      muted: state.player.isMuted,
+    });
+    this.$player.$el.setAttribute('toggle', {
+      playbackRate: PlaybackRate.Toggle,
+      volume: 0.1,
+      loop: false,
       muted: state.player.isMuted,
     });
   },

@@ -1,13 +1,13 @@
 // @ts-nocheck
-import { footstep } from '../../../utils/sound/sequences';
+import { toggle } from '../../../utils/sound/sequences';
 import { generateAudio } from '../../../utils/sound/sound-box';
 
-AFRAME.registerSystem('footstep', {
+AFRAME.registerSystem('toggle', {
   init() {
     this.audio = undefined;
   },
   initAudio(data) {
-    this.audio = generateAudio(data, footstep);
+    this.audio = generateAudio(data, toggle);
   },
   updateAudio(data) {
     this.audio.playbackRate = data.playbackRate;
