@@ -77,7 +77,9 @@ export class Player {
   }
 
   private resetStatus() {
-    const { flash, player } = state;
+    const { flash, player, game } = state;
+
+    game.isClear = false;
 
     flash.isOn = false;
     this.flash.turnOff();
