@@ -36,13 +36,13 @@ AFRAME.registerSystem('game', {
     });
     this.$player.$el.setAttribute('music', {
       playbackRate: PlaybackRate.Default,
-      volume: 0.1,
+      volume: 0.2,
       loop: true,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('toggle', {
       playbackRate: PlaybackRate.Toggle,
-      volume: 0.1,
+      volume: 0.2,
       loop: false,
       muted: state.player.isMuted,
     });
