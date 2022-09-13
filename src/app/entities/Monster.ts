@@ -1,5 +1,5 @@
+import '../public/다운로드.jpeg';
 import {state} from './../systems/state';
-import '../public/monster.webp';
 
 export class Monster {
   private readonly HEIGHT = 5;
@@ -17,12 +17,12 @@ export class Monster {
       this.$el.setAttribute(key, option[key]);
     });
     this.$el.classList.add('monster');
-    
+
     setTimeout(() => {
       const img = new Image();
       // @ts-ignore
       const texture = new THREE.Texture(img);
-      img.src = '../public/monster.webp';
+      img.src = '../public/다운로드.jpeg';
       // @ts-ignore
       img.tex = texture;
       img.onload = function() {
@@ -45,7 +45,6 @@ export class Monster {
         new THREE.MeshStandardMaterial({color: '#080808', roughness: 0.9})
       ];
 
-     
       // @ts-ignore
       this.$el.getObject3D('mesh').material = new THREE.MultiMaterial(materials);
     }, 500);
@@ -82,6 +81,7 @@ export class Monster {
 
     if (!this.didFindPlayer && distance < 10) {
       this.didFindPlayer = true;
+      this.$el.emit('player-dead', {x: mx, y: my, z: mz});
       // @ts-ignore
       this.$gameScene.systems['game'].restartGame();
     }

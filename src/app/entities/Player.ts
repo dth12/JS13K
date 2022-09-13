@@ -1,8 +1,8 @@
-import { Level } from '../entities/Level';
-import { state } from '../systems/state';
-import { PlaybackRate, Speed } from '../types';
-import { Flash } from './Flash';
+import {Level} from '../entities/Level';
 import option from '../settings/player.json';
+import {state} from '../systems/state';
+import {PlaybackRate, Speed} from '../types';
+import {Flash} from './Flash';
 
 export class Player {
   private HEALTH_CONSUME_SPEED = 0.05;
@@ -38,7 +38,7 @@ export class Player {
       ...config,
       acceleration: Speed.Run,
     });
-    
+
     requestAnimationFrame(
       function comsumeHealth() {
         if(player.isFound || state.game.isClear) {
@@ -60,7 +60,7 @@ export class Player {
 
   private walk(config: any) {
     const $health = document.querySelector('.health');
-    const {player} = state; 
+    const {player} = state;
     this.$el.setAttribute('wasd-controls', {
       ...config,
       acceleration: Speed.Walk,
@@ -99,11 +99,25 @@ export class Player {
   private initEventHandler() {
     const { flash, player, game } = state;
 
+    document.addEventListener('player-dead', (event) => {
+      this.$el.removeAttribute('look-controls');
+      const player = this.$el;
+      // @ts-ignore
+      let {x, y, z} = event.detail;
+      const {x: px, y: py, z: pz} = player.object3D.position;
+      // @ts-ignore
+      x -= (x - px) * 2;
+      z -= (z - pz) * 2;
+
+      // @ts-ignore
+      this.$el.object3D.lookAt(x, y, z);
+    })
+
     document.addEventListener('keydown', (event) => {
       if(game.isClear) {
         return;
       }
-      
+
       if (event.key === 'Enter') {
         this.$footstep.playAudio();
         this.$glitch.playAudio();
@@ -124,6 +138,7 @@ export class Player {
           this.resetStatus();
           // @ts-ignore
           this.$gameScene.systems['game'].resetUi();
+          this.$el.setAttribute('look-controls', { pointerLockEnabled: true });
         }
 
         this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
