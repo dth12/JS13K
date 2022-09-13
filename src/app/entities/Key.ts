@@ -11,9 +11,9 @@ export class Key {
     this.$el.setAttribute('position', { x, y, z });
     this.$el.setAttribute('geometry', {
       primitive: 'box',
-      width: settings.width || 1,
-      height: settings.height || 1,
-      depth: settings.depth || 1,
+      width: settings.width || 2,
+      height: settings.height || 2,
+      depth: settings.depth || 2,
     });
     this.$el.setAttribute('material', {
       color: '#ffe45e',
