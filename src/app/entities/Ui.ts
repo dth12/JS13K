@@ -37,8 +37,15 @@ export class Ui {
   }
 
   setGameOverUi() {
-    setTimeout(() => {
-      this.$gameOverPage.classList.remove('off');
-    }, 1500);
+    state.game.isClear = true;
+    const gameoverPromise = new Promise<void>((resolve, reject) => {
+      setTimeout(() => {
+        this.$gameOverPage.classList.remove('off');
+        resolve();
+      }, 1500);
+    });
+    gameoverPromise.then(() => {
+      state.game.isClear = false;
+    });
   }
 }
