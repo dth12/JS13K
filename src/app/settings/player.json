@@ -2,6 +2,6 @@
   "camera": {},
   "wasd-controls": {},
   "look-controls": { "pointerLockEnabled": true },
-  "position": { "x": 0, "y": 3, "z": 0 },
+  "position": { "x": -10, "y": 3, "z": 0 },
   "collision": ""
 }
