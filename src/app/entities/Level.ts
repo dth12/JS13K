@@ -1,7 +1,5 @@
 import {Entity} from 'aframe';
 import {getRandomIndex, getRandomRange} from '../../utils/util';
-// @ts-ignore
-import '../public/monster.webp';
 import {state} from '../systems/state';
 import {Key} from './Key';
 import {Monster} from './Monster';
@@ -154,7 +152,7 @@ export class Level {
           width: 10,
           height: 10,
           depth: 10,
-          material: {roughness: 0.9, src: '../public/monster.webp'},
+          // material: {roughness: 0.9, src: '../public/monster.webp'},
         })
       );
     });

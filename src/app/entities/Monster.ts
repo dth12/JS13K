@@ -1,4 +1,5 @@
 import {state} from './../systems/state';
+import '../public/monster.webp';
 
 export class Monster {
   private readonly HEIGHT = 5;
@@ -16,14 +17,49 @@ export class Monster {
       this.$el.setAttribute(key, option[key]);
     });
     this.$el.classList.add('monster');
+    
+    setTimeout(() => {
+      const img = new Image();
+      // @ts-ignore
+      const texture = new THREE.Texture(img);
+      img.src = '../public/monster.webp';
+      // @ts-ignore
+      img.tex = texture;
+      img.onload = function() {
+        // @ts-ignore
+        this.tex.needsUpdate = true;
+      };
+
+      const materials = [
+        // @ts-ignore
+        new THREE.MeshStandardMaterial({color: '#080808', roughness: 0.9 }),
+        // @ts-ignore
+        new THREE.MeshStandardMaterial({color: '#080808', roughness: 0.9 }),
+        // @ts-ignore
+        new THREE.MeshStandardMaterial({color: '#080808', roughness: 0.9}),
+        // @ts-ignore
+        new THREE.MeshStandardMaterial({color: '#080808', roughness: 0.9}),
+        // @ts-ignore
+        new THREE.MeshStandardMaterial({color: '#999999', map: texture, roughness: 0.9}),
+        // @ts-ignore
+        new THREE.MeshStandardMaterial({color: '#080808', roughness: 0.9})
+      ];
+
+     
+      // @ts-ignore
+      this.$el.getObject3D('mesh').material = new THREE.MultiMaterial(materials);
+    }, 500);
     this.$gameScene.appendChild(this.$el);
   }
 
   update(deltaTime: number) {
     const { flash, player } = state;
     const $player = document.querySelector('#player');
+
     // playerX, playerZ
-    const { x: px, z: pz } = $player.getAttribute('position');
+    const { x: px, y: py, z: pz } = $player.getAttribute('position');
+    // @ts-ignore
+    this.$el.object3D.lookAt(new THREE.Vector3(px, py, pz));
     // monsterX, monsterZ
     const { x: mx, y: my, z: mz } = this.$el.getAttribute('position');
 
