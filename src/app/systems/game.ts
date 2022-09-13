@@ -27,6 +27,7 @@ AFRAME.registerSystem('game', {
       // @ts-ignore
       const coin = document.querySelector('#gameScene').systems['coin'];
       coin.playAudio();
+      this.$player.coinCharge();
       this.$ui.setKeyCount(state.uiItem.keys.count + 1);
       if(state.uiItem.keys.count === state.uiItem.keys.total) {
         Level.clear();

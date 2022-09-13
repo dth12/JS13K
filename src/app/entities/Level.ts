@@ -138,7 +138,7 @@ export class Level {
   }
 
   private static spawnMonster(count: number) {
-    const playerOffset = 200;
+    const playerOffset = 2000;
     Array.from({length: count}).forEach((_, idx) => {
       const position = {
         x: (Math.random() * (state.level.mapWidth / 2 - playerOffset) + playerOffset) * (Math.random() < 0.5 ? 1 : -1),
