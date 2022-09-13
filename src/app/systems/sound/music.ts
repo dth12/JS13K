@@ -21,9 +21,13 @@ AFRAME.registerSystem('music', {
     }
   },
   playAudio() {
-    this.audio.play();
+    if (!(this.audio.currentTime > 0 && !this.audio.paused && !this.audio.ended && this.audio.readyState > 2)) {
+      this.audio.play();
+    }
   },
   pauseAudio() {
-    this.audio.pause();
+    if (this.audio.currentTime > 0 && !this.audio.paused && !this.audio.ended && this.audio.readyState > 2) {
+      this.audio.pause();
+    }
   },
 });
