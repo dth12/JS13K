@@ -1,24 +1,34 @@
 // @ts-nocheck
-import { footstep } from '../../../utils/sound/sequences';
 import { generateAudio } from '../../../utils/sound/sound-box';
+import { isPlaying } from './../../../utils/util';
 
 AFRAME.registerSystem('footstep', {
   init() {
     this.audio = undefined;
+    this.sequence = undefined;
   },
   initAudio(data) {
-    this.audio = generateAudio(data, footstep);
+    this.audio = generateAudio(data);
+    this.sequence = data.sequence;
   },
   updateAudio(data) {
-    this.audio.playbackRate = data.playbackRate;
-    this.audio.volume = data.volume;
-    this.audio.loop = data.loop;
-    this.audio.muted = data.muted;
+    if (this.sequence === data.sequence) {
+      this.audio.playbackRate = data.playbackRate;
+      this.audio.volume = data.volume;
+      this.audio.loop = data.loop;
+      this.audio.muted = data.muted;
+    } else {
+      this.initAudio(data);
+    }
   },
   playAudio() {
-    this.audio.play();
+    if (!isPlaying(this.audio)) {
+      this.audio.play();
+    }
   },
   pauseAudio() {
-    this.audio.pause();
+    if (isPlaying(this.audio)) {
+      this.audio.pause();
+    }
   },
 });

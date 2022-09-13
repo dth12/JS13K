@@ -19,13 +19,14 @@ function onChangePointerLock() {
 AFRAME.registerSystem('game', {
   schema: {},
   init() {
+    this.$gameScene = document.querySelector('#gameScene');
     Level.createStage(1);
 
     // init event
     document.addEventListener('pointerlockchange', onChangePointerLock.bind(this), false);
     document.addEventListener('find-key', () => {
       // @ts-ignore
-      const coin = document.querySelector('#gameScene').systems['coin'];
+      const coin = this.$gameScene.systems['coin'];
       coin.playAudio();
       this.$player.coinCharge();
       this.$ui.setKeyCount(state.uiItem.keys.count + 1);
@@ -40,30 +41,35 @@ AFRAME.registerSystem('game', {
     this.$ui = new Ui();
 
     this.$player.$el.setAttribute('coin', {
+      sequence: 'coin',
       playbackRate: PlaybackRate.Default,
       volume: 1.0,
       loop: false,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('footstep', {
+      sequence: 'footstep',
       playbackRate: PlaybackRate.Default,
       volume: 1.0,
       loop: true,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('glitch', {
+      sequence: 'glitch',
       playbackRate: PlaybackRate.Default,
-      volume: 0.2,
+      volume: 0.3,
       loop: true,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('music', {
+      sequence: 'music',
       playbackRate: PlaybackRate.Default,
-      volume: 0.2,
+      volume: 0.3,
       loop: true,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('toggle', {
+      sequence: 'toggle',
       playbackRate: PlaybackRate.Toggle,
       volume: 1.0,
       loop: false,
@@ -96,17 +102,29 @@ AFRAME.registerSystem('game', {
     {
       this.$player.$el.setAttribute('glitch', {
         ...glitchConfig,
-        volume: player.nearMonsters.length * 0.04,
+        volume: player.nearMonsters.length * 0.05,
       });
     }
 
     Level.update(timeDelta);
   },
   restartGame() {
+    // @ts-ignore
+    const $glitch = this.$gameScene.systems['glitch'];
+    const glitchConfig = this.$player.$el.getAttribute('glitch');
+
     state.player.isFound = true;
     Level.stopMonsters();
     this.$player.flash.turnOn();
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
+    $glitch.pauseAudio();
+    this.$player.$el.setAttribute('glitch', {
+      ...glitchConfig,
+      sequence: 'gameover',
+      volume: 0.3,
+      loop: false,
+    });
+    $glitch.playAudio();
     this.$ui.setGameOverUi();
   },
   resetUi() {
