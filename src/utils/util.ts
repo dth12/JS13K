@@ -25,3 +25,7 @@ export const getRandomMelody = (minScale: number, maxScale: number, patternLen: 
 
   return randomMelody;
 };
+
+export const isPlaying = (audio: HTMLAudioElement): boolean => {
+  return (audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2);
+}

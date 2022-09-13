@@ -1,5 +1,7 @@
+
 // @ts-nocheck
 import { generateAudio } from '../../../utils/sound/sound-box';
+import { isPlaying } from './../../../utils/util';
 
 AFRAME.registerSystem('coin', {
   init() {
@@ -21,12 +23,12 @@ AFRAME.registerSystem('coin', {
     }
   },
   playAudio() {
-    if (!(this.audio.currentTime > 0 && !this.audio.paused && !this.audio.ended && this.audio.readyState > 2)) {
+    if (!isPlaying(this.audio)) {
       this.audio.play();
     }
   },
   pauseAudio() {
-    if (this.audio.currentTime > 0 && !this.audio.paused && !this.audio.ended && this.audio.readyState > 2) {
+    if (isPlaying(this.audio)) {
       this.audio.pause();
     }
   },
