@@ -5,7 +5,8 @@ const C3 = 123;
 const C8 = 183;
 const C10 = 207;
 const MAX_PATTERN_LEN = 256;
-const NOTE_LEN = 4;
+const GLITCH_NOTE_LEN = 32;
+const MUSIC_NOTE_LEN = 4;
 
 export const coin = {
   songData: [
@@ -143,12 +144,12 @@ export const glitch = {
       p: [1],
       // Columns
       c: [
-        {n: getRandomMelody(C8, C10, MAX_PATTERN_LEN, NOTE_LEN),
+        {n: getRandomMelody(C8, C10, MAX_PATTERN_LEN, GLITCH_NOTE_LEN),
          f: []}
       ]
     },
   ],
-  rowLen: 11025,   // In sample lengths
+  rowLen: 5513,   // In sample lengths
   patternLen: MAX_PATTERN_LEN,  // Rows per pattern
   endPattern: 0,  // End pattern
   numChannels: 1  // Number of channels
@@ -192,7 +193,7 @@ export const music = {
       p: [1],
       // Columns
       c: [
-        {n: getRandomMelody(C1, C3, MAX_PATTERN_LEN, NOTE_LEN),
+        {n: getRandomMelody(C1, C3, MAX_PATTERN_LEN, MUSIC_NOTE_LEN),
          f: []},
       ]
     },
