@@ -79,7 +79,7 @@ export class Monster {
       player.nearMonsters = player.nearMonsters.filter((monster) => monster !== this);
     }
 
-    if (!this.didFindPlayer && distance < 10) {
+    if (!this.didFindPlayer && distance < 13) {
       this.didFindPlayer = true;
       this.$el.emit('player-dead', {x: mx, y: my, z: mz});
       // @ts-ignore
