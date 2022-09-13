@@ -10,6 +10,7 @@ export class Player {
   private $gameScene = document.querySelector('#gameScene');
   private $mainPage = document.querySelector('.ui_main');
   private $gameOverPage = document.querySelector('.ui_game_over');
+  private $health = document.querySelector('.health');
   private $el = document.createElement('a-entity');
   // @ts-ignore
   private $footstep = this.$gameScene.systems['footstep'];
@@ -32,7 +33,6 @@ export class Player {
   }
 
   private run(config: any) {
-    const $health = document.querySelector('.health');
     const {player} = state;
     this.$el.setAttribute('wasd-controls', {
       ...config,
@@ -48,7 +48,7 @@ export class Player {
         const isMoving = Math.abs(playerVelocity.x) > 5 || Math.abs(playerVelocity.y) > 5 || Math.abs(playerVelocity.z) > 5;
 
         player.health = Math.max(player.health - (isMoving ? this.HEALTH_CONSUME_SPEED : 0), 0);
-        $health.style.width = `${player.health}%`;
+        this.$health.style.width = `${player.health}%`;
         player.isRunning && requestAnimationFrame(comsumeHealth.bind(this));
         if (player.health === 0) {
           player.isRunning = false;
@@ -59,7 +59,6 @@ export class Player {
   }
 
   private walk(config: any) {
-    const $health = document.querySelector('.health');
     const {player} = state;
     this.$el.setAttribute('wasd-controls', {
       ...config,
@@ -72,7 +71,7 @@ export class Player {
           return;
         }
         player.health = Math.min(player.health + this.HEALTH_RECOVER_SPEED, 100);
-        $health.style.width = `${player.health}%`;
+        this.$health.style.width = `${player.health}%`;
         !player.isRunning && player.health < 100 && requestAnimationFrame(chargeHealth.bind(this));
       }.bind(this)
     );
@@ -94,6 +93,12 @@ export class Player {
     document.querySelector('.battery').style.width = '100%';
 
     player.nearMonsters = [];
+  }
+
+  // for test
+  private recoverFull() {
+    state.player.health = 100;
+    this.$health.style.width = `${state.flash.battery}%`;
   }
 
   private initEventHandler() {
@@ -218,6 +223,7 @@ export class Player {
         // for test
         case 'r':
           this.flash.chargeFull();
+          this.recoverFull();
           break;
         // for test
         case 'Alt':

@@ -8,6 +8,7 @@ export class Flash {
   private readonly FLASH_CHARGE_SPEED = 0.01;
   // @ts-ignore
   private $toggle = document.querySelector('#gameScene').systems['toggle'];
+  private $battery = document.querySelector('.battery');
   private $el = document.createElement('a-light');
 
   constructor($parentEl: Entity) {
@@ -21,7 +22,6 @@ export class Flash {
   }
 
   private chargeBattery() {
-    const $battery = document.querySelector('.battery');
     const { flash, player } = state;
     requestAnimationFrame(
       function chargeBattery() {
@@ -29,22 +29,21 @@ export class Flash {
           return;
         }
         flash.battery = Math.min(flash.battery + this.FLASH_CHARGE_SPEED, 100);
-        $battery.style.width = `${flash.battery}%`;
+        this.$battery.style.width = `${flash.battery}%`;
         !flash.isOn && flash.battery < 100 && requestAnimationFrame(chargeBattery.bind(this));
       }.bind(this)
     );
   }
 
   private consumeBattery() {
-    const $battery = document.querySelector('.battery');
-    const { flash , player, game} = state;
+    const { flash , player, game } = state;
     requestAnimationFrame(
       function comsumeBattery() {
         if(player.isFound || game.isClear) {
           return;
         }
         flash.battery = Math.max(flash.battery - this.FLASH_CONSUME_SPEED, 0);
-        $battery.style.width = `${flash.battery}%`;
+        this.$battery.style.width = `${flash.battery}%`;
         flash.isOn && requestAnimationFrame(comsumeBattery.bind(this));
         if (flash.battery === 0) {
           flash.isOn = false;
@@ -74,8 +73,7 @@ export class Flash {
   }
   // for test
   chargeFull() {
-    const $battery = document.querySelector('.battery');
     state.flash.battery = 100;
-    $battery.style.width = `${state.flash.battery}%`;
+    this.$battery.style.width = `${state.flash.battery}%`;
   }
 }
