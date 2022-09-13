@@ -149,6 +149,8 @@ export class Player {
           document.querySelector('.ui_health').classList.remove('off');
         }
         else if (state.player.isFound) {
+          const glitchConfig = this.$el.getAttribute('glitch');
+
           state.player.isFound = false;
           this.$gameOverPage.classList.add('off');
           Level.removeStage();
@@ -157,6 +159,14 @@ export class Player {
           // @ts-ignore
           this.$gameScene.systems['game'].resetUi();
           this.$el.setAttribute('look-controls', { pointerLockEnabled: true });
+          this.$glitch.pauseAudio();
+          this.$el.setAttribute('glitch', {
+            ...glitchConfig,
+            sequence: 'glitch',
+            volume: 0.2,
+            loop: true,
+          });
+          this.$glitch.playAudio();
         }
 
         this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });

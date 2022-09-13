@@ -1,19 +1,24 @@
 // @ts-nocheck
-import { music } from '../../../utils/sound/sequences';
 import { generateAudio } from '../../../utils/sound/sound-box';
 
 AFRAME.registerSystem('music', {
   init() {
     this.audio = undefined;
+    this.sequence = undefined;
   },
   initAudio(data) {
-    this.audio = generateAudio(data, music);
+    this.audio = generateAudio(data);
+    this.sequence = data.sequence;
   },
   updateAudio(data) {
-    this.audio.playbackRate = data.playbackRate;
-    this.audio.volume = data.volume;
-    this.audio.loop = data.loop;
-    this.audio.muted = data.muted;
+    if (this.sequence === data.sequence) {
+      this.audio.playbackRate = data.playbackRate;
+      this.audio.volume = data.volume;
+      this.audio.loop = data.loop;
+      this.audio.muted = data.muted;
+    } else {
+      this.initAudio(data);
+    }
   },
   playAudio() {
     this.audio.play();
