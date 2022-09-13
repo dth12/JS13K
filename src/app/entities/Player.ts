@@ -95,12 +95,6 @@ export class Player {
     player.nearMonsters = [];
   }
 
-  // for test
-  private recoverFull() {
-    state.player.health = 100;
-    this.$health.style.width = `${state.flash.battery}%`;
-  }
-
   private initEventHandler() {
     const { flash, player, game } = state;
 
@@ -229,14 +223,6 @@ export class Player {
             muted: player.isMuted,
           });
           break;
-        // for test
-        case 'r':
-          this.flash.chargeFull();
-          this.recoverFull();
-          break;
-        // for test
-        case 'Alt':
-          this.$el.setAttribute('wasd-controls', { ...controlConfig, acceleration: '1000' });
       }
     });
   }
