@@ -123,7 +123,6 @@ export class Player {
 
         // @ts-ignore
         this.$el.object3D.lookAt(x, y, z);
-        console.log(state.player.isFound)
         if(state.player.isFound) {
           requestAnimationFrame(look.bind(this));
         } else {
