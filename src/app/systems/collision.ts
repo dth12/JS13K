@@ -1,5 +1,5 @@
-import { Entity } from 'aframe';
-import { Level } from '../entities/Level';
+import {Entity} from 'aframe';
+import {Level} from '../entities/Level';
 
 AFRAME.registerSystem('collision', {
   init() {
@@ -20,7 +20,7 @@ AFRAME.registerSystem('collision', {
     this.walls.push(wall);
   },
   detectCollisionWithWall() {
-    this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall, 0.2));
+    this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall, 0.1));
   },
   detectCollisionWithKey() {
     this.keyWithCollision = this.keys.find((key: Entity) => this.isCollide(key, 1.5));
