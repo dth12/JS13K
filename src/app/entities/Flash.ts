@@ -71,9 +71,4 @@ export class Flash {
     this.$toggle.playAudio();
     this.consumeBattery();
   }
-  // for test
-  chargeFull() {
-    state.flash.battery = 100;
-    this.$battery.style.width = `${state.flash.battery}%`;
-  }
 }
