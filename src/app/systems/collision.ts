@@ -1,4 +1,5 @@
 import {Entity} from 'aframe';
+import {getRandomRange} from '../../utils/util';
 import {Level} from '../entities/Level';
 
 AFRAME.registerSystem('collision', {
@@ -9,24 +10,38 @@ AFRAME.registerSystem('collision', {
     this.keyWithCollision;
     this.player;
     this.playerOldPosition;
+    this.mapWidth = 500;
+    this.mapHeight = 500;
+    this.isAllKeyPositionRight = false;
   },
   registerPlayer(player: Entity) {
     this.player = player;
   },
   registerKey(key: Entity) {
+    // console.log(this.walls);
     this.keys.push(key);
   },
   registerWall(wall: Entity) {
     this.walls.push(wall);
   },
+  generateKeyPosition(key: Entity) {
+    const isCollideWithWall = this.walls.some((wall: Entity) => this.isCollide(key, wall, 0.5));
+
+    if (!isCollideWithWall) return;
+
+    key.object3D.position.x = getRandomRange(this.mapWidth / 2);
+    key.object3D.position.z = getRandomRange(this.mapHeight / 2);
+
+    return this.generateKeyPosition(key);
+  },
   detectCollisionWithWall() {
-    this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall, 0.1));
+    this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(this.player, wall, 0.1));
   },
   detectCollisionWithKey() {
-    this.keyWithCollision = this.keys.find((key: Entity) => this.isCollide(key, 1.5));
+    this.keyWithCollision = this.keys.find((key: Entity) => this.isCollide(this.player, key, 1.5));
   },
-  isCollide(el: Entity, dist: number) {
-    const {x, y, z} = this.player.object3D.position;
+  isCollide(p: Entity,el: Entity, dist: number) {
+    const {x, y, z} = p.object3D.position;
 
     // @ts-ignore
     const boundingBox = new THREE.Box3();
@@ -34,6 +49,12 @@ AFRAME.registerSystem('collision', {
     boundingBox.setFromObject(mesh);
     const elMin = boundingBox.min;
     const elMax = boundingBox.max;
+
+    if (!p.id.includes('key')) {
+      console.log(elMin);
+      console.log(elMax);
+      console.log(x, y, z);
+    }
 
     return (x <= elMax.x + dist && x >= elMin.x - dist) &&
            (y <= elMax.y + dist && y >= elMin.y - dist) &&
@@ -54,6 +75,11 @@ AFRAME.registerSystem('collision', {
     this.keyWithCollision.emit('find-key');
     Level.removeKey(this.keyWithCollision);
   },
+  solveCollisionWithKeyAndWall() {
+    this.keys.forEach((key:Entity) => {
+      this.generateKeyPosition(key);
+    })
+  },
   updatePlayerOldPosition() {
     const {x, y, z} = this.player.object3D.position;
     this.playerOldPosition = [x, y, z];
@@ -65,6 +91,7 @@ AFRAME.registerSystem('collision', {
     this.detectCollisionWithKey();
     this.solveCollisionWithWall();
     this.solveCollisionWithKey();
+    this.solveCollisionWithKeyAndWall();
     this.updatePlayerOldPosition();
   }
 })
