@@ -70,6 +70,12 @@ AFRAME.registerSystem('game', {
     });
   },
   tick(_time, timeDelta) {
+    if(state.player.nearMonsters.length) {
+      document.querySelector('.pulse_wrap').classList.add('pulse');
+    } else {
+      document.querySelector('.pulse_wrap').classList.remove('pulse');
+    }
+    
     if(state.game.isClear || state.player.isFound || !this.$player.$el.components['wasd-controls']) {
       return;
     }
