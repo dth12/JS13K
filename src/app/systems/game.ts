@@ -109,7 +109,7 @@ AFRAME.registerSystem('game', {
     Level.update(timeDelta);
   },
   restartGame() {
-      // @ts-ignore
+    // @ts-ignore
     const $glitch = this.$gameScene.systems['glitch'];
     const glitchConfig = this.$player.$el.getAttribute('glitch');
 
