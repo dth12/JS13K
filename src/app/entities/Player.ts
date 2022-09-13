@@ -163,7 +163,7 @@ export class Player {
           this.$el.setAttribute('glitch', {
             ...glitchConfig,
             sequence: 'glitch',
-            volume: 0.2,
+            volume: 0.3,
             loop: true,
           });
           this.$glitch.playAudio();
