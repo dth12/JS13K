@@ -18,7 +18,6 @@ AFRAME.registerSystem('collision', {
     this.player = player;
   },
   registerKey(key: Entity) {
-    // console.log(this.walls);
     this.keys.push(key);
   },
   registerWall(wall: Entity) {
@@ -49,12 +48,6 @@ AFRAME.registerSystem('collision', {
     boundingBox.setFromObject(mesh);
     const elMin = boundingBox.min;
     const elMax = boundingBox.max;
-
-    if (!p.id.includes('key')) {
-      console.log(elMin);
-      console.log(elMax);
-      console.log(x, y, z);
-    }
 
     return (x <= elMax.x + dist && x >= elMin.x - dist) &&
            (y <= elMax.y + dist && y >= elMin.y - dist) &&
