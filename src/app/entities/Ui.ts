@@ -37,6 +37,8 @@ export class Ui {
   }
 
   setGameOverUi() {
-    this.$gameOverPage.classList.remove('off');
+    setTimeout(() => {
+      this.$gameOverPage.classList.remove('off');
+    }, 1500);
   }
 }
