@@ -106,16 +106,30 @@ export class Player {
 
     document.addEventListener('player-dead', (event) => {
       this.$el.removeAttribute('look-controls');
-      const player = this.$el;
-      // @ts-ignore
-      let {x, y, z} = event.detail;
-      const {x: px, y: py, z: pz} = player.object3D.position;
-      // @ts-ignore
-      x -= (x - px) * 2;
-      z -= (z - pz) * 2;
+      requestAnimationFrame(function look() {
+        const player = this.$el;
+        const control = (player.components['wasd-controls'] as any);
+        if(control) {
+          control.velocity = {x: 0, y: 0, z: 0};
+        }
+        
+        // @ts-ignore
+        let {x, y, z} = event.detail;
+        const {x: px, y: py, z: pz} = player.object3D.position;
+        // @ts-ignore
+        x -= (x - px) * 2;
+        y -= (y - py) * 2;
+        z -= (z - pz) * 2;
 
-      // @ts-ignore
-      this.$el.object3D.lookAt(x, y, z);
+        // @ts-ignore
+        this.$el.object3D.lookAt(x, y, z);
+        console.log(state.player.isFound)
+        if(state.player.isFound) {
+          requestAnimationFrame(look.bind(this));
+        } else {
+          this.$el.setAttribute('look-controls', { pointerLockEnabled: true });
+        }
+      }.bind(this));  
     })
 
     document.addEventListener('keydown', (event) => {
