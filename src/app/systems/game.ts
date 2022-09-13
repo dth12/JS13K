@@ -57,14 +57,14 @@ AFRAME.registerSystem('game', {
     this.$player.$el.setAttribute('glitch', {
       sequence: 'glitch',
       playbackRate: PlaybackRate.Default,
-      volume: 0.2,
+      volume: 0.3,
       loop: true,
       muted: state.player.isMuted,
     });
     this.$player.$el.setAttribute('music', {
       sequence: 'music',
       playbackRate: PlaybackRate.Default,
-      volume: 0.2,
+      volume: 0.3,
       loop: true,
       muted: state.player.isMuted,
     });
@@ -102,7 +102,7 @@ AFRAME.registerSystem('game', {
     {
       this.$player.$el.setAttribute('glitch', {
         ...glitchConfig,
-        volume: player.nearMonsters.length * 0.04,
+        volume: player.nearMonsters.length * 0.05,
       });
     }
 
@@ -121,7 +121,7 @@ AFRAME.registerSystem('game', {
     this.$player.$el.setAttribute('glitch', {
       ...glitchConfig,
       sequence: 'gameover',
-      volume: 0.2,
+      volume: 0.3,
       loop: false,
     });
     $glitch.playAudio();
