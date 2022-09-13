@@ -152,3 +152,27 @@ body {
   font-weight: bold;
   font-size: 3rem;
 }
+
+.pulse_wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.pulse {
+  animation: pulse 1.5s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: inset 0px 0px 30px #ff00008b;
+  }
+  
+  70% {
+    box-shadow: inset 0px 0px 100px #ff00008b;
+  }
+
+  100% {
+    box-shadow: inset 0px 0px 30px #ff00008b;
+  }
+}
