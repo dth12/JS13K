@@ -240,4 +240,9 @@ export class Player {
       }
     });
   }
+  
+  private coinCharge() {
+    state.flash.battery = Math.min(state.flash.battery + 15, 100);
+    state.player.health = Math.min(state.player.health + 15, 100);
+  }
 }

@@ -138,7 +138,7 @@ export class Level {
   }
 
   private static spawnMonster(count: number) {
-    const playerOffset = 200;
+    const playerOffset = 2000;
     Array.from({length: count}).forEach((_, idx) => {
       const position = {
         x: (Math.random() * (state.level.mapWidth / 2 - playerOffset) + playerOffset) * (Math.random() < 0.5 ? 1 : -1),
@@ -197,10 +197,10 @@ export class Level {
     const {level, uiItem} = state;
     switch (stage) {
       case 1:
-        level.roomRowCount = 15;
+        level.roomRowCount = 19;
         level.mapHeight = level.roomRowCount * 100;
-        uiItem.monsters.total = 5;
-        uiItem.keys.total = 10;
+        uiItem.monsters.total = 6;
+        uiItem.keys.total = 20;
         this.generateWorld();
         this.addKeys(uiItem.keys.total);
         this.spawnMonster(uiItem.monsters.total);
