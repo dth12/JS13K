@@ -104,6 +104,7 @@ AFRAME.registerSystem('game', {
   restartGame() {
     state.player.isFound = true;
     Level.stopMonsters();
+    this.$player.flash.turnOn();
     this.$player.$el.setAttribute('wasd-controls', { acceleration: 0 });
     this.$ui.setGameOverUi();
   },
