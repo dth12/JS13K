@@ -96,7 +96,7 @@ export class Player {
   }
 
   // for test
-  private chargeFull() {
+  private recoverFull() {
     state.player.health = 100;
     this.$health.style.width = `${state.flash.battery}%`;
   }
@@ -223,7 +223,7 @@ export class Player {
         // for test
         case 'r':
           this.flash.chargeFull();
-          this.chargeFull();
+          this.recoverFull();
           break;
         // for test
         case 'Alt':
