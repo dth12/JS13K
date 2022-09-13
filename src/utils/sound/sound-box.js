@@ -1,9 +1,10 @@
+import { sequences } from "./sequences";
 import { CPlayer } from "./player-small";
 
-export const generateAudio = (data, sequence) => {
+export const generateAudio = (data) => {
   const player = new CPlayer();
   const audio = document.createElement("audio");
-  player.init(sequence);
+  player.init(sequences[data.sequence]);
 
   let done = false;
   
