@@ -23,7 +23,7 @@ AFRAME.registerSystem('collision', {
     this.wallsWithCollision = this.walls.filter((wall: Entity) => this.isCollide(wall, 0.1));
   },
   detectCollisionWithKey() {
-    this.keyWithCollision = this.keys.find((key: Entity) => this.isCollide(key, 1.5));
+    this.keyWithCollision = this.keys.find((key: Entity) => this.isCollide(key, 3.5));
   },
   isCollide(el: Entity, dist: number) {
     const {x, y, z} = this.player.object3D.position;
