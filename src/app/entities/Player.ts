@@ -95,12 +95,6 @@ export class Player {
     player.nearMonsters = [];
   }
 
-  // for test
-  private recoverFull() {
-    state.player.health = 100;
-    this.$health.style.width = `${state.flash.battery}%`;
-  }
-
   private initEventHandler() {
     const { flash, player, game } = state;
 
@@ -149,6 +143,8 @@ export class Player {
           document.querySelector('.ui_health').classList.remove('off');
         }
         else if (state.player.isFound) {
+          const glitchConfig = this.$el.getAttribute('glitch');
+
           state.player.isFound = false;
           this.$gameOverPage.classList.add('off');
           Level.removeStage();
@@ -157,6 +153,14 @@ export class Player {
           // @ts-ignore
           this.$gameScene.systems['game'].resetUi();
           this.$el.setAttribute('look-controls', { pointerLockEnabled: true });
+          this.$glitch.pauseAudio();
+          this.$el.setAttribute('glitch', {
+            ...glitchConfig,
+            sequence: 'glitch',
+            volume: 0.3,
+            loop: true,
+          });
+          this.$glitch.playAudio();
         }
 
         this.$el.setAttribute('wasd-controls', { acceleration: state.player.isRunning ? Speed.Run : Speed.Walk });
@@ -219,14 +223,6 @@ export class Player {
             muted: player.isMuted,
           });
           break;
-        // for test
-        case 'r':
-          this.flash.chargeFull();
-          this.recoverFull();
-          break;
-        // for test
-        case 'Alt':
-          this.$el.setAttribute('wasd-controls', { ...controlConfig, acceleration: '1000' });
       }
     });
   }

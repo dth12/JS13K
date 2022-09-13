@@ -197,10 +197,10 @@ export class Level {
     const {level, uiItem} = state;
     switch (stage) {
       case 1:
-        level.roomRowCount = 15;
+        level.roomRowCount = 19;
         level.mapHeight = level.roomRowCount * 100;
-        uiItem.monsters.total = 5;
-        uiItem.keys.total = 10;
+        uiItem.monsters.total = 6;
+        uiItem.keys.total = 20;
         this.generateWorld();
         this.addKeys(uiItem.keys.total);
         this.spawnMonster(uiItem.monsters.total);
