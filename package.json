@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "postbuild": "node postbuild.js"
+    "postbuild": "node postbuild.js && cp dist/index.html . && cp -r dist/public ."
   },
   "devDependencies": {
     "@types/aframe": "^1.2.0",
