@@ -1,4 +1,5 @@
-import '../public/monster.webp';
+// @ts-ignore
+import MonsterImageSrc from '../public/monster.webp';
 import {state} from './../systems/state';
 
 export class Monster {
@@ -22,7 +23,7 @@ export class Monster {
       const img = new Image();
       // @ts-ignore
       const texture = new THREE.Texture(img);
-      img.src = '../public/monster.webp';
+      img.src = MonsterImageSrc;
       // @ts-ignore
       img.tex = texture;
       img.onload = function() {
